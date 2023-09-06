@@ -1,4 +1,6 @@
-public class Review {
+package u0;
+
+public class L5_2DArrays {
 
     // a
     public static void a(int[][] numsArr) {
@@ -10,8 +12,28 @@ public class Review {
         }
     }
 
+    // b
     public static void b(int[][] numsArr) {
+        for (int i = 0; i < numsArr.length; i++) {
+            for (int n = 0; n < numsArr[i].length; n++) {
+                if (n != 0)
+                    System.out.print(",");
+                System.out.print(numsArr[i][n]);
+            }
+            System.out.println("");
+        }
+    }
 
+    // c
+    public static void c(int[][] numsArr) {
+        for (int i = numsArr.length - 1; i >= 0; i--) {
+            for (int n = 0; n < numsArr[i].length; n++) {
+                if (n != 0)
+                    System.out.print(",");
+                System.out.print(numsArr[i][n]);
+            }
+            System.out.println("");
+        }
     }
 
     public static void main(String[] args) {
@@ -35,5 +57,8 @@ public class Review {
         // b
         int[][] numsArr2 = { { 1, 2, 3, 4 }, { 5, 6 }, { 7, 8, 9 } };
         b(numsArr2);
+
+        // c
+        c(numsArr2);
     }
 }
