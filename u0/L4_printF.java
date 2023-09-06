@@ -2,6 +2,14 @@ package u0;
 
 public class L4_printF {
     public static void main(String[] args) {
+        // Placeholders
+        // %d int
+        // %f double
+        // %s string
+        // %b boolean
+        // %c char
+        // %n new line
+
         String item = "Almonds";
         double pricePerKg = 12.34;
         double weight = 3.4566;
