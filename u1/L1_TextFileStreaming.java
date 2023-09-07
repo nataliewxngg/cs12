@@ -29,7 +29,7 @@ public class L1_TextFileStreaming {
 
         // Writing to files
         try {
-            PrintWriter out = new PrintWriter(new FileWriter("blablbla.txt", true));
+            PrintWriter out = new PrintWriter(new FileWriter("u1/blablbla.txt", true));
             // true indicates the append flag (will add to file instead of erasing)
             out.println("hhahahahahhahahaha");
             out.println("lalalalala");

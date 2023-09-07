@@ -1,6 +1,6 @@
 package u0;
 
-public class L5_2DArrays {
+public class Lidk_2DArrays {
 
     // a
     public static void a(int[][] numsArr) {
