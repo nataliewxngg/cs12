@@ -1,9 +1,9 @@
-package u0;
+package u1;
 
 import java.util.Scanner;
 import java.io.*;
 
-public class L6_TextFileStreaming {
+public class L1_TextFileStreaming {
     public static void main(String[] args) {
 
         // Try and catch, unlike throws IOException, will continue running the code even
