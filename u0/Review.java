@@ -214,5 +214,10 @@ public class Review {
             }
             System.out.println("");
         }
+
+        System.out.println("video".compareTo("videogames"));
+        System.out.println("roblox".compareTo("minecraft"));
+        System.out.println("NOOB".compareTo("mob"));
     }
+
 }
