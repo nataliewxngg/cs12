@@ -30,6 +30,19 @@ public class A {
         return newBag;
     }
 
+    public static int getMostExpensive(String[][] bag) {
+        int mostExpensiveIndex = 0;
+        double mostExpensiveCost = 0;
+
+        for (int row = 0; row < bag.length; row++) {
+            if (Integer.parseInt(bag[row][1]) * Double.parseDouble(bag[row][2]) > mostExpensiveCost) {
+                mostExpensiveCost = Integer.parseInt(bag[row][1]) * Double.parseDouble(bag[row][2]);
+                mostExpensiveIndex = row;
+            }
+        }
+        return mostExpensiveIndex;
+    }
+
     public static void main(String[] args) {
         // Variables
         Scanner in = new Scanner(System.in);
@@ -40,12 +53,14 @@ public class A {
         String toy;
         int amount;
         double cost;
+
         double totalCost = 0;
+        int totalAmount = 0;
 
         String[][] bag = new String[0][0];
 
         // Main Code
-        System.out.println("WONG R US\n");
+        System.out.println("WONG \"R\" US\n");
 
         while (buying) {
             toyNum++;
@@ -87,6 +102,7 @@ public class A {
             }
             System.out.println("");
             bag = addItemToBag(bag, toy, amount, cost);
+            totalAmount += amount;
         }
 
         try {
@@ -114,9 +130,12 @@ public class A {
             }
 
             outputFile.printf("%n%-61s$%.2f%n%n", "FINAL COST", totalCost * 1.13);
-            outputFile.printf("Total # of items bought: %d",
-                    999999999999999999999999999999999999999999999999999999999999999999999999);
-            outputFile.printf("Most expensive item: %d %s for %.2d", 1, "poop", 12.123121212121212);
+            outputFile.printf("Total # of items bought: %d%n", totalAmount);
+            outputFile.printf("Most expensive item: %d %s for $%.2f",
+                    Integer.parseInt(bag[getMostExpensive(bag)][1]),
+                    bag[getMostExpensive(bag)][0],
+                    Double.parseDouble(bag[getMostExpensive(bag)][2])
+                            * Integer.parseInt(bag[getMostExpensive(bag)][1]));
 
             outputFile.close();
         } catch (IOException e) {
