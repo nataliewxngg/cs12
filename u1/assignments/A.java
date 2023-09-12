@@ -6,7 +6,7 @@
 
 // Questions:
 // 1. Do we have to consider cases for when customers enter an input that doesnt match the datatype 
-//    eg. inputted a word for cost
+//    eg. inputted a word for cost YES
 
 package u1.assignments;
 
@@ -67,21 +67,21 @@ public class A {
 
             System.out.printf("Please enter the name of toy #%d: ", toyNum);
             toy = in.nextLine();
-            while (toy.length() < 1) {
+            while (toy.length() < 1 || toy.length() > 20) {
                 System.out.printf("Invalid input. Please enter the name of toy #%d: ", toyNum);
                 toy = in.nextLine();
             }
 
             System.out.print("How many of this toy are you buying?: ");
             amount = Integer.parseInt(in.nextLine());
-            while (amount < 1) {
+            while (amount < 1 || amount >= 99999) {
                 System.out.print("Invalid input. How many of this toy are you buying?: ");
                 amount = Integer.parseInt(in.nextLine());
             }
 
             System.out.print("Please enter the cost of this toy: $");
             cost = Double.parseDouble(in.nextLine());
-            while (cost <= 0) {
+            while (cost <= 0 || cost >= 99999) {
                 System.out.print("Invalid input. Please enter the cost of this toy: $");
                 cost = Double.parseDouble(in.nextLine());
             }
