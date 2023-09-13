@@ -22,7 +22,7 @@ public class B {
         String index = "1";
 
         // Adds n-1 zeroes behind the string index, "1", to create the first n-digit
-        // number in STRING
+        // number as type STRING
         // eg. n = 4 --> adds 3 "0"s behind the "1" to create "1000"
         for (int i = 0; i < n - 1; i++) {
             index += "0";
@@ -35,7 +35,7 @@ public class B {
     // It will be utilized to stop the for loop in the main method
     // (It is divided by 3 and added by 1 for improved runtime.)
 
-    // eg. n = 4 --> This method will return 10000/3 = 3333+4
+    // eg. n = 4 --> This method will return 10000/3 + 1 = 3334
     // In the for loop used, 3333 will be the last number ran. 3333*3 is 9999,
     // there's no need to check 3334 and onwards.
     public static int conditionVal(int n) { // Parameter: The value of 'n' as inputted by the user, which represents
