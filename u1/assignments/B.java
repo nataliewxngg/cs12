@@ -36,9 +36,10 @@ public class B {
     // (It is divided by 3 and added by 1 for improved runtime.)
 
     // eg. n = 4 --> This method will return 10000/3 + 1 = 3334
-    // In the for loop used, 3333 (condition statement: i<3334) will be the last
+    // (In the for loop, 3333 (condition statement: i<3334) will be the last
     // number ran. 3333*3 is 9999,
-    // there's no need to check 3334 and onwards (as it'll exceed the # of digits).
+    // there's no need to check 3334*3 and onwards (as it'll exceed the # of
+    // digits)).
     public static int conditionVal(int n) { // Parameter: The value of 'n' as inputted by the user, which represents
                                             // 'n'-digits
         String index = "1";
