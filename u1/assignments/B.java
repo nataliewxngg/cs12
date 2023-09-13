@@ -8,9 +8,6 @@
 // For example. 24714 multiplied by 3 will produce 74142
 //              24714 and 74142 both use the same digits the same number of times
 
-// Questions: 
-// 1. What is meant by sorting? (3rd criteria)
-
 package u1.assignments;
 
 import java.util.Scanner;
