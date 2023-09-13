@@ -82,8 +82,8 @@ public class A {
         boolean buying = true;
         int toyNum = 0;
         String toy;
-        int amount;
-        double cost;
+        int amount = 0;
+        double cost = 0;
 
         double totalCost = 0;
         int totalAmount = 0;
@@ -100,6 +100,7 @@ public class A {
 
             // inputs the toy name from user
             // (between 0-20 characters exclusive)
+            // user will be continuously prompted until a valid input is entered
             System.out.printf("Please enter the name of toy #%d: ", toyNum);
             toy = in.nextLine();
             while (toy.length() < 1 || toy.length() > 19) {
@@ -109,20 +110,34 @@ public class A {
 
             // inputs the quantity of the toy from user
             // (between 0-99999 toys exclusive)
+            // user will be continuously prompted until a valid input is entered
             System.out.print("How many of this toy are you buying?: ");
-            amount = Integer.parseInt(in.nextLine());
+
             while (amount < 1 || amount >= 99999) {
-                System.out.print("Invalid input. How many of this toy are you buying?: ");
-                amount = Integer.parseInt(in.nextLine());
+                try {
+                    amount = Integer.parseInt(in.nextLine().trim());
+                    if (amount < 1 || amount >= 99999) {
+                        throw new NumberFormatException();
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.print("Invalid. How many of this toy are you buying?: ");
+                }
             }
 
             // inputs the cost of the toy from user
             // (between $0-99999 exclusive)
+            // user will be continuously prompted until a valid input is entered
             System.out.print("Please enter the cost of this toy: $");
-            cost = Double.parseDouble(in.nextLine());
+
             while (cost <= 0 || cost >= 99999) {
-                System.out.print("Invalid input. Please enter the cost of this toy: $");
-                cost = Double.parseDouble(in.nextLine());
+                try {
+                    cost = Double.parseDouble(in.nextLine().trim());
+                    if (cost <= 0 || cost >= 99999) {
+                        throw new NumberFormatException();
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.print("Invalid. Please enter the cost of this toy: $");
+                }
             }
 
             System.out.printf("The cost for %d %s @ $%.2f each is %.2f%n", amount, toy, cost, amount * cost);
@@ -152,6 +167,9 @@ public class A {
 
             totalAmount += amount; // accumulates the toy's cost*quantity (toy's total cost) into totalAmount,
                                    // which will be accessed later on for the receipt
+
+            amount = 0;
+            cost = 0;
         }
 
         // creates receipt.txt
