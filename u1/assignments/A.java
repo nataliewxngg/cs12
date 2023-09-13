@@ -108,7 +108,7 @@ public class A {
             // (between 0-20 characters exclusive)
             // user will be continuously prompted until a valid input is entered
             System.out.printf("\nPlease enter the name of toy #%d: ", toyNum);
-            toy = in.nextLine();
+            toy = in.nextLine().trim();
             while (toy.length() < 1 || toy.length() > 19) {
                 System.out.printf("Invalid input. Please enter the name of toy #%d: ", toyNum);
                 toy = in.nextLine();
@@ -118,7 +118,6 @@ public class A {
             // (between 0-99999 toys exclusive)
             // user will be continuously prompted until a valid input is entered
             System.out.print("How many of this toy are you buying?: ");
-
             while (amount < 1 || amount >= 99999) {
                 try {
                     amount = Integer.parseInt(in.nextLine().trim());
@@ -134,7 +133,6 @@ public class A {
             // (between $0-99999 exclusive)
             // user will be continuously prompted until a valid input is entered
             System.out.print("Please enter the cost of this toy: $");
-
             while (cost <= 0 || cost >= 99999) {
                 try {
                     cost = Double.parseDouble(in.nextLine().trim());

@@ -3,7 +3,7 @@
 
 // This program determines the number of n-digit (where n is between 1-7 inclusively) numbers
 // that satisfy a specific property: 
-// a number multiplied by 3 will produce a product made up of the same digits as the original numbers.
+// the numbers multiplied by 3 will produce a product made up of the same digits as the original numbers
 
 // For example. 24714 multiplied by 3 will produce 74142
 //              24714 and 74142 both use the same digits the same number of times
@@ -13,35 +13,72 @@ package u1.assignments;
 import java.util.Scanner;
 
 public class B {
-    public static int startingVal(int n) {
+    // Description: This method returns the first n-digit(s) number
+    // It will be used as the variable initialization value to initiate the for loop
+    // in the main method
+    // eg. n = 4 --> This method will return 1000
+    public static int startingVal(int n) { // Parameter: The value of 'n' as inputted by the user, which represents
+                                           // 'n'-digits
         String index = "1";
+
+        // Adds n-1 zeroes behind the string index, "1", to create the first n-digit
+        // number in STRING
+        // eg. n = 4 --> adds 3 "0"s behind the "1" to create "1000"
         for (int i = 0; i < n - 1; i++) {
             index += "0";
         }
-        return Integer.parseInt(index);
+        return Integer.parseInt(index); // Returns the first n-digit(s) number as an integer (int)
     }
 
-    public static int conditionVal(int n) {
+    // Description: This method returns the first (n+1)-digit(s) number divided by 3
+    // and added by 1
+    // It will be utilized to stop the for loop in the main method
+    // (It is divided by 3 and added by 1 for improved runtime.)
+
+    // eg. n = 4 --> This method will return 10000/3 = 3333+4
+    // In the for loop used, 3333 will be the last number ran. 3333*3 is 9999,
+    // there's no need to check 3334 and onwards.
+    public static int conditionVal(int n) { // Parameter: The value of 'n' as inputted by the user, which represents
+                                            // 'n'-digits
         String index = "1";
+
+        // Adds n zeroes behind the string index, "1", to create the first (n+1)-digit
+        // number in STRING
+        // eg. n = 4 --> adds 4 "0"s behind the "1" to create "10000"
         for (int i = 0; i < n; i++) {
             index += "0";
         }
-        return Integer.parseInt(index);
+        return Integer.parseInt(index) / 3 + 1; // Returns the first (n+1)-digit(s) number as an integer (int)
     }
 
-    public static boolean satisfyProperty(String originalNum, String product) {
+    // Description: This method checks if a given number satisfies the condition
+    // (where a number*3's product uses the same digits)
+    // It will return true if the condition is satisfied by the number, but false
+    // otherwise
+    public static boolean satisfyProperty(String originalNum, String product) { // Parameters (both STRINGS):
+                                                                                // 1. The original number to be
+                                                                                // multiplied by 3
+                                                                                // 2. The product of the original number
+                                                                                // when multiplied by 3
+
+        // Checks if the original number's digits are in the product, excluding the last
+        // digit
         for (int i = 0; i < originalNum.length() - 1; i++) {
             if (product.indexOf(originalNum.charAt(i)) != -1) {
                 product = product.substring(0, product.indexOf(originalNum.charAt(i))) +
                         product.substring(product.indexOf(originalNum.charAt(i)) + 1);
             } else {
-                return false;
+                return false; // Returns false if the original number's current digit is NOT in the product
             }
         }
+
+        // Checks if the original number's last digit is the remaining digit left in the
+        // substringed product, which now only has 1 digit left, and should equal to the
+        // original number's last digit if the number satisfies the condition
         if (Character.toString(originalNum.charAt(originalNum.length() - 1)).equals(product)) {
-            return true;
+            return true; // Returns true if the original number's last digit is equal to the product
         }
-        return false;
+        return false; // Returns false if the original number's last digit is NOT equal to the product
     }
 
     public static void main(String[] args) {
@@ -53,8 +90,25 @@ public class B {
 
         // Main Code
         System.out.print("Enter 'n' for n-digit numbers: ");
-        n = Integer.parseInt(in.nextLine());
 
+        // Collects input for 'n' (n-digits) from the user.
+        // Continuously prompts the user for the input until a valid number (1<=n<=7) is
+        // entered
+        while (true) {
+            try {
+                n = Integer.parseInt(in.nextLine().trim());
+                if (n < 1 || n > 7)
+                    throw new NumberFormatException();
+                else
+                    break;
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid. Enter 'n' for n-digit numbers: ");
+            }
+        }
+
+        // For all n-digit numbers, utilize the satisfyProperty() method to check if
+        // they satisfy the condition
+        // If they do, print out the number and accumulate to the quantity #
         for (int i = startingVal(n); i < conditionVal(n); i++) {
             product = i * 3;
             if (satisfyProperty(Integer.toString(i), Integer.toString(product))) {
@@ -65,7 +119,7 @@ public class B {
 
         System.out.printf("%d %d-digit numbers satisfy this property.", quantity, n);
 
-        // Terminating Variables
+        // Variable(s) Termination
         in.close();
     }
 }
