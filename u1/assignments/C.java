@@ -11,11 +11,12 @@ import java.util.Scanner;
 import java.io.*;
 
 public class C {
+
     public static void findLargestPalindrome(String s) {
         String word;
         String flippedWord = "";
 
-        for (int i = s.length(); i > 0; i--) {
+        for (int i = s.length(); i > 1; i--) {
             for (int n = 0; n <= s.length() - i; n++) {
 
                 word = s.substring(n, n + i);
@@ -38,6 +39,8 @@ public class C {
                 flippedWord = "";
             }
         }
+        System.out.println("Screen Output");
+        System.out.println("\tNo palindrome!");
     }
 
     public static void main(String[] args) {
@@ -53,7 +56,7 @@ public class C {
 
                 if (s.length() >= 10_000) {
                     System.out.printf("File input: \n\t%s%n%n", s.substring(0, 50));
-                } else {
+                } else if (s.length() > 0) {
                     System.out.printf("File input: \n\t%s%n%n", s);
                 }
 

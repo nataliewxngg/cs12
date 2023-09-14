@@ -85,7 +85,9 @@ public class B {
         return false; // Returns false if the original number's last digit is NOT equal to the product
     }
 
-    public static void main(String[] args) {
+    // Description: The main method acquires the input for n (in 'n'-digits) and
+    // displays the # of n-digit numbers that satisfy the condition
+    public static void main(String[] args) { // Parameter: args not used
         // Variables
         Scanner in = new Scanner(System.in);
         int n;

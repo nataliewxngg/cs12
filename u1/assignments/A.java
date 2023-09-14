@@ -80,7 +80,9 @@ public class A {
         }
     }
 
-    public static void main(String[] args) {
+    // Description: The main method acquires input (items - toy name, quantity,
+    // cost) from the customer and creates the receipt with the data
+    public static void main(String[] args) { // Parameter: args not used
         // Variables
         Scanner in = new Scanner(System.in);
 
