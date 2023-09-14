@@ -51,7 +51,11 @@ public class C {
             while (inputFile.hasNextLine()) {
                 s = inputFile.nextLine();
 
-                System.out.printf("File input: \n\t%s%n%n", s);
+                if (s.length() >= 10_000) {
+                    System.out.printf("File input: \n\t%s%n%n", s.substring(0, 50));
+                } else {
+                    System.out.printf("File input: \n\t%s%n%n", s);
+                }
 
                 findLargestPalindrome(s);
             }

@@ -50,27 +50,29 @@ public class B {
         for (int i = 0; i < n; i++) {
             index += "0";
         }
-        return Integer.parseInt(index) / 3 + 1; // Returns the first (n+1)-digit(s) number as an integer (int)
+        return Integer.parseInt(index) / 3 + 1; // Returns the first (n+1)-digit(s) number as an integer (int), divided
+                                                // by 3 and added by 1
     }
 
     // Description: This method checks if a given number satisfies the condition
     // (where a number*3's product uses the same digits)
-    // It will return true if the condition is satisfied by the number, but false
+    // It will return true if the number satisfies the condition, but false
     // otherwise
     public static boolean satisfyProperty(String originalNum, String product) { // Parameters (both STRINGS):
-                                                                                // 1. The original number to be
-                                                                                // multiplied by 3
+                                                                                // 1. The original number
                                                                                 // 2. The product of the original number
                                                                                 // when multiplied by 3
 
-        // Checks if the original number's digits are in the product, excluding the last
+        // Checks if the original number's digit is in the product index by index,
+        // excluding the last
         // digit
         for (int i = 0; i < originalNum.length() - 1; i++) {
             if (product.indexOf(originalNum.charAt(i)) != -1) {
                 product = product.substring(0, product.indexOf(originalNum.charAt(i))) +
                         product.substring(product.indexOf(originalNum.charAt(i)) + 1);
             } else {
-                return false; // Returns false if the original number's current digit is NOT in the product
+                return false; // Returns false if the original number's current digit is NOT FOUND in the
+                              // product
             }
         }
 
@@ -110,7 +112,7 @@ public class B {
 
         // For all n-digit numbers, utilize the satisfyProperty() method to check if
         // they satisfy the condition
-        // If they do, print out the number and accumulate to the quantity #
+        // If they do, print out the number and accumulate to the quantity variable
         for (int i = startingVal(n); i < conditionVal(n); i++) {
             product = i * 3;
             if (satisfyProperty(Integer.toString(i), Integer.toString(product))) {
