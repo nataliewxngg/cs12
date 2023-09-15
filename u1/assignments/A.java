@@ -9,7 +9,7 @@
 // The receipt will display each item's quantity and price, as well as the total cost (without tax), tax, and the final cost (with tax).
 // On top of that, the receipt will provide a summary of the total number of toys bought and the most expensive item purchased!
 
-package u1.assignments;
+// package u1.assignments;
 
 import java.util.Scanner;
 import java.io.*;

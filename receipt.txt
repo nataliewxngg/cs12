@@ -3,12 +3,12 @@ Here is a summary of your purchases at Wong "R" Us:
 ITEM                                UNIT COST   QUANTITY    TOTAL COST  
 ----                                ---------   ---------   ----------  
 Among Us Pikachu                    $17.30      12           $207.60     
-Mr. Potato head                     $10.99      4            $43.96      
+Mr. Potato head                     $10.99      4            $43.95      
 ----------------------------------------------------------------------
-Total Cost                                                   $251.56
+Total Cost                                                   $251.55
 Tax                                                          $32.70
 ----------------------------------------------------------------------
-FINAL COST                                                   $284.26
+FINAL COST                                                   $284.25
 
 Total # of items bought: 16
 Most expensive item: 12 Among Us Pikachu for $207.60
