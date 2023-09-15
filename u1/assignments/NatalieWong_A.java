@@ -14,7 +14,7 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class A {
+public class NatalieWong_A {
 
     // Description: This method takes a 2D array, bag, and appends a new item into
     // it (item as in a toy's name, quantity, and cost)

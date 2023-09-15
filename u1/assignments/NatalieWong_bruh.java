@@ -10,7 +10,7 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class bruh {
+public class NatalieWong_bruh {
 
     // Description: This method finds the largest ODD-lengthed palindrome in a given
     // string

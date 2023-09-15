@@ -12,7 +12,7 @@
 
 import java.util.Scanner;
 
-public class B {
+public class NatalieWong_B {
     // Description: This method returns the first n-digit(s) number
     // It will be used as the variable initialization value to initiate the for loop
     // in the main method

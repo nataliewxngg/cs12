@@ -10,7 +10,7 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class C {
+public class NatalieWong_C {
 
     // Description: This method will determine the largest palindrome in a given
     // string
