@@ -17,5 +17,8 @@ public class test {
         // or consider using .nextLine() only then converting/casting later
 
         // in.close();
+
+        String name = "natalie";
+        System.out.println(name.substring(0, 10));
     }
 }
