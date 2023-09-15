@@ -43,7 +43,7 @@ public class NatalieWong_C {
                     System.out.printf("\tStarting position: %d%n", n + 1);
                     System.out.printf("\tLength: %d%n%n", word.length());
 
-                    return;
+                    return; // Returns nothing to exit/stop the method
                 }
                 flippedWord = "";
             }
