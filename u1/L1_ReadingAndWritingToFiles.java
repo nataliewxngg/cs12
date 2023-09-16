@@ -3,14 +3,14 @@ package u1;
 import java.util.Scanner;
 import java.io.*;
 
-public class L1_TextFileStreaming {
+public class L1_ReadingAndWritingToFiles {
     public static void main(String[] args) {
 
         // Try and catch, unlike throws IOException, will continue running the code even
         // if the try {} condition could not be met
         // (whereas throws IOException will stop the entire program)
         try {
-            BufferedReader in = new BufferedReader(new FileReader("input.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("inpusdfsdt.txt"));
 
             String line = in.readLine();
             System.out.println(line);
