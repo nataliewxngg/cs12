@@ -6,6 +6,8 @@ import java.io.*;
 public class L1_ReadingAndWritingToFiles {
     public static void main(String[] args) {
 
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
         // Try and catch, unlike throws IOException, will continue running the code even
         // if the try {} condition could not be met
         // (whereas throws IOException will stop the entire program)

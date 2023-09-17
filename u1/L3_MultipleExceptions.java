@@ -3,7 +3,7 @@ package u1;
 import java.util.Scanner;
 import java.io.*;
 
-public class L2_tryAndCatch {
+public class L3_MultipleExceptions {
     public static void main(String[] args) {
         try {
 

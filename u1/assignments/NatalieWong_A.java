@@ -1,6 +1,3 @@
-// Natalie Wong
-// DUE September 14, 2023
-
 // Description:
 
 // This program is designated to take input from WONG "R" Us' customers
