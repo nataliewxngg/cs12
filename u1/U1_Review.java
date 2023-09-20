@@ -25,5 +25,13 @@ public class U1_Review {
             System.out.println("yo");
         }
 
+        // StringBuilder
+        // String hello = "hello";
+        StringBuilder st = new StringBuilder();
+        st.append("1234567890123456");
+        System.out.println(st.capacity());
+        st.append("1");
+        System.out.println(st.capacity());
+        System.out.println("poo");
     }
 }
