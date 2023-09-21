@@ -13,8 +13,10 @@ public class study1 {
         try {
             BufferedReader in1 = new BufferedReader(new InputStreamReader(System.in));
             in1.close();
-        } catch (RUNtimeException e) {
+        } catch (RuntimeException e) {
             System.out.println("Reading Error");
+        } catch (IOException e) {
+            System.out.println("ooh");
         }
     }
 }

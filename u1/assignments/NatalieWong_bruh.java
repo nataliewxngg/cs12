@@ -2,8 +2,6 @@
 // determines the longest palindromes in each string, which may
 // begin at any index and be any length long.
 
-// package u1.assignments;
-
 import java.util.Scanner;
 import java.io.*;
 

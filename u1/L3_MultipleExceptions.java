@@ -15,9 +15,10 @@ public class L3_MultipleExceptions {
             Scanner in = new Scanner(new File("input.txt"));
         } catch (IOException e) {
 
-        } catch (FileNotFound e) { // will NOT work as FileNotFound class is under IOException
-
         }
+        // catch (FileNotFound e) { // will NOT work as FileNotFound class is under
+        // IOException
+        // }
 
         // if catching multiple exceptions, make sure you catch the most specific one
         // first, and the most exception at last
