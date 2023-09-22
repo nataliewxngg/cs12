@@ -1,4 +1,6 @@
+package assignment1;
 // This program determines the number of n-digit (where n is between 1-7 inclusively) numbers
+
 // that satisfy a specific property: 
 // the numbers multiplied by 3 will produce a product made up of the same digits as the original numbers
 
