@@ -107,8 +107,10 @@ class NatalieWong_RecursionExercises {
         }
     }
 
-    // Program 7:
+    // Program 7: largest
     public static int largest(int[] ia) {
+        if (ia.length == 1)
+            return ia[0];
 
     }
 
@@ -167,5 +169,6 @@ class NatalieWong_RecursionExercises {
         System.out.println("---------------------------");
 
         // Program 7
+        System.out.println();
     }
 }
