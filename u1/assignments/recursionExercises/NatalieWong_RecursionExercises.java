@@ -25,25 +25,30 @@ class NatalieWong_RecursionExercises {
 
         if (n > 0) { // Positive
             if (n % 2 == 0) // Even
-                return (1.0 / Math.abs(n)) + sumDiff(n - 2);
+                return Math.round(((1.0 / Math.abs(n)) + sumDiff(n - 2)) * 100000.0) / 100000.0;
             else { // Odd
                 if (n == 1)
-                    return 1;
-                return (1.0 / Math.abs(n)) * sumDiff(n - 2);
+                    return 1.0;
+                return Math.round(((1.0 / Math.abs(n)) * sumDiff(n - 2)) * 100000.0) / 100000.0;
             }
         } else { // Negative
             if (n % 2 == 0) // Even
-                return (1.0 / Math.abs(n)) * sumDiff(n + 2);
+                return Math.round(((1.0 / Math.abs(n)) * sumDiff(n + 2)) * 100000.0) / 100000.0;
             else { // Odd
                 if (n == -1)
-                    return 1;
-                return (1.0 / Math.abs(n)) + sumDiff(n + 2);
+                    return 1.0;
+                return Math.round(((1.0 / Math.abs(n)) + sumDiff(n + 2)) * 100000.0) / 100000.0;
             }
         }
 
         // odd - product
         // even - add
         // negative num - switch operations
+    }
+
+    // Program 3: divide()
+    public static int divide(int dividend, int divisor) {
+        return 0;
     }
 
     public static void main(String[] args) {
