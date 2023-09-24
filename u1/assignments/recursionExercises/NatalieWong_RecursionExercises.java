@@ -107,11 +107,22 @@ class NatalieWong_RecursionExercises {
         }
     }
 
-    // Program 7: largest
-    public static int largest(int[] ia) {
-        if (ia.length == 1)
-            return ia[0];
+    // Program 7: largest()
+    public static int largest(int[] ia, int index, int k, int largestIndex) {
+        // index = 1, k = 1, largestIndex = 0
+        int largest = ia[largestIndex];
 
+        if (ia[index] > largest) {
+            largest = ia[index];
+            largestIndex = index;
+            k = 1;
+        } else if (ia[index] == largest) {
+            k++;
+        }
+        if (index == ia.length - 1)
+            return largest * k;
+
+        return Math.max(largest(ia, index + 1, k, largestIndex), largest * k);
     }
 
     public static void main(String[] args) {
@@ -169,6 +180,11 @@ class NatalieWong_RecursionExercises {
         System.out.println("---------------------------");
 
         // Program 7
-        System.out.println();
+        int[] ia = { 8, 5, 8, 8, -234 };
+        System.out.println(largest(ia, 1, 1, 0)); // 8 * 3 = 24
+        int[] ia2 = { 23, 5, -2, 2000, 234 };
+        System.out.println(largest(ia2, 1, 1, 0)); // 2000 * 1 = 2000
+        int[] ia3 = { 9, 9, 9, 2, 9 };
+        System.out.println(largest(ia3, 1, 1, 0)); // 9 * 4 = 36
     }
 }
