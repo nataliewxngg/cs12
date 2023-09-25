@@ -3,6 +3,8 @@
 
 package recursionExercises;
 
+import java.util.Scanner;
+
 class NatalieWong_RecursionExercises {
 
     // OUTLINES:
@@ -126,65 +128,78 @@ class NatalieWong_RecursionExercises {
     }
 
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        boolean run = true;
+        String runInput;
+        int program;
 
-        // Test Cases
+        while (run) {
+            while (true) { // Prompt user for method/program/question #
+                System.out.print("Enter the method #: ");
+                try {
+                    program = Integer.parseInt(in.nextLine());
+                    if (program < 1 || program > 7)
+                        throw new NumberFormatException();
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.print("Invalid input. ");
+                }
+            }
 
-        // Program 1
-        System.out.println(fangs(-10)); // 0
-        System.out.println(fangs(0)); // 0
-        System.out.println(fangs(1)); // 3
-        System.out.println(fangs(4)); // 10
+            if (program == 1) {
+                System.out.print("How many vampires are there?: ");
+                System.out.println(fangs(Integer.parseInt(in.nextLine())));
+            } else if (program == 2) {
+                System.out.print("Enter a #: ");
+                System.out.println(sumDiff(Integer.parseInt(in.nextLine())));
+            } else if (program == 3) {
+                int dividend;
+                int divisor;
 
-        System.out.println("---------------------------");
+                System.out.print("Enter the Dividend: ");
+                dividend = Integer.parseInt(in.nextLine());
+                System.out.print("Enter the Divisor: ");
+                divisor = Integer.parseInt(in.nextLine());
 
-        // Program 2
-        System.out.println(sumDiff(-7)); // 1.67619
-        System.out.println(sumDiff(-6)); // 0.02083
+                System.out.println(divide(dividend, divisor));
+            } else if (program == 4) {
+                System.out.print("Enter a String: ");
+                System.out.println(find(in.nextLine()));
+            } else if (program == 5) {
+                String s;
+                char c;
 
-        System.out.println("---------------------------");
+                System.out.print("Enter a String: ");
+                s = in.nextLine();
+                System.out.print("Enter a Character: ");
+                c = in.nextLine().charAt(0);
 
-        // Program 3
-        System.out.println(divide(18, 6)); // 3
-        System.out.println(divide(20, 3)); // 7
-        System.out.println(divide(25, 6)); // 4
-        System.out.println(divide(2, 3)); // 1
-        System.out.println(divide(1, 2)); // 1
+                System.out.println(insert(s, c));
+            } else if (program == 6) {
+                System.out.print("Enter an Integer: ");
+                System.out.println(commas(Integer.parseInt(in.nextLine())));
+            } else {
+                int[] ia = { 9, 9, 9, 2, 9 };
+                System.out.println(largest(ia, 1, 1, 0));
+            }
 
-        System.out.println("---------------------------");
+            System.out.println("");
+            while (true) {
+                System.out.print("Run another program?: ");
+                runInput = in.nextLine();
 
-        // Program 4
-        System.out.println(find("")); // 0
-        System.out.println(find("alsdkjfalkdsjfasdklfj")); // 0
-        System.out.println(find("HarrY pOTTEr!?!")); // 10
-        System.out.println(find("HELLOxx!!")); // 7
+                if (runInput.equalsIgnoreCase("y")) {
+                    break;
+                } else if (runInput.equalsIgnoreCase("n")) {
+                    run = false;
+                    break;
+                } else {
+                    System.out.print("Invalid input. ");
+                }
+            }
 
-        System.out.println("---------------------------");
+        }
+        in.close();
 
-        // Program 5
-        System.out.println(insert("bruh", '!')); // bruh
-        System.out.println(insert("jiggly", '!')); // jig!gly
-        System.out.println(insert("jig?gly puffy", '@')); // jig?gly puffy
-        System.out.println(insert("aaAA", '.')); // a.a.A.A
-        System.out.println(insert("rilaaaaakkum?????????][[21?ma", '.')); // rila.a.a.a.ak.kum.ma
-
-        System.out.println("---------------------------");
-
-        // Program 6
-        System.out.println(commas(0)); // 0
-        System.out.println(commas(9)); // +9
-        System.out.println(commas(123456)); // +123,456
-
-        System.out.println(commas(-2)); // -2
-        System.out.println(commas(-9876)); // -9,876
-
-        System.out.println("---------------------------");
-
-        // Program 7
-        int[] ia = { 8, 5, 8, 8, -234 };
-        System.out.println(largest(ia, 1, 1, 0)); // 8 * 3 = 24
-        int[] ia2 = { 23, 5, -2, 2000, 234 };
-        System.out.println(largest(ia2, 1, 1, 0)); // 2000 * 1 = 2000
-        int[] ia3 = { 9, 9, 9, 2, 9 };
-        System.out.println(largest(ia3, 1, 1, 0)); // 9 * 4 = 36
     }
 }
