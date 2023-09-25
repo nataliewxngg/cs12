@@ -50,9 +50,8 @@ class NatalieWong_RecursionExercises {
 
     // Program 3: divide()
     public static int divide(int dividend, int divisor) {
-        if (((dividend * 1.0) / divisor) < 0.5)
-            return 0; // 0 divided by anything is UNDEFINED
-                      // anything divided by 0 is ZERO
+        if (dividend < divisor)
+            return (int) (Math.round(((dividend * 1.0) / divisor)));
 
         return divide(dividend - divisor, divisor) + 1;
     }
@@ -96,7 +95,6 @@ class NatalieWong_RecursionExercises {
             return "0";
         }
 
-        // convert to string first then do it backwards
         String numStr = num + "";
 
         if (numStr.length() > 3)
@@ -133,9 +131,11 @@ class NatalieWong_RecursionExercises {
         String runInput;
         int program;
 
+        int[] ia = { 8, 5, 8, 8, -234 }; // EDIT THIS ARRAY FOR PROGRAM 7 INPUT
+
         while (run) {
             while (true) { // Prompt user for method/program/question #
-                System.out.print("Enter the method #: ");
+                System.out.print("Enter the method/program #: ");
                 try {
                     program = Integer.parseInt(in.nextLine());
                     if (program < 1 || program > 7)
@@ -150,8 +150,16 @@ class NatalieWong_RecursionExercises {
                 System.out.print("How many vampires are there?: ");
                 System.out.println(fangs(Integer.parseInt(in.nextLine())));
             } else if (program == 2) {
+                int num;
+
                 System.out.print("Enter a #: ");
-                System.out.println(sumDiff(Integer.parseInt(in.nextLine())));
+                num = Integer.parseInt(in.nextLine());
+                while (num == 0) {
+                    System.out.print("Invalid input. Enter a #: ");
+                    num = Integer.parseInt(in.nextLine());
+                }
+
+                System.out.println(sumDiff(num));
             } else if (program == 3) {
                 int dividend;
                 int divisor;
@@ -179,8 +187,7 @@ class NatalieWong_RecursionExercises {
                 System.out.print("Enter an Integer: ");
                 System.out.println(commas(Integer.parseInt(in.nextLine())));
             } else {
-                int[] ia = { 9, 9, 9, 2, 9 };
-                System.out.println(largest(ia, 1, 1, 0));
+                System.out.println(largest(ia, 1, 1, 0)); // DO NOT alter parameters
             }
 
             System.out.println("");
