@@ -9,4 +9,8 @@ public class test {
 
         return divide(dividend - divisor, divisor) + 1;
     }
+
+    public static void main(String[] args) {
+        System.out.println(divide(-1, 2));
+    }
 }
