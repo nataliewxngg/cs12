@@ -12,6 +12,7 @@ public class test {
     }
 
     public static void main(String[] args) {
-        System.out.println(divide(1, -2));
+        // System.out.println(divide(1, -2));
+        System.out.println(Math.round(-0.5));
     }
 }
