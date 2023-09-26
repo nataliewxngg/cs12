@@ -50,11 +50,14 @@ class NatalieWong_RecursionExercises {
 
     // Program 3: divide()
     public static int divide(int dividend, int divisor) {
-        // if denominator is negative and numerator is not
-        // OR
         // if denominator is 0
-        if ((divisor < 0 && dividend > -1) || (divisor == 0)) {
+        if (divisor == 0) {
             return 0;
+        }
+        // if denominator is negative and numerator is not
+        if (divisor < 0 && dividend > -1) {
+            dividend = -dividend;
+            divisor = -divisor;
         }
 
         if (dividend < divisor)
@@ -199,7 +202,7 @@ class NatalieWong_RecursionExercises {
 
             System.out.println("");
             while (true) {
-                System.out.print("Run another program?: ");
+                System.out.print("Run another program? (y/n): ");
                 runInput = in.nextLine();
 
                 if (runInput.equalsIgnoreCase("y")) {
