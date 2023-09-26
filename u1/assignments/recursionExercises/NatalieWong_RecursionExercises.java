@@ -58,7 +58,7 @@ class NatalieWong_RecursionExercises {
         }
 
         if (dividend < divisor)
-            return (int) (Math.round(((dividend * 1.0) / divisor)));
+            return (int) (Math.round(((dividend * 1.0) / divisor))); // division FOR ROUNDING
 
         return divide(dividend - divisor, divisor) + 1;
     }
