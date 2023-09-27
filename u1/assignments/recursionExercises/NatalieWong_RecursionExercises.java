@@ -1,7 +1,7 @@
 // Natalie Wong - Recursion Exercises
 // Due September 26, 2023
 
-package u1.assignments.recursionExercises;
+package recursionExercises;
 
 import java.util.Scanner;
 
