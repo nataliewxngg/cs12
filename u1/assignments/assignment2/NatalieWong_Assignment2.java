@@ -11,10 +11,14 @@ import java.util.Scanner;
 import java.io.*;
 
 public class NatalieWong_Assignment2 {
-    // public static char[] findRoutes(char[][] map, int currentRow, int currentCol)
-    // {
-    //
-    // }
+    public static int findRoutes(char[][] map, int currentRow, int currentCol) {
+        // check north (if currentrow != 0)
+        // check east (if currentcol != map[row].length-1)
+        // check south (if currentrow != map.length-1)
+        // check west (if currentcol != 0)
+
+        // idk how to do this
+    }
 
     public static void main(String[] args) {
 
@@ -45,6 +49,7 @@ public class NatalieWong_Assignment2 {
                 }
 
                 // FIND THE ROUTES HERE
+                System.out.println(findRoutes(map, 0, 0));
 
                 // PRINT THE ARRAY
                 for (int x = 0; x < map.length; x++) {
