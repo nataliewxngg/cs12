@@ -205,8 +205,7 @@ public class NatalieWong_Assignment2 {
                 }
 
                 // FIND THE ROUTES HERE*************************************
-                System.out.println(goThroughMap(map, 0, 0, null)); // displays the total number of asterisks + 1 (1 for
-                                                                   // suki)
+                System.out.println(goThroughMap(map, 0, 0, null)); // displays the total number of asterisks + 1
 
                 // // PRINT THE ARRAY
                 // for (int x = 0; x < map.length; x++) {
