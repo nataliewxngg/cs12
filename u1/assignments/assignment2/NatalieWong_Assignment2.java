@@ -11,26 +11,6 @@ import java.util.Scanner;
 import java.io.*;
 
 public class NatalieWong_Assignment2 {
-    {// current direction should be a parameter
-     // public static int findRoutes(char[][] map, int currentRow, int currentCol,
-     // char previousDir) {
-     // // check north (if currentrow != 0)
-     // // check east (if currentcol != map[row].length-1)
-     // // check south (if currentrow != map.length-1)
-     // // check west (if currentcol != 0)
-
-        // map[currentRow][currentCol] = '*';
-
-        // for (int x = 0; x < map.length; x++) {
-        // for (int m = 0; m < map[x].length; m++) {
-        // System.out.print(map[x][m]);
-        // }
-        // System.out.println();
-        // }
-        // System.out.println();
-        // }
-    }
-
     public static int goThroughMap(char[][] map, int currentRow, int currentCol, String prevDir) {
 
         // display array
