@@ -11,169 +11,79 @@ import java.util.Scanner;
 import java.io.*;
 
 public class NatalieWong_Assignment2 {
-    public static int goThroughMap(char[][] map, int currentRow, int currentCol, String prevDir) {
 
-        // display array
-        for (int x = 0; x < map.length; x++) {
-            for (int m = 0; m < map[x].length; m++) {
-                System.out.print(map[x][m]);
-            }
-            System.out.println();
+    public static char[] findShortestRoute(char[] shortestRoute, char[] newRoute) {
+        if (shortestRoute.length == 0)
+            shortestRoute = newRoute;
+        else if (newRoute.length < shortestRoute.length)
+            shortestRoute = newRoute;
+        return shortestRoute;
+    }
+
+    public static char[] addDirection(char[] route, char newDirection) {
+        char[] newRoute = new char[route.length + 1];
+
+        for (int i = 0; i < route.length; i++) {
+            newRoute[i] = route[i];
         }
-        System.out.println();
-        // display array end
+        newRoute[newRoute.length - 1] = newDirection;
 
-        if (map[currentRow][currentCol] == 'X' || map[currentRow][currentCol] == 'S'
+        return newRoute;
+    }
+
+    public static char[] shortestRoute(char[][] map, int currentRow, int currentCol, char[] shortestRoute,
+            char[] route) {
+
+        // if currentRow or currentCol is out of range
+        if (currentRow < 0 || currentRow >= map.length || currentCol < 0 || currentCol >= map[currentRow].length)
+            return shortestRoute;
+
+        // // CHECK MAP
+        // for (int x = 0; x < map.length; x++) {
+        // for (int m = 0; m < map[x].length; m++) {
+        // System.out.print(map[x][m]);
+        // }
+        // System.out.println();
+        // }
+        // System.out.println();
+        // // CHECK MAP END
+
+        if (map[currentRow][currentCol] == 'X'
                 || map[currentRow][currentCol] == '*') {
-            return 0;
+            return shortestRoute;
+        } else if (map[currentRow][currentCol] == 'S') {
+            shortestRoute = findShortestRoute(shortestRoute, route);
+            return shortestRoute;
         }
-
         if (!(currentRow == 0 && currentCol == 0))
             map[currentRow][currentCol] = '*';
 
-        if (currentRow == 0) { // first row
-            if (currentCol == 0) { // (only check south and east)
-                if (prevDir == "west")
-                    return goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else if (prevDir == "south")
-                    return goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-                else
-                    return goThroughMap(map, currentRow, currentCol + 1, "east")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south")
-                            + 1;
-            } else if (currentCol == map[0].length - 1) { // if last column (only check west or south)
-                if (prevDir == "east")
-                    return goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else if (prevDir == "north")
-                    return goThroughMap(map, currentRow, currentCol - 1, "west") + 1;
+        shortestRoute = shortestRoute(map, currentRow, currentCol + 1, shortestRoute, addDirection(route, 'E'));
+        shortestRoute = shortestRoute(map, currentRow, currentCol - 1, shortestRoute, addDirection(route, 'W'));
+        shortestRoute = shortestRoute(map, currentRow - 1, currentCol, shortestRoute, addDirection(route, 'N'));
+        shortestRoute = shortestRoute(map, currentRow + 1, currentCol, shortestRoute, addDirection(route, 'S'));
 
-                else
-                    return goThroughMap(map, currentRow + 1, currentCol, "south")
-                            + goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + 1;
-            }
+        if (!(currentRow == 0 && currentCol == 0))
+            map[currentRow][currentCol] = '-'; // change back for checking the coming routes
 
-            else { // check east, south, west
-                if (prevDir == "east")
-                    return goThroughMap(map, currentRow + 1, currentCol, "south")
-                            + goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-                else if (prevDir == "north")
-                    return goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-                else if (prevDir == "west")
-                    return goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else
-                    return goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south")
-                            + goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-            }
-
-        } else if (currentRow == map.length - 1) { // last row
-            if (currentCol == 0) { // (only check north and east)
-                if (prevDir == "west")
-                    return goThroughMap(map, currentRow - 1, currentCol, "north") + 1;
-                else if (prevDir == "south")
-                    return goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-                else
-                    return goThroughMap(map, currentRow, currentCol + 1, "east")
-                            + goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + 1;
-            } else if (currentCol == map[0].length - 1) { // if last column (only check north or west)
-                if (prevDir == "east")
-                    return goThroughMap(map, currentRow - 1, currentCol, "north") + 1;
-                else if (prevDir == "south")
-                    return goThroughMap(map, currentRow, currentCol - 1, "west") + 1;
-
-                else
-                    return goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + 1;
-            }
-
-            else { // check east, north, west
-                if (prevDir == "east")
-                    return goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-                else if (prevDir == "south")
-                    return goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-                else if (prevDir == "west")
-                    return goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow - 1, currentCol, "north") + 1;
-                else
-                    return goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-            }
-        } else { // middle rows
-            if (currentCol == 0) { // check north, east, south
-                if (prevDir == "west")
-                    return goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else if (prevDir == "north")
-                    return goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-                else if (prevDir == "south")
-                    return goThroughMap(map, currentRow, currentCol + 1, "east")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else
-                    return goThroughMap(map, currentRow, currentCol + 1, "east")
-                            + goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-            } else if (currentCol == map[0].length - 1) { // check north, west, south
-                if (prevDir == "east")
-                    return goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else if (prevDir == "south")
-                    return goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else if (prevDir == "north")
-                    return goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow, currentCol - 1, "west") + 1;
-                else
-                    return goThroughMap(map, currentRow - 1, currentCol, "north") +
-                            goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-            } else { // check all
-                if (prevDir == "east")
-                    return goThroughMap(map, currentRow, currentCol + 1, "east")
-                            + goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else if (prevDir == "west")
-                    return goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow + 1, currentCol, "south") + 1;
-                else if (prevDir == "north")
-                    return goThroughMap(map, currentRow, currentCol + 1, "east")
-                            + goThroughMap(map, currentRow - 1, currentCol, "north")
-                            + goThroughMap(map, currentRow, currentCol - 1, "west") + 1;
-                else // prevDir == "south"
-                    return goThroughMap(map, currentRow + 1, currentCol, "south")
-                            + goThroughMap(map, currentRow, currentCol - 1, "west")
-                            + goThroughMap(map, currentRow, currentCol + 1, "east") + 1;
-            }
-        }
+        return shortestRoute;
     }
 
     public static void main(String[] args) {
 
-        // Rules/Outlines:
-        // 1. Ms. Wong CANNOT move diagonally
-        // 2. W and S' starting positions will ALWAYS be the same
-
         // Variables
-        int numOfCases;
+        int numOfMaps;
         char[][] map;
-
+        char[] shortestRoute;
+        char[] route;
         String line;
 
         // Main Code
         try {
             Scanner in = new Scanner(new File("input.txt"));
 
-            numOfCases = Integer.parseInt(in.nextLine());
-            for (int i = 0; i < numOfCases; i++) {
+            numOfMaps = Integer.parseInt(in.nextLine());
+            for (int mapNum = 1; mapNum <= numOfMaps; mapNum++) {
                 map = new char[Integer.parseInt(in.nextLine())][Integer.parseInt(in.nextLine())];
 
                 // Saves the whole map into a 2D array
@@ -184,32 +94,37 @@ public class NatalieWong_Assignment2 {
                     }
                 }
 
-                // FIND THE ROUTES HERE*************************************
-                System.out.println(goThroughMap(map, 0, 0, null)); // displays the total number of asterisks + 1
+                shortestRoute = new char[0];
+                route = new char[0];
 
-                // // PRINT THE ARRAY
-                // for (int x = 0; x < map.length; x++) {
-                // for (int m = 0; m < map[x].length; m++) {
-                // System.out.print(map[x][m]);
-                // }
-                // System.out.println();
-                // }
-                // System.out.println();
-                // // PRINT THE ARRAY
+                // display results here
+                shortestRoute = shortestRoute(map, 0, 0, shortestRoute, route);
+
+                System.out.printf("Layout #%d:%n", mapNum);
+
+                for (int row = 0; row < map.length; row++) {
+                    for (int col = 0; col < map[row].length; col++) {
+                        System.out.print(map[row][col]);
+                    }
+                    System.out.println("");
+                }
+
+                if (shortestRoute.length == 0) {
+                    System.out.println("\nOH NO! There is no way for Ms. Wong to reach Suki!\n");
+                } else {
+                    System.out.printf("\nFastest # of steps: %d%n", shortestRoute.length);
+                    System.out.print("Direction: ");
+
+                    for (int direction = 0; direction < shortestRoute.length; direction++)
+                        System.out.print(shortestRoute[direction] + " ");
+                    System.out.println("\n");
+                }
             }
 
             in.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not Found");
         }
-
-        // Hints:
-        // 1. create a program to find all possible routes first
-        // 2. add * at all visited spots
-        // 3. determine global and local vars
-
-        // 4. recursive method should contain ATLEAST 3 parameters:
-        // the array, current row position, current column position
 
     }
 }

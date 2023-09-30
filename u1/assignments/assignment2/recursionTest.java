@@ -15,6 +15,10 @@ public class recursionTest {
         return newDirections;
     }
 
+    public static char[][] isPath(char[][] map, int currentRow, int currentCol) {
+
+    }
+
     // public static String[][] savePaths(String[] newPath) {
 
     // }
@@ -58,14 +62,9 @@ public class recursionTest {
 
         if (currentRow == 0) { // first row
             if (currentCol == 0) { // (only check south and east)
-                if (prevDir == "west")
-                    return goThroughMap(map, currentRow + 1, currentCol, "south", directions) + 1;
-                else if (prevDir == "south")
-                    return goThroughMap(map, currentRow, currentCol + 1, "east", directions) + 1;
-                else
-                    return goThroughMap(map, currentRow, currentCol + 1, "east", directions)
-                            + goThroughMap(map, currentRow + 1, currentCol, "south", directions)
-                            + 1;
+                return goThroughMap(map, currentRow, currentCol + 1, "east", directions)
+                        + goThroughMap(map, currentRow + 1, currentCol, "south", directions)
+                        + 1;
             } else if (currentCol == map[0].length - 1) { // if last column (only check west or south)
                 if (prevDir == "east")
                     return goThroughMap(map, currentRow + 1, currentCol, "south", directions) + 1;
