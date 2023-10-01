@@ -66,5 +66,8 @@ public class L2_Arithmetics {
         a = 10;
         b += ++a;
         System.out.println(b); // 31
+
+        // BEDMAS
+        System.out.println(2 + 3 * 4);
     }
 }
