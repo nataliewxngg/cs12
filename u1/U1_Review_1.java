@@ -1,6 +1,6 @@
 package u1;
 
-public class U1_Review {
+public class U1_Review_1 {
     // Method heading - MODIFIER RETURN_TYPE METHOD_NAME(PARAMETERS)
     public static String methodName(String parameter) {
         return "";
@@ -13,13 +13,13 @@ public class U1_Review {
         // Primitive types
         int age = 9;
         double time = 8.23;
-        char pee = 'p';
-        boolean iwillget100tomorrow = true;
+        // char pee = 'p';
+        // boolean iwillget100tomorrow = true;
 
         // Non-primitive types
         String name = "Natalie";
         double[] birthdays = { 5.9, 1.11, 5.31, 3.4 };
-        int[] numOfEars = new int[2];
+        // int[] numOfEars = new int[2];
 
         // Arithmetics
         System.out.println(age + time); // 9+8.23 = 17.23
@@ -78,12 +78,6 @@ public class U1_Review {
 
         // *** METHOD OVERLOADING - Creating a method with the same name or/and return
         // type, but with different parameters
-
-        System.out.println(
-                "------------------------------------------------------------------------------------------------");
-
-        // 2. Input from keyboaard and file using Scanner/BufferedReader
-        // Output using .println() or PrintWriter
 
     }
 }
