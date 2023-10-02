@@ -43,13 +43,13 @@ public class test {
 
     // returns true if sentence is a palindrome of words
     public static boolean palinWords(String s) {
-        if (s.indexOf(" ") == -1)
+        if (s.indexOf(" ") < 0)
             return true;
 
-        if (!(s.substring(0, s.indexOf(" ")).equalsIgnoreCase(s.substring(s.lastIndexOf(" " + 1)))))
+        if (!(s.substring(0, s.indexOf(" ")).equalsIgnoreCase(s.substring(s.lastIndexOf(" ") + 1, s.length()))))
             return false;
 
-        return palinWords(s.substring(s.indexOf(" " + 1), s.lastIndexOf(" ")));
+        return palinWords(s.substring(s.indexOf(" ") + 1, s.lastIndexOf(" ")));
     }
 
     public static void main(String[] args) {
@@ -72,7 +72,8 @@ public class test {
         System.out.println(backStars("hello"));
         System.out.println(convert(123));
         System.out.println(scream('f', 4));
-
         System.out.println(palinWords("apple kiwi mango"));
+        System.out.println(palinWords("apple kiwi orange kiwi APPLE"));
+        System.out.println(palinWords("apple"));
     }
 }
