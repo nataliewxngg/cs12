@@ -29,11 +29,16 @@ public class NatalieWong_Assignment2 {
                 || map[currentRow][currentCol] == 'X' || map[currentRow][currentCol] == '*')
             return shortestRoute;
 
+        // if ((map[currentRow][currentCol] == '*' && !sukiFound) ||
+        // (map[currentRow][currentCol] == '#' && sukiFound))
+        // return shortestRoute;
+
         // If Ms. Wong manages to reach Suki, the boolean sukiFound is set to true so
         // that Ms. Wong will now search for the litter box (instead of Suki)
         if (map[currentRow][currentCol] == 'S') {
             sukiFound = true;
         }
+
         // If Ms. Wong is already carrying Suki away from the sink and reaches the
         // litter box, determine and return the current shortest route
         if (sukiFound && map[currentRow][currentCol] == 'L') {
@@ -46,7 +51,10 @@ public class NatalieWong_Assignment2 {
         // is Ms. Wong, Suki, or the litter box
         if (map[currentRow][currentCol] != 'W' && map[currentRow][currentCol] != 'S'
                 && map[currentRow][currentCol] != 'L') {
+            // if (sukiFound == false)
             map[currentRow][currentCol] = '*';
+            // else
+            // map[currentRow][currentCol] = '#';
         }
 
         // Check all 4 directions at each step to determine or possible replace the
