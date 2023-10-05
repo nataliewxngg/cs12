@@ -137,8 +137,9 @@ public class NatalieWong_Assignment2 {
                 }
             }
             in.close();
-        } catch (FileNotFoundException e) { // If the file was not found, catch the exception and display "File not
-                                            // Found" instead
+        } // If the file was not found (FileNotFoundException is thrown), catch the
+          // exception and display "File not Found" instead
+        catch (FileNotFoundException e) {
             System.out.println("File not Found");
         }
 
