@@ -26,9 +26,8 @@ public class NatalieWong_Assignment2 {
         // If the current coordinate is OUT OF RANGE or is a WALL or OBSTACLE (X/*),
         // return the current shortest route
         if (currentRow < 0 || currentRow >= map.length || currentCol < 0 || currentCol >= map[currentRow].length
-                || map[currentRow][currentCol] == 'X' || map[currentRow][currentCol] == '*') {
+                || map[currentRow][currentCol] == 'X' || map[currentRow][currentCol] == '*')
             return shortestRoute;
-        }
 
         // If Ms. Wong manages to reach Suki, the boolean sukiFound is set to true so
         // that Ms. Wong will now search for the litter box (instead of Suki)
@@ -37,7 +36,7 @@ public class NatalieWong_Assignment2 {
         }
         // If Ms. Wong is already carrying Suki away from the sink and reaches the
         // litter box, determine and return the current shortest route
-        else if (sukiFound && map[currentRow][currentCol] == 'L') {
+        if (sukiFound && map[currentRow][currentCol] == 'L') {
             if (shortestRoute.length() == 0 || route.length() < shortestRoute.length())
                 return route;
             return shortestRoute;
@@ -46,8 +45,9 @@ public class NatalieWong_Assignment2 {
         // Replace the map coordinate with an asterisk (to avoid backtracking) unless it
         // is Ms. Wong, Suki, or the litter box
         if (map[currentRow][currentCol] != 'W' && map[currentRow][currentCol] != 'S'
-                && map[currentRow][currentCol] != 'L')
+                && map[currentRow][currentCol] != 'L') {
             map[currentRow][currentCol] = '*';
+        }
 
         // Check all 4 directions at each step to determine or possible replace the
         // shortest route
