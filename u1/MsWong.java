@@ -1,6 +1,6 @@
 package u1;
 
-public class MsWong {
+public class MsWong implements Comparable<MsWong> {
 
     // instance variables
     int age;
@@ -29,6 +29,14 @@ public class MsWong {
     public MsWong(String firstName, String subject) {
         this.firstName = firstName;
         this.subject = subject;
+    }
+
+    public int compareTo(MsWong w) {
+        if (this.age < w.age)
+            return -1;
+        else if (this.age == w.age)
+            return 0;
+        return 1;
     }
 
 }
