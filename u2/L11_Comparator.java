@@ -1,4 +1,4 @@
-package u1;
+package u2;
 
 import java.util.ArrayList;
 
@@ -13,11 +13,11 @@ public class L11_Comparator {
         // ANSWER: Create a new class for every sorting criteria that implements
         // Comparator
 
-        MsWong wong1 = new MsWong("J", "CS", 25);
-        ArrayList<MsWong> list = new ArrayList<>();
+        L1_MsWong1 wong1 = new L1_MsWong1("J", "CS", 25);
+        ArrayList<L1_MsWong1> list = new ArrayList<>();
         list.add(wong1);
-        list.add(new MsWong("E", "Math", 30));
-        list.add(new MsWong("S", "Geo", 26));
+        list.add(new L1_MsWong1("E", "Math", 30));
+        list.add(new L1_MsWong1("S", "Geo", 26));
 
     }
 

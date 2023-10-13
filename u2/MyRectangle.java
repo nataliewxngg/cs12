@@ -1,4 +1,4 @@
-package u1;
+package u2;
 
 public class MyRectangle {
     private int left;

@@ -1,6 +1,9 @@
 package u1;
 
 import java.util.Scanner;
+
+import u2.MyRectangle;
+
 import java.util.ArrayList;
 
 public class ControlMyRectangles {

@@ -1,0 +1,75 @@
+package u2;
+
+public class L1_MsWong1 implements Comparable<L1_MsWong1> {
+
+    // instance variables
+    private int age; // Data encapsulation - hiding of the internal data - only accessible to current
+                     // class (MsWong)
+                     // - accessible with getter/setter methods
+    private String subject;
+    private String firstName;
+    private double height;
+
+    // static/class variables
+    private static String school = "MSS";
+
+    // Constructor - initialzies instance variables
+    // - NO return type
+    // - same name as class name
+    // - can overload
+    public L1_MsWong1(String firstName, String subject, int age) {
+        this.firstName = firstName;
+        this.subject = subject;
+        this.age = age;
+    }
+
+    public L1_MsWong1(String firstName) { // Overloaded constructor
+        this.firstName = firstName;
+    }
+
+    // Instance Methods - MUST be called with an instance object (eg.
+    // wong1.getAge())
+    // Getter and Setter - for data encapsulated variables
+    public int getAge() {
+        return age;
+    }
+
+    public void birthday() {
+        age++;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void changeSubject(String subject) {
+        this.subject = subject;
+    }
+
+    // Static Method - Can be called with an instance object or with the class name
+    // (eg. wong1.changeSchools("UW") OR MsWong.changeSchools("UW"))
+    public static void changeSchools(String newSchool) {
+        school = newSchool;
+    }
+
+    // Originally, printing an object will print the object's address
+    // This will allow the information of the MsWong object to be displayed instead
+    public String toString() {
+        return String.format("%nName: %s%nSubject: %s%nAge: %d%nHeight: %f%n", firstName, subject, age, height);
+    }
+
+    // Natural sorting order
+    public int compareTo(L1_MsWong1 w) {
+        // sort by age
+        if (this.age < w.age)
+            return -1;
+        else if (this.age == w.age)
+            return 0;
+        return 1;
+    }
+
+}
