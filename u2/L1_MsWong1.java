@@ -42,6 +42,10 @@ public class L1_MsWong1 implements Comparable<L1_MsWong1> {
         return subject;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public void setAge(int age) {
         this.age = age;
     }
@@ -60,6 +64,14 @@ public class L1_MsWong1 implements Comparable<L1_MsWong1> {
     // This will allow the information of the MsWong object to be displayed instead
     public String toString() {
         return String.format("%nName: %s%nSubject: %s%nAge: %d%nHeight: %f%n", firstName, subject, age, height);
+    }
+
+    // Checks if a MsWong object has the same name as another MsWong object
+    public boolean sameName(L1_MsWong1 o) {
+        // L1_MsWong1 wong = (L1_MsWong1) o; // if parameter was Object o instead
+        L1_MsWong1 wong = o;
+
+        return (this.getFirstName().equals(wong.getFirstName()));
     }
 
     // Natural sorting order
