@@ -45,8 +45,9 @@ public class L2_ArrayList {
 
         // Question #1
         // Checks if two L1_MsWong1 objects have the same firstName
-        System.out.println(list.get(0).equals(new L1_MsWong1("J", "CS", 25))); // BY DEFAULT, .EQUALS() CHECKS FOR THE
-                                                                               // SAME ADDRESS
+        System.out.println(list.get(0).equals(new L1_MsWong1("J", "CS", 25))); // false
+        // BY DEFAULT, .EQUALS() CHECKS FOR THE
+        // SAME ADDRESS
         System.out.println(list.get(0).sameName(new L1_MsWong1("J"))); // True
 
         // ----------------
