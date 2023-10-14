@@ -19,6 +19,9 @@ public class Main {
         String name;
         String type;
 
+        String searchBy = "";
+        String userLine = "";
+
         // Inputting from txt file
         try {
             // Input line
@@ -60,11 +63,54 @@ public class Main {
 
             // if Array is empty: automatically exit
             if (games.size() == 0)
-                System.out.println("You own 0 games :( Automatically exiting...");
+                System.out.println("You own 0 games... :( Automatically exiting.");
+
             // Otherwise, prompt user:
             else {
-                // Input from user (game name, type, or exit) - CASE INSENSITIVE:
-                System.out.println("SDKJFSDKJHFLK");
+                Scanner userIn = new Scanner(System.in);
+
+                // while searchBy is not "exit":
+                while (!searchBy.equalsIgnoreCase("exit")) {
+                    System.out.print("Search by game, type, or exit?: ");
+                    searchBy = userIn.nextLine().strip();
+
+                    // break if user exits from searchBy prompt
+                    if (searchBy.equalsIgnoreCase("exit")) {
+                        break;
+                    }
+
+                    // if user SEARCHES BY GAME, continuously prompt for game name until "exit" -
+                    // which returns back to prompting for searchBy
+                    while (searchBy.equalsIgnoreCase("game")) {
+                        System.out.print("Enter a game or exit: ");
+                        userLine = userIn.nextLine();
+
+                        if (userLine.equalsIgnoreCase("exit"))
+                            break;
+                        else {
+                            // EDIT HERE
+                            System.out.println("display game stats here");
+                        }
+                    }
+
+                    // if user SEARCHES BY TYPE, continuously prompt for type until "exit" -
+                    // which returns back to prompting for searchBy
+                    while (searchBy.equalsIgnoreCase("type")) {
+                        System.out.println("SEARCH BY TYPE");
+                        System.out.print("Enter a type or exit: ");
+                        userLine = userIn.nextLine();
+
+                        if (userLine.equalsIgnoreCase("exit")) {
+                            break;
+                        } else {
+                            // EDIT HERE
+                            System.out.println("display the games here");
+                        }
+                    }
+                }
+
+                // User enters "exit" on enterBy prompt
+                userIn.close();
             }
 
             in.close();
