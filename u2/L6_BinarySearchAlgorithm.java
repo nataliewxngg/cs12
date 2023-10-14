@@ -28,12 +28,13 @@ public class L6_BinarySearchAlgorithm {
     public static int binarySearch(int[] list, int key, int left, int right) {
 
         int mid = (left + right) / 2;
+
         if (left > right)
             return -left - 1;
 
         if (key == list[mid])
             return mid;
-        if (list[mid] < key)
+        else if (list[mid] < key)
             return binarySearch(list, key, mid + 1, right);
         else
             return binarySearch(list, key, left, mid - 1);

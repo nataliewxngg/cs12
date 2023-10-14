@@ -1,149 +1,23 @@
-5
-5
-5
-WX---
----X-
-XXXX-
-L--X-
-XX--S
-3
-3
-WXX
--L-
-XXS
-6
-6
-W---XX
---X--X
-X-LX-X
---XX--
--XXXX-
------S
-4
-4
-WXXX
---XX
-X--X
-LX-S
-3
-3
-WX-
-XXL
-XXS
-10
-10
-W---X---XX
-X-X---X--X
-X--XXX-X--
--X-X---XX-
----XLX----
--XXX--X--X
--XXXX--X--
--X---X--X-
----X--X-X-
-XXX-X----S
-15
-15
-W--XXXXXXXXX---
--X--XXXXXXX--X-
---X--X------X--
-X--XL-X--XXX--X
-XX--X--X--X--XX
-XXX--X--X--X--X
-XXXX--X--X--X--
-XX--X--X--X--X-
-X----X--X--X-X-
---X---X--X---X-
-X---X--X--XXXX-
---X-XX--X-XX---
-XXX---X---X-X--
-XXX-X--XXXX-XX-
-XXX--X--------S
-20
-20
-WX----XX-XX--X------
--X--X--XX-X---XX-XX-
----XXXXX-X----X--X--
--X--X-XXXX---X--XX-L
---XX--XX---X-----XX-
----X-XX--X-X--XXX-X-
--X--X----X----XXX-XX
--X-XX---X----X-XXXXX
--X-XXX-X--XX-XX--X-X
-XX--X-XXX---X---XXX-
-XXX-X-X-X---XX--XX--
-X-X---X-X-X-X--XX---
-X--XX-X-X-X-------X-
-XX--X-----X--XXX----
-X-XXXX-X-X-X-X--XXXX
--X---XX-XX-X-XXX--X-
--X-X--X--X-X-----X--
-X--XX------XXX-X---X
-X-X--X----XXX--XXX--
-XX---XX---XXX-----XS
-20
-50
-WX----XX---X--------X--XXXXXX--XX---XX----X--XX--X
------XXX-X---XXX--XXXXXXXXX-X---------XX-X--------
-XXXX----X-X---XX-X-XXXXXX--XXXX---XXX--------XX--X
--XX--XX--XX---X----XXXXXXX---X--X-X-XXXXX----X-X--
-XXXX--X----X--XX--XX---X-X---X-X---XXXXX-XXX-X---X
-X-XX--X-X---XXX---X--XXXXX-XX---XX-X-XX--X----XXXX
-X-XX-X-----X-X-----X-X-XX-X-XXXX-X--X-XX-X-X---X-X
--XX--XX-XX---XX-----------XX-XX--X-X-X-XX--XX-L-XX
--X---X----XXXXXX----X--X---X-X-X-----XXXX---XXXXX-
-X---X---X-----XX-XXXX-XXX--X-XX---X----XX-XXXXXX-X
-XX-XXX-XXXXX--X--XX-X--X--XXX--X-XX---XX-XXX-XXXX-
----X-XXX---X-------X-X----XXXX-XXX-XX-----------X-
-----XX-------XX---X-XXX---XX-X-X--X--XX--XX---XX--
--XXXXXX-X-XXX--X-X--X-XX--X---X-XXX-X-X-X--XXXX-X-
------XX--X-X--X---XXX-------X--X---X----XX--XXXXX-
-X-XX-XXX--X--X---XXXXX--X-X------X-----X----XX-XXX
---XX-----XX-XX---XXX-X-X--X----X-X--XX--XX-----X-X
---XXX-X-X---X-X---X-XXXXXX-XX---X-X----X-XXXX----X
----X--X---XX----X--X-X--XXXX---XX-XXX---------X---
-X--X-X--XX--XX--X--XX-X----X-X---X-X-X----XX---XXS
-20
-50
-W------XX---X--XXXXXX-XX--XXX--XXXXXX--X---XXXXX--
---X---X-XXXXXX--X-XXXXXX--X--X-XXXX-X-X--X--XX--XX
---X-X-X-XX-X---X--X-XXX---XXX-X---XXX---X-X-X--X--
-X-X-XX-X----X-X-X-XXX--X--------X-X----X---XXX-X-X
---XXX--X-----X---XX-X---XXXX------XXXXX-X--X---X--
-------XXXXX--X-----XXXX--XX--XXXXXX-XXX-------X-X-
-XXXX-X--X-X-XX-----XX-X-XXX--XX--XX---------X-XXX-
-X-X---X-X-X--XX-XX--X-X--X--XX----XXX-X-X----XXX-X
--X-XX---X--XXXX--X-X---X-XX--X-X-X-X---X--X-XX-XXX
----X-XX----X--X----XXXX-XX---X-X--X-------X-XXX--X
-X---XXX-X-X-X----X---X-XXX--XXX--XX----XX--XX---X-
----X-X--XXX--XX-------X-XX---X---XX--X---X-XX---XX
---X-X-X----X----X--XX---X-X------XX----X---XXX--X-
--X---X-X--XX--XX---X--------X--XX--X-----XX----X--
-X--X--XX--XXX--XX----X-X-X---X-X---X-----X---X--XX
-XX-X-X--X-----X-X--XXX---X-XX-XX-X---XXX---XX-XX-X
--XX---X-X------XXX--X--X-X--------X-XX-X-X-X-----X
--XXX---X--XXX--XXXXXX--XX-X-------X-XXXXX----X-X--
-----L-----XX-X--XX--XX----XXX-XX--X--XXX-X-X--XXX-
---XXXXX---------XX-X-XX-------XX-XX--XXX-X-----X-S
-20
-50
-W-XX---X-------XX-X-X-X-X-X----X------XX--X-XXXX--
-X-XX-XXL-X--X-----X------X-XXX-XXXX---XX--XXX-----
---XX---XXX--XXXX-----X--X---X------------X---XX--X
-X----XXX-XXXX--X--XXXXX----X--X-XX----XX------X--X
-XXX--XXXX-X-XX--X-X-------X--X-X-XX-XXX--X-X------
--XX--X-XXX----X-XXX--X-XXXX-XXXX-X--XXX----X-XX--X
--XX-----X-XXXX-XXX----XXX---XXXXXXX-X--X-X--XX-X--
--X-XX----X-X---X----X---XX---XX-X--XXXX-XX-XX---XX
--X---X-X----X--X---X-XXX--X-XXX-XX-XX---X-----X--X
---XXX-XX---XXX--X-X-X--X----XX-X-XX-X--XXX-X-X--X-
--X--X-----X----XX-------X---X----X-X-XXX-----X-XX-
-X--XXX-X---X-X---X----X-------XX--XX--X---XX------
-X--XX--XXX--XXXX-XXXXXXX-XX------XXX-----X---X-XXX
--X---X---XX-----X--X--XX--XX--XX--X-X----X-XX--X--
--X--X-XXXX--XX-XX--X--XX--------X--X--X--XXX-XX-X-
---XX-X--X----X---XXX-XX-X-XXX-X--XX-------X--XXXXX
---X-X-X-X---X----XX-----------X-XX--XX-X--------X-
-XX----XX---XX-X-------XXX-X-XXXX-XXXXX---X-X-X----
-X---XX-X-----XX-X---XX-XXX--XX-XXX----XX--XX----X-
----X-XX--X---X--X-------X-X-X---X--X-X-X---X---XXS
+9.25 Super Smash Bros PVP 
+8.98 Overcooked Simulation
+9.50 The Legend of Zelda: Breath of the Wild Action-Adventure
+9.75 The Witcher 3: Wild Hunt RPG
+8.80 Red Dead Redemption 2 Action-Adventure
+9.25 Dark Souls III Action-RPG
+8.90 Overwatch FPS
+9.10 Celeste Platformer
+8.75 Horizon Zero Dawn Action-RPG
+9.30 Super Mario Odyssey Platformer
+8.60 Grand Theft Auto V Action-Adventure
+9.40 Bloodborne Action-RPG
+
+  hello !
+10.00 awesomegamethatdoesnotexistsadly  
+very good game fun
+9.99
+11 Baldur's Gate 3 Adventure-RPG
+-12 really bad game bad
+                                            
+   9.19 Mincraft Adventure
+0.001 OverWatch 2 FPS
+                              
