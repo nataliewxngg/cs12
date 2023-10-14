@@ -7,6 +7,8 @@ public class L4_ComparatorInterface {
 
         // IMPORTANT NOTE
         // YOU MUST INCLUDE IMPORT JAVA.UTIL.*; IN ALL COMPARATOR CLASSES
+        // BINARY SEARCH FOR COMPARATORS MUST INCLUDE COMPARATOR PARAMETER SO IT
+        // SEARCHES FOR THE INDEX OF THE *****INTENDED FIELD
 
         // QUESTION #1: How do I sort a list of objects with different sorting
         // criterias?
