@@ -9,7 +9,7 @@ package u2.assignment1;
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class Bonus {
 
     // binarySearch algorithm (recursive approach) - to search case insensitively
     // for game titles
@@ -40,7 +40,7 @@ public class Main {
 
     // binarySearch algorithm (iterative approach) - to find the ranking of a game
     // given its ranking
-    public static int findRanking(ArrayList<Games> games, double key, int left, int right) {
+    public static int binarySearch_Rating(ArrayList<Games> games, double key, int left, int right) {
 
         Collections.sort(games, new SortByRating());
 
@@ -50,11 +50,9 @@ public class Main {
             // Instead of returning mid right when key is found, keep searching towards the
             // left to find the FIRST occurrence
             if (key == games.get(mid).rating) {
-                while (key == games.get(mid).rating && mid != 0) {
+                while (key == games.get(mid).rating) {
                     mid--;
                 }
-                if (mid == 0)
-                    return 0;
                 return mid + 1;
             }
 
@@ -178,7 +176,7 @@ public class Main {
 
                                 // Display the ranking of the game
                                 System.out.println(
-                                        "Ranking: " + (findRanking(games, games.get(indexOfGame).rating, 0,
+                                        "Ranking: " + (binarySearch_Rating(games, games.get(indexOfGame).rating, 0,
                                                 games.size() - 1) + 1) + " out of " + games.size());
                             }
                         } else {
@@ -230,7 +228,7 @@ public class Main {
 
                                     // Display the ranking of the game
                                     System.out.println("Ranking: "
-                                            + (findRanking(games, gamesInType.get(game).rating, 0,
+                                            + (binarySearch_Rating(games, gamesInType.get(game).rating, 0,
                                                     games.size() - 1) + 1)
                                             + " out of " + games.size());
                                 }
