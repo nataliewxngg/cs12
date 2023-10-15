@@ -2,7 +2,7 @@ package u2.assignment1;
 
 public class Games implements Comparable<Games> {
 
-    // Natural sorting order - sort game names alphabetically
+    // Natural sorting order - sort game names alphabetically and case insensitively
     public int compareTo(Games game) {
         return this.name.toLowerCase().compareTo(game.name.toLowerCase());
     }

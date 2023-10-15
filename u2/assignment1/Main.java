@@ -38,13 +38,9 @@ public class Main {
             return binarySearch_Name(games, key, mid + 1, right);
     }
 
-    // binarySearch algorithm (iterative approach) - to find the FIRST OCCURRENCE of
-    // a game's rating
+    // binarySearch algorithm (iterative approach) - to find the ranking of a game
+    // given its ranking
     public static int binarySearch_Rating(ArrayList<Games> games, double key, int left, int right) {
-        // {0.001, 8.6, 8.75, 8.8, 8.9, 8.9, 8.9, 8.98, 9.1, 9.19, 9.25, 9.25, 9.3, 9.4,
-        // 9.5, 9.75}
-
-        // mincraft - ranked 10 of 16
 
         Collections.sort(games, new SortByRating());
 
@@ -68,6 +64,22 @@ public class Main {
         }
 
         return -left - 1;
+    }
+
+    // binarySearch algorithm (recursive approach) - to search case insensitively
+    // for game types
+    public static int binarySearch_Type(ArrayList<Games> games, String key, int left, int right) {
+        int mid = (left + right) / 2;
+
+        if (left > right)
+            return -left - 1;
+
+        if (key.equalsIgnoreCase(games.get(mid).type))
+            return mid;
+        else if (key.toLowerCase().compareTo(games.get(mid).type.toLowerCase()) < 0) {
+            return binarySearch_Type(games, key, left, mid - 1);
+        } else
+            return binarySearch_Type(games, key, mid + 1, right);
     }
 
     public static void main(String[] args) throws IOException {
@@ -146,7 +158,7 @@ public class Main {
 
                         if (userLine.equalsIgnoreCase("exit"))
                             break;
-                        else {
+                        else if (userLine.length() > 0) {
                             // Sort games alphabetically and search for the inputted game name (case
                             // insensitive)
                             Collections.sort(games);
@@ -167,35 +179,68 @@ public class Main {
                                         "Ranking: " + (binarySearch_Rating(games, games.get(indexOfGame).rating, 0,
                                                 games.size() - 1) + 1) + " out of " + games.size());
                             }
+                        } else {
+                            System.out.print("\nInvalid input.");
                         }
+
                     }
 
                     // If user SEARCHES BY TYPE, continuously prompt for type until "exit" -
                     // which returns back to prompting for searchBy
                     while (searchBy.equalsIgnoreCase("type")) {
-                        System.out.println("SEARCH BY TYPE");
-                        System.out.print("Enter a type or exit: ");
-                        userLine = userIn.nextLine();
+                        System.out.print("\nEnter a type or exit: ");
+                        userLine = userIn.nextLine().strip();
 
                         if (userLine.equalsIgnoreCase("exit")) {
                             break;
-                        } else {
+                        } else if (userLine.length() > 0) {
                             // Sort games by type and search for the inputted type (case insensitive) -
                             // search for the FIRST occurrence
 
-                            // Type not found in list - goes back to prompting for types
+                            ArrayList<Games> gamesEdited = new ArrayList<>(games); // used to remove all instances of
+                                                                                   // the games with the same types
+                            Collections.sort(gamesEdited, new SortByType());
 
-                            // If the type is found in the list, display the statistics for the game - keep
-                            // adding 1 to index until type is no longer the same
+                            int indexOfGame = binarySearch_Type(gamesEdited, userLine, 0, gamesEdited.size() - 1);
 
-                            // EDIT HERE
-                            System.out.println("display the games here");
+                            if (indexOfGame < 0) {
+                                System.out.println("You don't own a game of this type :(");
+                            } else {
+                                ArrayList<Games> gamesInType = new ArrayList<>(); // only has games of the inputted type
+
+                                // Add all other games with the same type into the gamesInType ArrayList
+                                do {
+                                    gamesInType.add(gamesEdited.get(indexOfGame));
+                                    gamesEdited.remove(indexOfGame);
+                                    indexOfGame = binarySearch_Type(gamesEdited, userLine, 0,
+                                            gamesEdited.size() - 1);
+                                } while (indexOfGame >= 0);
+
+                                Collections.sort(gamesInType); // Sort the games with the same type by their names in
+                                                               // alphabetical order
+                                                               // check
+
+                                // Display all the games in gamesInType
+                                Collections.sort(games);
+
+                                for (int game = 0; game < gamesInType.size(); game++) {
+                                    System.out.print(gamesInType.get(game));
+
+                                    // Display the ranking of the game
+                                    System.out.println("Ranking: "
+                                            + (binarySearch_Rating(games, gamesInType.get(game).rating, 0,
+                                                    games.size() - 1) + 1)
+                                            + " out of " + games.size());
+                                }
+                            }
+                        } else {
+                            System.out.print("\nInvalid input.");
                         }
                     }
 
                     if (!searchBy.equalsIgnoreCase("type") && !searchBy.equalsIgnoreCase("game")
                             && !searchBy.equalsIgnoreCase("exit"))
-                        System.out.print("Invalid input. ");
+                        System.out.print("\nInvalid input.");
                 }
 
                 // User enters "exit" on enterBy prompt
