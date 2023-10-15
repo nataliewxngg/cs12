@@ -156,7 +156,7 @@ public class Main {
 
                             // Game not found in list - goes back to prompting for game titles
                             if (indexOfGame < 0) {
-                                System.out.println("You don't own this game :(\n");
+                                System.out.println("You don't own this game :(");
                             }
                             // If the game is found in the list, display the statistics for the game
                             else {
@@ -180,6 +180,14 @@ public class Main {
                         if (userLine.equalsIgnoreCase("exit")) {
                             break;
                         } else {
+                            // Sort games by type and search for the inputted type (case insensitive) -
+                            // search for the FIRST occurrence
+
+                            // Type not found in list - goes back to prompting for types
+
+                            // If the type is found in the list, display the statistics for the game - keep
+                            // adding 1 to index until type is no longer the same
+
                             // EDIT HERE
                             System.out.println("display the games here");
                         }

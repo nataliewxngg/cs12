@@ -4,7 +4,7 @@ public class Games implements Comparable<Games> {
 
     // Natural sorting order - sort game names alphabetically
     public int compareTo(Games game) {
-        return this.name.compareTo(game.name);
+        return this.name.toLowerCase().compareTo(game.name.toLowerCase());
     }
 
     // Instance Variables
