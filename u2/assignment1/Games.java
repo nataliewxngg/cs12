@@ -1,10 +1,14 @@
 package u2.assignment1;
 
-public class Games {
+public class Games implements Comparable<Games> {
+
+    // Natural sorting order - sort game names alphabetically
+    public int compareTo(Games game) {
+        return this.name.compareTo(game.name);
+    }
 
     // Instance Variables
     String name;
-
     double rating; // can be duplicated
     String type; // can be duplicated
 
