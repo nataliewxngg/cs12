@@ -9,8 +9,8 @@ public class Games implements Comparable<Games> {
 
     // Instance Variables
     String name;
-    double rating; // can be duplicated
-    String type; // can be duplicated
+    double rating;
+    String type;
 
     // Constructor
     public Games(double rating, String name, String type) {

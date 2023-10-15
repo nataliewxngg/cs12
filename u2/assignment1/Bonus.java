@@ -1,8 +1,8 @@
 // Natalie Wong
 // Due Monday, October 16, 2023
 
-// Assignment #3 - OOP: Nintendo Switch Games Assignment
-// This program will input a list of Nintendo games from a txt file and allow the user to search for games by title or type
+// Assignment #3 - OOP: Nintendo Switch Games Assignment (WITHOUT BONUS)
+// This program inputs a list of Nintendo games from an input.txt file and allows the user to search for the games either by title or by type.
 
 package u2.assignment1;
 
@@ -40,7 +40,7 @@ public class Bonus {
 
     // binarySearch algorithm (iterative approach) - to find the ranking of a game
     // given its ranking
-    public static int binarySearch_Rating(ArrayList<Games> games, double key, int left, int right) {
+    public static int findRanking(ArrayList<Games> games, double key, int left, int right) {
 
         Collections.sort(games, new SortByRating());
 
@@ -50,9 +50,11 @@ public class Bonus {
             // Instead of returning mid right when key is found, keep searching towards the
             // left to find the FIRST occurrence
             if (key == games.get(mid).rating) {
-                while (key == games.get(mid).rating) {
+                while (key == games.get(mid).rating && mid != 0) {
                     mid--;
                 }
+                if (mid == 0)
+                    return 0;
                 return mid + 1;
             }
 
@@ -176,7 +178,7 @@ public class Bonus {
 
                                 // Display the ranking of the game
                                 System.out.println(
-                                        "Ranking: " + (binarySearch_Rating(games, games.get(indexOfGame).rating, 0,
+                                        "Ranking: " + (findRanking(games, games.get(indexOfGame).rating, 0,
                                                 games.size() - 1) + 1) + " out of " + games.size());
                             }
                         } else {
@@ -228,7 +230,7 @@ public class Bonus {
 
                                     // Display the ranking of the game
                                     System.out.println("Ranking: "
-                                            + (binarySearch_Rating(games, gamesInType.get(game).rating, 0,
+                                            + (findRanking(games, gamesInType.get(game).rating, 0,
                                                     games.size() - 1) + 1)
                                             + " out of " + games.size());
                                 }
