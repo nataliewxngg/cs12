@@ -22,10 +22,24 @@ public class Games implements Comparable<Games> {
         // IF g1 > g2 --> RETURN A POSITIVE #
     }
 
-    // Instance Variables
-    String name;
-    double rating;
-    String type;
+    // Instance Variables + Data Encapsulation
+    private String name;
+    private double rating;
+    private String type;
+
+    // DESCRIPTION: Getter methods - allows the files utilizing Games
+    // objects to access its private attributes
+    public String getName() {
+        return this.name;
+    }
+
+    public double getRating() {
+        return this.rating;
+    }
+
+    public String getType() {
+        return this.type;
+    }
 
     // DESCRIPTION: The CONSTRUCTOR method - utilized to create new Games objects
     // and to initialize each object's instance variables
@@ -43,7 +57,6 @@ public class Games implements Comparable<Games> {
     // DESCRIPTION: .toString() is called whenever a Games object is to be printed
     // By default, it will print the address location of the Games object in the
     // computer.
-
     // However, by writing the .toString() method like so ourselves,
     // it allows us to change what is to be displayed instead.
 

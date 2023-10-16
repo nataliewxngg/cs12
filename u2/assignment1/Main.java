@@ -29,25 +29,26 @@ public class Main {
             return -left - 1;
 
         // If the game is found, return the index of the game in the ArrayList
-        if (key.equalsIgnoreCase(games.get(mid).name))
+        if (key.equalsIgnoreCase(games.get(mid).getName()))
             return mid;
 
-        // If the game is LESS than the current games' name (ie. A<Z, A<E, J>B, etc.),
-        // readjust the right index to mid-1 and call binarySearch again so it only
+        // If the game is LESS than the current games' name case insensitively (ie. A<Z,
+        // A<e, b<J, etc.),
+        // readjust the right index to mid-1 and recall the method so it only
         // checks the LEFT SIDE of mid in the ArrayList
 
         // eg. Game you are searching for: Animal Crossing; Game at 'mid' index:
-        // Minecraft
-        else if (key.toLowerCase().compareTo(games.get(mid).name.toLowerCase()) < 0) {
+        // Minecraft (A<M)
+        else if (key.toLowerCase().compareTo(games.get(mid).getName().toLowerCase()) < 0) {
             return binarySearchName(games, key, left, mid - 1);
         }
 
-        // If the game is GREATER than the current games' name, readjust the left
-        // index to mid+1 and recall the method so it only checks the RIGHT SIDE
-        // of mid in the ArrayList
+        // If the game is GREATER than the current games' name case insensitively,
+        // readjust the left index to mid+1 and recall the method so it only checks the
+        // RIGHT SIDE of mid in the ArrayList
 
         // eg. Game you are searching for: Minecraft; Game at 'mid' index: Animal
-        // Crossing
+        // Crossing (M>A)
         else
             return binarySearchName(games, key, mid + 1, right);
 
@@ -57,7 +58,7 @@ public class Main {
     }
 
     // DESCRIPTION: Searches case insensitively for a game of a given type
-    // from an ArrayList
+    // from an ArrayList of Games objects
     // UTILIZES THE BINARY SEARCH ALGORITHM (RECURSIVE APPROACH)
     public static int binarySearchType(ArrayList<Games> games, String key, int left, int right) { // PARAMETERS:
                                                                                                   // 1. ArrayList to
@@ -76,7 +77,7 @@ public class Main {
 
         // If a game of the same type is found, return the index of the game in the
         // ArrayList
-        if (key.equalsIgnoreCase(games.get(mid).type))
+        if (key.equalsIgnoreCase(games.get(mid).getType()))
             return mid;
 
         // If the type of the game is LESS than the current games' type (ie. A<Z, A<E,
@@ -85,7 +86,7 @@ public class Main {
 
         // eg. Type of game you are looking for: Adventure | Type of game at 'mid'
         // index: RPG
-        else if (key.toLowerCase().compareTo(games.get(mid).type.toLowerCase()) < 0) {
+        else if (key.toLowerCase().compareTo(games.get(mid).getType().toLowerCase()) < 0) {
             return binarySearchType(games, key, left, mid - 1);
         }
 
@@ -114,7 +115,7 @@ public class Main {
                                                                                              // 3. Left and right
                                                                                              // indexes (for algorithm)
 
-        Collections.sort(games, new SortByRating());
+        Collections.sort(games, new SortByRating()); // Sort the ArrayList of games by ratings IN DESCENDING ORDER
 
         // As long as all possible indexes have not yet been searched, continuously
         // shrink the length between left and right to determine the index of
@@ -122,37 +123,38 @@ public class Main {
         while (left <= right) {
             int mid = (left + right) / 2;
 
-            // If a game with the same type is found, instead of returning its
+            // If a game with the same rating is found, instead of returning its
             // index right away, keep searching towards the left to determine the index of
             // the FIRST occurrence
-            if (key == games.get(mid).rating) {
+            if (key == games.get(mid).getRating()) {
 
                 // Move the current index left until
                 // 1. Rating of the game at index 'mid' is no longer the 'key' index
                 // 2. The 'mid' index is already at the leftmost position
-                while (key == games.get(mid).rating && mid != 0) {
+                while (key == games.get(mid).getRating()) {
+                    if (mid == 0)
+                        return mid;
                     mid--;
                 }
 
-                // RETURN: Return 0 if 'mid' is at the leftmost position already; otherwise,
+                // RETURN:
                 // return an accumulated version of 'mid' to make up for the while loop above,
                 // which would have moved 'mid' one extra index to the left
-                if (mid == 0)
-                    return mid;
                 return mid + 1;
             }
 
             // If the 'key' rating is greater than the rating of the game at the current
-            // index of the ArrayList, move left to 1 right of mid to eliminate the
-            // games on the left side, which are 100% less than the 'key' rating
-            else if (key > games.get(mid).rating) {
-                left = mid + 1;
-            }
-            // If the 'key' rating is less than the rating of the game at the current
             // index of the ArrayList, move right to 1 left of mid to eliminate the
-            // games on the right side, which are 100% greater than the 'key' rating
-            else {
+            // games on the right side, which are 100% less than the 'key' rating
+            else if (key > games.get(mid).getRating()) {
                 right = mid - 1;
+            }
+
+            // If the 'key' rating is less than the rating of the game at the current
+            // index of the ArrayList, move left to 1 right of mid to eliminate the
+            // games on the left side, which are 100% greater than the 'key' rating
+            else {
+                left = mid + 1;
             }
         }
 
@@ -162,12 +164,12 @@ public class Main {
     }
 
     // DESCRIPTION: The main method acquires input from the textfile, saves each
-    // game into an ArrayList of 'Games' objects, and prompts the user for searching
-    // criterias
+    // game into an ArrayList of 'Games' objects, prompts the user for searching
+    // criterias, and displays the statistics given the inputs
     public static void main(String[] args) throws IOException { // PARAMETER: args not used
-                                                                // THROWS IOEXCEPTION: For
-                                                                // Scanner and BufferedReader used to input from the
-                                                                // textfile and from the user
+                                                                // THROWS IOEXCEPTION: For the BufferedReader, which
+                                                                // collects input from the textfile
+
         // Variables
         ArrayList<Games> games = new ArrayList<>();
         String line;
@@ -195,6 +197,8 @@ public class Main {
                 line = line.strip();
                 StringTokenizer st = new StringTokenizer(line);
 
+                name = "";
+
                 // If there is a valid # of fields (3 fields: rating, name, type) in the current
                 // line, separate it and initialize its 'Game' object
                 if (st.countTokens() >= 3) {
@@ -205,8 +209,12 @@ public class Main {
                         if (rating < 0 || rating > 10)
                             throw new NumberFormatException();
 
-                        // Game Name
-                        name = line.substring(line.indexOf(" ") + 1, line.lastIndexOf(" "));
+                        // Game Name - takes the second to 2nd last token and combines them all to
+                        // create a string (for the name)
+                        int numOfTokens = st.countTokens() - 1;
+                        for (int token = 0; token < numOfTokens; token++)
+                            name += st.nextToken() + " ";
+                        name = name.strip();
 
                         // Type
                         type = line.substring(line.lastIndexOf(" ") + 1);
@@ -277,7 +285,7 @@ public class Main {
 
                                 // Displays the Ranking of the game
                                 System.out.println(
-                                        "Ranking: " + (findRanking(games, games.get(indexOfGame).rating, 0,
+                                        "Ranking: " + (findRanking(games, games.get(indexOfGame).getRating(), 0,
                                                 games.size() - 1) + 1) + " out of " + games.size());
                             }
                         }
@@ -342,7 +350,7 @@ public class Main {
 
                                     // Display game's ranking
                                     System.out.println("Ranking: "
-                                            + (findRanking(games, gamesInType.get(game).rating, 0,
+                                            + (findRanking(games, gamesInType.get(game).getRating(), 0,
                                                     games.size() - 1) + 1)
                                             + " out of " + games.size());
                                 }

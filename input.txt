@@ -8,8 +8,7 @@
 8.90 Hello What
 8.90 I love ur mom Love
 9.10 Celeste Platformer
-8.2 Celeste bad
-8.75 Horizon Zero Dawn Action-RPG
+8.75        Horizon         Zero Dawn         Action-RPG
 9.30 Super Mario Odyssey Platformer
 8.60 Grand Theft Auto V Action-Adventure
 9.40 Bloodborne Action-RPG
@@ -21,4 +20,4 @@ very good game fun
 -12 really bad game bad
                                                                             
    9.19 Mincraft Adventure
-0.001 OverWatch 2 FPS             
+0.001 OverWatch 2 FPS

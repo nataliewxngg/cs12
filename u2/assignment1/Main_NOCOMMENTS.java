@@ -8,9 +8,9 @@ public class Main_NOCOMMENTS {
         int mid = (left + right) / 2;
         if (left > right)
             return -left - 1;
-        if (key.equalsIgnoreCase(games.get(mid).name))
+        if (key.equalsIgnoreCase(games.get(mid).getName()))
             return mid;
-        else if (key.toLowerCase().compareTo(games.get(mid).name.toLowerCase()) < 0) {
+        else if (key.toLowerCase().compareTo(games.get(mid).getName().toLowerCase()) < 0) {
             return binarySearch_Name(games, key, left, mid - 1);
         } else
             return binarySearch_Name(games, key, mid + 1, right);
@@ -20,14 +20,14 @@ public class Main_NOCOMMENTS {
         Collections.sort(games, new SortByRating());
         while (left <= right) {
             int mid = (left + right) / 2;
-            if (key == games.get(mid).rating) {
-                while (key == games.get(mid).rating && mid != 0) {
+            if (key == games.get(mid).getRating()) {
+                while (key == games.get(mid).getRating() && mid != 0) {
                     mid--;
                 }
                 if (mid == 0)
                     return 0;
                 return mid + 1;
-            } else if (key > games.get(mid).rating) {
+            } else if (key > games.get(mid).getRating()) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
@@ -41,9 +41,9 @@ public class Main_NOCOMMENTS {
         int mid = (left + right) / 2;
         if (left > right)
             return -left - 1;
-        if (key.equalsIgnoreCase(games.get(mid).type))
+        if (key.equalsIgnoreCase(games.get(mid).getType()))
             return mid;
-        else if (key.toLowerCase().compareTo(games.get(mid).type.toLowerCase()) < 0) {
+        else if (key.toLowerCase().compareTo(games.get(mid).getType().toLowerCase()) < 0) {
             return binarySearch_Type(games, key, left, mid - 1);
         } else
             return binarySearch_Type(games, key, mid + 1, right);
@@ -103,7 +103,7 @@ public class Main_NOCOMMENTS {
                                 System.out.print(games.get(indexOfGame));
 
                                 System.out.println(
-                                        "Ranking: " + (findRanking(games, games.get(indexOfGame).rating, 0,
+                                        "Ranking: " + (findRanking(games, games.get(indexOfGame).getRating(), 0,
                                                 games.size() - 1) + 1) + " out of " + games.size());
                             }
                         } else {
@@ -137,7 +137,7 @@ public class Main_NOCOMMENTS {
                                     System.out.print(gamesInType.get(game));
 
                                     System.out.println("Ranking: "
-                                            + (findRanking(games, gamesInType.get(game).rating, 0,
+                                            + (findRanking(games, gamesInType.get(game).getRating(), 0,
                                                     games.size() - 1) + 1)
                                             + " out of " + games.size());
                                 }

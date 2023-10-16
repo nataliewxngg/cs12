@@ -4,14 +4,23 @@ import java.util.*;
 
 public class SortByRating implements Comparator<Games> {
 
-    // DESCRIPTION: A compare method utilized for the comparator interface, which
-    // sorts an ArrayList of Games Objects by rating, in ascending order
-    public int compare(Games g1, Games g2) { // PARAMETERS: 2 Games objects
-        if (g1.rating == g2.rating)
+    // DESCRIPTION: A compare method utilized for the sort-by-rating comparator
+    // interface, which sorts an ArrayList of Games Objects by rating in descending
+    // order
+
+    public int compare(Games g1, Games g2) { // PARAMETERS: 2 Games objects to compare
+        // RETURN: If the rating of the two Games are the name, return 0
+        if (g1.getRating() == g2.getRating())
             return 0;
-        else if (g1.rating < g2.rating)
-            return -1;
-        else
+
+        // RETURN: If the rating of the first game is less than the second, return 1
+        // (can be any positive # for the purpose of the comparator)
+        else if (g1.getRating() < g2.getRating())
             return 1;
+
+        // RETURN: If the rating of the first game is greater than the second, return -1
+        // (can be any negative # for the purpose of the comparator)
+        else
+            return -1;
     }
 }
