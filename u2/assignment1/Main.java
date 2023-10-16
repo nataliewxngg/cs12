@@ -11,77 +11,154 @@ import java.io.*;
 
 public class Main {
 
-    // binarySearch algorithm (recursive approach) - to search case insensitively
-    // for game titles
-    public static int binarySearchName(ArrayList<Games> games, String key, int left, int right) {
+    // DESCRIPTION: Searches case insensitively for a given game title from an
+    // ArrayList
+    // UTILIZES THE BINARY SEARCH ALGORITHM (RECURSIVE APPROACH)
+    public static int binarySearchName(ArrayList<Games> games, String key, int left, int right) { // PARAMETERS:
+                                                                                                  // 1. ArrayList to
+                                                                                                  // search game title
+                                                                                                  // from
+                                                                                                  // 2. Game title
+                                                                                                  // 3. Left and right
+                                                                                                  // indexes (for
+                                                                                                  // algorithm)
         int mid = (left + right) / 2;
 
-        // If key is not found in the ArrayList, return the "-insertion point"
+        // If the game is not found in the ArrayList, return the "-insertion point"
         if (left > right)
             return -left - 1;
 
-        // If key is found in the ArrayList, return the index of the key in the
-        // ArrayList
+        // If the game is found, return the index of the game in the ArrayList
         if (key.equalsIgnoreCase(games.get(mid).name))
             return mid;
 
-        // If key is less than the current games' name (ie. A<Z, A<E, J>B, etc.),
+        // If the game is LESS than the current games' name (ie. A<Z, A<E, J>B, etc.),
         // readjust the right index to mid-1 and call binarySearch again so it only
         // checks the LEFT SIDE of mid in the ArrayList
+
+        // eg. Game you are searching for: Animal Crossing; Game at 'mid' index:
+        // Minecraft
         else if (key.toLowerCase().compareTo(games.get(mid).name.toLowerCase()) < 0) {
             return binarySearchName(games, key, left, mid - 1);
         }
-        // Otherwise, if key is greater than the current games' name, readjust the left
-        // index to mid+1 and call binarySearch again so it only checks the RIGHT SIDE
+
+        // If the game is GREATER than the current games' name, readjust the left
+        // index to mid+1 and recall the method so it only checks the RIGHT SIDE
         // of mid in the ArrayList
+
+        // eg. Game you are searching for: Minecraft; Game at 'mid' index: Animal
+        // Crossing
         else
             return binarySearchName(games, key, mid + 1, right);
+
+        // RETURNS: If game is not found in the ArrayList, this recursive method will
+        // return the "-insertion point"
+        // However, if it IS found, it returns the index of the game in the ArrayList
     }
 
-    // binarySearch algorithm (iterative approach) - to find the ranking of a game
-    // given its ranking
-    public static int findRanking(ArrayList<Games> games, double key, int left, int right) {
+    // DESCRIPTION: Searches case insensitively for a game of a given type
+    // from an ArrayList
+    // UTILIZES THE BINARY SEARCH ALGORITHM (RECURSIVE APPROACH)
+    public static int binarySearchType(ArrayList<Games> games, String key, int left, int right) { // PARAMETERS:
+                                                                                                  // 1. ArrayList to
+                                                                                                  // search game of same
+                                                                                                  // type from
+                                                                                                  // 2. Type
+                                                                                                  // 3. Left and right
+                                                                                                  // indexes (for
+                                                                                                  // algorithm)
+        int mid = (left + right) / 2;
+
+        // If a game of the same type cannot be found in the ArrayList, return the
+        // "-insertion point"
+        if (left > right)
+            return -left - 1;
+
+        // If a game of the same type is found, return the index of the game in the
+        // ArrayList
+        if (key.equalsIgnoreCase(games.get(mid).type))
+            return mid;
+
+        // If the type of the game is LESS than the current games' type (ie. A<Z, A<E,
+        // J>B, etc.), readjust the right index to mid-1 and recall the method so
+        // it only checks the LEFT SIDE of mid in the ArrayList
+
+        // eg. Type of game you are looking for: Adventure | Type of game at 'mid'
+        // index: RPG
+        else if (key.toLowerCase().compareTo(games.get(mid).type.toLowerCase()) < 0) {
+            return binarySearchType(games, key, left, mid - 1);
+        }
+
+        // If the type of the game is GREATER than the current games' type, readjust the
+        // left index to mid+1 and recall the method so it only checks the RIGHT
+        // SIDE of mid in the ArrayList
+
+        // eg. Type of game you are looking for: RPG | Type of game at 'mid' index:
+        // Adventure
+        else
+            return binarySearchType(games, key, mid + 1, right);
+
+        // RETURNS: If a game of the same type cannot be found in the ArrayList, this
+        // recursive method will return the "-insertion point"
+        // However, if it IS found, it returns the index of the game in the ArrayList
+    }
+
+    // DESCRIPTION: Finds the ranking of a game in an ArrayList of games given its
+    // rating
+    // UTILIZES THE BINARY SEARCH ALGORITHM (ITERATIVE APPROACH)
+    public static int findRanking(ArrayList<Games> games, double key, int left, int right) { // PARAMETERS:
+                                                                                             // 1. ArrayList of all the
+                                                                                             // games
+                                                                                             // 2. Rating of the given
+                                                                                             // game
+                                                                                             // 3. Left and right
+                                                                                             // indexes (for algorithm)
 
         Collections.sort(games, new SortByRating());
 
+        // As long as all possible indexes have not yet been searched, continuously
+        // shrink the length between left and right to determine the index of
+        // ArrayList at which the FIRST OCCURRENCE of the rating can be found
         while (left <= right) {
             int mid = (left + right) / 2;
 
-            // Instead of returning mid right when key is found, keep searching towards the
-            // left to find the FIRST occurrence
+            // If a game with the same type is found, instead of returning its
+            // index right away, keep searching towards the left to determine the index of
+            // the FIRST occurrence
             if (key == games.get(mid).rating) {
+
+                // Move the current index left until
+                // 1. Rating of the game at index 'mid' is no longer the 'key' index
+                // 2. The 'mid' index is already at the leftmost position
                 while (key == games.get(mid).rating && mid != 0) {
                     mid--;
                 }
+
+                // RETURN: Return 0 if 'mid' is at the leftmost position already; otherwise,
+                // return an accumulated version of 'mid' to make up for the while loop above,
+                // which would have moved 'mid' one extra index to the left
                 if (mid == 0)
-                    return 0;
+                    return mid;
                 return mid + 1;
             }
 
+            // If the 'key' rating is greater than the rating of the game at the current
+            // index of the ArrayList, move left to 1 right of mid to eliminate the
+            // games on the left side, which are 100% less than the 'key' rating
             else if (key > games.get(mid).rating) {
                 left = mid + 1;
-            } else {
+            }
+            // If the 'key' rating is less than the rating of the game at the current
+            // index of the ArrayList, move right to 1 left of mid to eliminate the
+            // games on the right side, which are 100% greater than the 'key' rating
+            else {
                 right = mid - 1;
             }
         }
 
+        // RETURN: If the rating does not apply to any of the games in the ArrayList,
+        // return the "-insertion point"
         return -left - 1;
-    }
-
-    // binarySearch algorithm (recursive approach) - to search case insensitively
-    // for game types
-    public static int binarySearchType(ArrayList<Games> games, String key, int left, int right) {
-        int mid = (left + right) / 2;
-
-        if (left > right)
-            return -left - 1;
-
-        if (key.equalsIgnoreCase(games.get(mid).type))
-            return mid;
-        else if (key.toLowerCase().compareTo(games.get(mid).type.toLowerCase()) < 0) {
-            return binarySearchType(games, key, left, mid - 1);
-        } else
-            return binarySearchType(games, key, mid + 1, right);
     }
 
     // DESCRIPTION: The main method acquires input from the textfile, saves each
