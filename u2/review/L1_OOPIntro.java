@@ -22,7 +22,9 @@ public class L1_OOPIntro {
         System.out.println(markville.getCountry()); // Canada
         Schools.countryNameChange("Conodo");
         System.out.println(Schools.getCountry()); // Conodo
-        System.out.println(markville.getCountry()); // Conodo
+        Schools schoolToChangeCountry = new Schools(1.0, "ew", 1, "COOOOOOOOOOONDOODA"); // Country for ALL schools is
+                                                                                         // now COOOOOOOOOOONDOODA
+        System.out.println(markville.getCountry()); // COOOOOOOOOOONDOODA
 
         // Overloaded constructor
         Schools newSchool = new Schools("STILL IN CONSTRUCTION School");

@@ -69,6 +69,16 @@ public class Schools {
         this.capacity = capacity;
     }
 
+    public Schools(double rating, String name, int capacity, String country) {
+        this.rating = rating;
+        this.name = name;
+        this.capacity = capacity;
+
+        this.country = country;
+        // OR
+        // Schools.country = country;
+    }
+
     public Schools(String name) {
         this.name = name;
     }
