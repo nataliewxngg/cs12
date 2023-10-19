@@ -83,5 +83,4 @@ public class L1_MsWong1 implements Comparable<L1_MsWong1> {
             return 0;
         return 1;
     }
-
 }

@@ -1,6 +1,6 @@
 package u2.review;
 
-public class MsWong implements Comparable<MsWong> {
+public class MsWong {
 
     // instance variables
     private int age; // Data encapsulation - hiding of the internal data - only accessible to current
