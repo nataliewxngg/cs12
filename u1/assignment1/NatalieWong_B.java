@@ -1,4 +1,4 @@
-package assignment1;
+package u1.assignment1;
 // This program determines the number of n-digit (where n is between 1-7 inclusively) numbers
 
 // that satisfy a specific property: 

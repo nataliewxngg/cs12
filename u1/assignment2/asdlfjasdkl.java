@@ -1,4 +1,4 @@
-package assignment2;
+package u1.assignment2;
 
 public class asdlfjasdkl {
     public static void main(String[] args) {

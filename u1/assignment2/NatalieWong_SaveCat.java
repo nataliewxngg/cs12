@@ -4,7 +4,7 @@
 // Assignment #2 - Save Cat WITHOUT BONUS 
 // This program determines the shortest/quickest route for Ms. Wong to reach naughty Suki, 
 // who is feasting in the sink
-package assignment2;
+package u1.assignment2;
 
 import java.io.*;
 import java.util.Scanner;

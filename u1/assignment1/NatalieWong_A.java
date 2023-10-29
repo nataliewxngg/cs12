@@ -1,4 +1,4 @@
-package assignment1;
+package u1.assignment1;
 // Description:
 
 // This program is designated to take input from WONG "R" Us' customers

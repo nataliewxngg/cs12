@@ -1,4 +1,4 @@
-package recursionExercises;
+package u1.recursionExercises;
 
 public class test {
     // Program 3: Divide

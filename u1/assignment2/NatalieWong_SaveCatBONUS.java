@@ -5,7 +5,7 @@
 // This program determines the shortest/quickest route for Ms. Wong to 
 // reach Suki AND return her into the litter box (BONUS!).
 
-package assignment2;
+package u1.assignment2;
 
 import java.io.*;
 import java.util.Scanner;

@@ -4,7 +4,7 @@
 // Assignment #3 - OOP: Nintendo Switch Games Assignment (WITHOUT BONUS)
 // This program inputs a list of Nintendo games from an input.txt file and allows the user to search for the games either by title or by type.
 
-package u2.assignment1;
+package u2.assignment3;
 
 import java.util.*;
 import java.io.*;

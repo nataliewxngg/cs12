@@ -1,4 +1,4 @@
-package assignment1;
+package u1.assignment1;
 // This program reads strings from a text file and 
 
 // determines the longest palindromes in each string, which may

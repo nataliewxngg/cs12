@@ -1,4 +1,4 @@
-package u2.assignment1;
+package u2.assignment3;
 
 public class Games implements Comparable<Games> {
 
