@@ -4,5 +4,15 @@ package u2.assignment4;
 // Constructor (can be cahnged later)
 
 public class Attack {
+    // Variables
+    private String name;
+    private String desc;
+    private String damage;
 
+    // Constructor
+    public Attack(String name, String desc, String damage) {
+        this.name = name;
+        this.desc = desc;
+        this.damage = damage;
+    }
 }
