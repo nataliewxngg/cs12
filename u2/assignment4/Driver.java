@@ -117,9 +117,11 @@ public class Driver {
                     // Menu #1 Submenu #3
                     System.out.print("Enter the file name (exclude .txt): ");
                     fileName = in.nextLine();
+                    // WORKING ON THIS - DONT ALLOW FOR DUPLICATE ALBUMS
 
                     try {
                         BufferedReader inFile = new BufferedReader(new FileReader(fileName + "txt"));
+                        inFile.close();
                     } catch (FileNotFoundException e) {
                         System.out.println("File not found.");
                     }
