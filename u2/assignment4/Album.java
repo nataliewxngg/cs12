@@ -5,7 +5,12 @@ import java.util.*;
 // Necessary instance and static variables declared (can ADD more variables later)
 // Constructor (can be cahnged later)
 
-public class Album {
+public class Album implements Comparable<Album> {
+    // Comparable (Natural Sorting Order) - Sort by Album #, in ascending order
+    public int compareTo(Album a) {
+        return this.num - a.num;
+    }
+
     // Variables
     private int num;
     private int capacity;
@@ -23,8 +28,29 @@ public class Album {
         this.date = date;
 
         // determines the totalHP of the album
-        for (int i = 0; i < cards.size(); i++) {
-            totalHP += cards.get(i).getHP();
+        for (int card = 0; card < cards.size(); card++) {
+            this.totalHP += cards.get(card).getHP();
         }
+    }
+
+    // Getters + Setters
+    public int getNum() {
+        return this.num;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
+    }
+
+    public ArrayList<Card> getCards() {
+        return this.cards;
+    }
+
+    public int getTotalHP() {
+        return this.totalHP;
+    }
+
+    public String getDate() {
+        return this.date.toString();
     }
 }

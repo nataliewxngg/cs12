@@ -18,4 +18,9 @@ public class Date {
         this.date = Integer.parseInt(st.nextToken());
         this.year = Integer.parseInt(st.nextToken());
     }
+
+    // Getters + Setters
+    public String toString() {
+        return Integer.toString(this.month) + "/" + Integer.toString(this.date) + "/" + Integer.toString(this.year);
+    }
 }
