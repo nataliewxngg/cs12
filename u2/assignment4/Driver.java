@@ -113,17 +113,16 @@ public class Driver {
                         System.out.println("You don't own this album... :(");
                     }
 
-                } else if (subChoice == 3) {
-                    // Menu #1 Submenu #3
+                } else if (subChoice == 3) { // Menu #1 Submenu #3
                     System.out.print("Enter the file name (exclude .txt): ");
                     fileName = in.nextLine();
                     // WORKING ON THIS - DONT ALLOW FOR DUPLICATE ALBUMS
 
                     try {
-                        BufferedReader inFile = new BufferedReader(new FileReader(fileName + "txt"));
+                        BufferedReader inFile = new BufferedReader(new FileReader(fileName + ".txt"));
                         inFile.close();
                     } catch (FileNotFoundException e) {
-                        System.out.println("File not found.");
+                        System.out.println("This album doesn't exist :(");
                     }
                 } else if (subChoice == 4) {
                     // Menu #1 Submenu #4
