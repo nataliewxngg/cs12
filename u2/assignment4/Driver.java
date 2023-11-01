@@ -16,6 +16,42 @@ import java.io.*;
 //  Display information on a particular card (Menu #2 – Submenu #2)
 
 public class Driver {
+    public static void displayAlbums(ArrayList<Album> albums) { // #1-#1
+        if (albums.size() == 0) // own 0 albums
+            System.out.println("You own 0 albums... :(");
+        else { // own 1+ albums
+            Collections.sort(albums); // sort by album #
+            for (int album = 0; album < albums.size(); album++) {
+                System.out.printf("\nAlbum Number: %d\nDate: %s\n", albums.get(album).getNum(),
+                        albums.get(album).getDate());
+            }
+            System.out.println();
+        }
+    }
+
+    public static void displayInfo(Scanner in, ArrayList<Album> albums) { // #1-#2
+        int albumNum;
+        ArrayList<Card> emptyArrList = new ArrayList<>();
+
+        try {
+            // Prompt for album
+            System.out.print("Enter the album #: ");
+            albumNum = Integer.parseInt(in.nextLine());
+
+            Collections.sort(albums); // sort by album # and see if album already exists
+            int index = Collections.binarySearch(albums,
+                    new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
+
+            if (index >= 0) { // album found
+                albums.get(index).displayInfo();
+            } else { // album not found
+                System.out.println("\nYou don't own this album... :(\n");
+            }
+        } catch (NumberFormatException e) {
+            System.out.print("Invalid album #.\n");
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         // Variables
         ArrayList<Album> albums = new ArrayList<>();
@@ -25,9 +61,10 @@ public class Driver {
         int subChoice;
         String fileName;
 
-        // #1 #2
-        int albumNum;
+        // TESTING ONLY
         ArrayList<Card> emptyArrList = new ArrayList<>();
+        albums.add(new Album(1, 4, emptyArrList, new Date("05/09/2006")));
+        albums.add(new Album(3, 99, emptyArrList, new Date("01/11/2005")));
 
         // Main Code
         System.out.println("Welcome to My Pokemon Cards Collection!");
@@ -48,8 +85,10 @@ public class Driver {
 
                     if (choice < 1 || choice > 3)
                         throw new NumberFormatException();
-                    else
+                    else {
+                        System.out.println("");
                         break;
+                    }
 
                 } catch (NumberFormatException e) {
                     System.out.print("Invalid input. ");
@@ -59,7 +98,7 @@ public class Driver {
             while (choice == 1) {
                 // Submenu 1
                 System.out.println(
-                        "\n---------  SUB-MENU #1  ----------\n1) Display a list of all albums\n2) Display information on a particular album\n3) Add an album\n4) Remove an album\n5) Show statistics\n6) Return back to main menu\n----------------------------------\n");
+                        "---------  SUB-MENU #1  ----------\n1) Display a list of all albums\n2) Display information on a particular album\n3) Add an album\n4) Remove an album\n5) Show statistics\n6) Return back to main menu\n----------------------------------\n");
 
                 // Prompt for submenu option
                 do {
@@ -77,53 +116,32 @@ public class Driver {
                 } while (true);
 
                 if (subChoice == 1) { // Menu #1 Submenu #1
-                    if (albums.size() == 0) // own 0 albums
-                        System.out.println("You own 0 albums... :(");
-                    else { // own 1+ albums
-                        Collections.sort(albums);
-                        for (int album = 0; album < albums.size(); album++) {
-                            System.out.printf("Album Number: %d\nDate: %s", albums.get(album).getNum(),
-                                    albums.get(album).getDate());
-                        }
-                    }
-
+                    displayAlbums(albums);
                 } else if (subChoice == 2) { // Menu #1 Submenu #2
-
-                    // Prompt for album
-                    do {
-                        try {
-                            System.out.print("Enter the album #: ");
-                            albumNum = Integer.parseInt(in.nextLine());
-                            break;
-                        } catch (NumberFormatException e) {
-                            System.out.print("Invalid input. ");
-                        }
-                    } while (true);
-
-                    Collections.sort(albums);
-                    int index = Collections.binarySearch(albums,
-                            new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
-
-                    if (index > 0) {
-                        System.out.printf("Album #: %d\nDate: %s\nMaxCapacity: %d\nNumber of Cards: %d\nTotal HP: %d",
-                                albums.get(index).getNum(), albums.get(index).getDate(),
-                                albums.get(index).getCapacity(),
-                                albums.get(index).getCards().size(), albums.get(index).getTotalHP());
-                    } else {
-                        System.out.println("You don't own this album... :(");
-                    }
-
+                    displayInfo(in, albums);
                 } else if (subChoice == 3) { // Menu #1 Submenu #3
-                    System.out.print("Enter the file name (exclude .txt): ");
-                    fileName = in.nextLine();
-                    // WORKING ON THIS - DONT ALLOW FOR DUPLICATE ALBUMS
+                    // System.out.print("Enter the file name (exclude .txt): ");
+                    // fileName = in.nextLine();
 
-                    try {
-                        BufferedReader inFile = new BufferedReader(new FileReader(fileName + ".txt"));
-                        inFile.close();
-                    } catch (FileNotFoundException e) {
-                        System.out.println("This album doesn't exist :(");
-                    }
+                    // try {
+                    // BufferedReader inFile = new BufferedReader(new FileReader(fileName +
+                    // ".txt"));
+
+                    // // WORKING ON THIS - DONT ALLOW FOR DUPLICATE ALBUMS
+                    // albumNum = Integer.parseInt(inFile.readLine());
+                    // Collections.sort(albums);
+                    // int index = Collections.binarySearch(albums,
+                    // new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
+
+                    // if (index >= 0) // already has a duplicate
+                    // System.out.println("This album already exists!");
+                    // else // not in albums yet
+
+                    // inFile.close();
+                    // } catch (FileNotFoundException e) {
+                    // System.out.println("This album doesn't exist :(");
+                    // }
+
                 } else if (subChoice == 4) {
                     // Menu #1 Submenu #4
                 } else if (subChoice == 5) {
@@ -138,7 +156,7 @@ public class Driver {
             while (choice == 2) {
                 // Submenu 2
                 System.out.println(
-                        "\n---------  SUB-MENU #2  ----------\n1) Display all cards (in the last sorted order)\n2) Display information on a particular card\n3) Add a card\n4) Remove a card (4 options)\n5) Edit attack\n6) Sort cards (3 options)\n7) Return back to main menu\n----------------------------------\n");
+                        "---------  SUB-MENU #2  ----------\n1) Display all cards (in the last sorted order)\n2) Display information on a particular card\n3) Add a card\n4) Remove a card (4 options)\n5) Edit attack\n6) Sort cards (3 options)\n7) Return back to main menu\n----------------------------------\n");
 
                 // Prompt for submenu option
                 do {

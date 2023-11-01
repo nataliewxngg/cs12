@@ -33,6 +33,15 @@ public class Album implements Comparable<Album> {
         }
     }
 
+    // displayInfo method - for #1-#2
+    public void displayInfo() {
+        System.out.printf(
+                "\nAlbum #: %d\nDate: %s\nMaxCapacity: %d\nNumber of Cards: %d\nTotal HP: %d\n\n",
+                this.num, this.getDate(),
+                this.capacity,
+                this.cards.size(), this.totalHP);
+    }
+
     // Getters + Setters
     public int getNum() {
         return this.num;
