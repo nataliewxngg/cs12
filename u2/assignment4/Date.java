@@ -23,4 +23,11 @@ public class Date {
     public String toString() {
         return Integer.toString(this.month) + "/" + Integer.toString(this.date) + "/" + Integer.toString(this.year);
     }
+
+    // valid() - to check if a date is a valid date
+    public boolean valid() {
+        // check year
+        // check month
+        // check date
+    }
 }

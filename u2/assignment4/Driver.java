@@ -38,6 +38,10 @@ public class Driver {
             System.out.print("Enter the album #: ");
             albumNum = Integer.parseInt(in.nextLine());
 
+            if (albumNum < 0) { // don't allow for negative album #s
+                throw new NumberFormatException();
+            }
+
             Collections.sort(albums); // sort by album # and see if album already exists
             int index = Collections.binarySearch(albums,
                     new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
@@ -45,10 +49,53 @@ public class Driver {
             if (index >= 0) { // album found
                 albums.get(index).displayInfo();
             } else { // album not found
-                System.out.println("\nYou don't own this album... :(\n");
+                System.out.println("You don't own this album... :(\n");
             }
         } catch (NumberFormatException e) {
-            System.out.print("Invalid album #.\n");
+            System.out.println("Invalid album #.\n");
+        }
+    }
+
+    public static void addAlbum(ArrayList<Album> albums, Scanner in) throws IOException {
+        System.out.print("Enter the file name (exclude .txt): ");
+        String fileName = in.nextLine();
+
+        ArrayList<Card> emptyArrList = new ArrayList<>();
+        int albumNum;
+        Date date;
+
+        try {
+            BufferedReader inFile = new BufferedReader(new FileReader(fileName + ".txt"));
+
+            albumNum = Integer.parseInt(inFile.readLine());
+            if (albumNum < 0) { // don't allow for negative album #s
+                inFile.close();
+                throw new NumberFormatException();
+            }
+            // check for duplicates
+            Collections.sort(albums);
+            int index = Collections.binarySearch(albums, new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
+
+            if (index >= 0) // album already exists
+                System.out.println("This album already exists!\n");
+            else { // album is new!
+
+                // Date of album
+                date = new Date(inFile.readLine());
+                if (date.valid()) {
+                    // IF DATE IS VALID
+                } else {
+                    // IF DATE IS INVALID
+                    System.out.println("The date of album creation is invalid... Album not added into collection. :(");
+                }
+
+            }
+
+            inFile.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("This album doesn't exist :(\n");
+        } catch (NumberFormatException e) {
+            System.out.println("The album number is invalid... Album not added into collection. :(");
         }
     }
 
@@ -120,12 +167,7 @@ public class Driver {
                 } else if (subChoice == 2) { // Menu #1 Submenu #2
                     displayInfo(in, albums);
                 } else if (subChoice == 3) { // Menu #1 Submenu #3
-                    // System.out.print("Enter the file name (exclude .txt): ");
-                    // fileName = in.nextLine();
-
-                    // try {
-                    // BufferedReader inFile = new BufferedReader(new FileReader(fileName +
-                    // ".txt"));
+                    addAlbum(albums, in);
 
                     // // WORKING ON THIS - DONT ALLOW FOR DUPLICATE ALBUMS
                     // albumNum = Integer.parseInt(inFile.readLine());
@@ -136,11 +178,6 @@ public class Driver {
                     // if (index >= 0) // already has a duplicate
                     // System.out.println("This album already exists!");
                     // else // not in albums yet
-
-                    // inFile.close();
-                    // } catch (FileNotFoundException e) {
-                    // System.out.println("This album doesn't exist :(");
-                    // }
 
                 } else if (subChoice == 4) {
                     // Menu #1 Submenu #4
