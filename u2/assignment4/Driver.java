@@ -9,7 +9,7 @@ import java.io.*;
 // You must have the following functions properly implemented:
 // - Display a list of your albums (Menu #1 – Submenu #1)
 // - Display information on a particular album (Menu #1 – Submenu #2)
-//  Be able to add multiple albums onto ArrayList (read in from input file)
+// - Be able to add multiple albums onto ArrayList (read in from input file)
 // (Menu #1 – Submenu #3)
 //  Be able to remove an album (Menu #1 – Submenu #4)
 //  Display a list of cards in a particular album (Menu #2 – Submenu #1)
@@ -65,6 +65,20 @@ public class Driver {
         int albumNum;
         Date date;
         int capacity;
+        int numCards;
+
+        ArrayList<Card> cards = new ArrayList<>();
+        String cardName;
+        int HP;
+        String type;
+        Date dateOfCard;
+        int numAttacks;
+
+        ArrayList<Attack> attacks = new ArrayList<>();
+        StringTokenizer attackNameAndDesc;
+        String attackName;
+        String attackDesc;
+        String attackDamage;
 
         try {
             BufferedReader inFile = new BufferedReader(new FileReader(fileName + ".txt"));
@@ -76,44 +90,113 @@ public class Driver {
                         "The album number of this album is invalid... Album not added into collection. :(");
                 throw new NumberFormatException();
             }
+
             // check for duplicates
             Collections.sort(albums);
             int index = Collections.binarySearch(albums, new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
 
             if (index >= 0) // album already exists
                 System.out.println("This album already exists!\n");
-            else { // album is new!
-
+            else {
                 // Date of album
                 date = new Date(inFile.readLine());
 
-                if (date.valid()) {
-                    // IF DATE IS VALID
-
-                    // Maximum capacity of the album
-                    capacity = Integer.parseInt(inFile.readLine());
-                    if (capacity < 1) {
-                        System.out.println(
-                                "The maximum capacity of this album is invalid... Album not added into collection. :(");
-                        inFile.close();
-                        throw new NumberFormatException();
-                    }
-
-                    // Number of cards in album
-
-                } else {
-                    // IF DATE IS INVALID
+                if (!date.valid()) { // Stop if date entered is invalid
                     System.out.println("The date of album creation is invalid... Album not added into collection. :(");
                     inFile.close();
                     throw new NumberFormatException();
                 }
 
+                // Maximum capacity of the album
+                capacity = Integer.parseInt(inFile.readLine());
+
+                if (capacity < 1) { // Invalid capacity - less than 1
+                    System.out.println(
+                            "The maximum capacity of this album is invalid... Album not added into collection. :(");
+                    inFile.close();
+                    throw new NumberFormatException();
+                }
+
+                // Number of cards in album
+                numCards = Integer.parseInt(inFile.readLine());
+
+                if (numCards < 0) { // have negative # of cards
+                    System.out.println(
+                            "The number of cards in this album is invalid... Album not added into collection. :(");
+                    inFile.close();
+                    throw new NumberFormatException();
+                }
+
+                // Loops for ALL cards in the album
+                for (int card = 0; card < numCards; card++) {
+                    // Name of card
+                    cardName = inFile.readLine();
+
+                    // HP of card
+                    HP = Integer.parseInt(inFile.readLine());
+                    if (HP < 1) { // HP of pokemon cards must ATLEAST be 1
+                        System.out.println("A card in this album is invalid... Album not added into collection :(");
+                        inFile.close();
+                        throw new NumberFormatException();
+                    }
+
+                    type = inFile.readLine();
+
+                    // Date of purchase/trade
+                    dateOfCard = new Date(inFile.readLine());
+
+                    if (!dateOfCard.valid()) {
+                        System.out.println("A card in this album is invalid... Album not added into collection :(");
+                        inFile.close();
+                        throw new NumberFormatException();
+                    }
+
+                    // Number of attacks
+                    numAttacks = Integer.parseInt(inFile.readLine());
+                    if (numAttacks < 0) { // Don't allow for negative # of attacks
+                        System.out.println("A card in this album is invalid... Album not added into collection :(");
+                        inFile.close();
+                        throw new NumberFormatException();
+                    }
+
+                    // Attacks
+                    for (int attack = 0; attack < numAttacks; attack++) {
+                        attacks = new ArrayList<>();
+                        attackNameAndDesc = new StringTokenizer(inFile.readLine(), "- ");
+                        attackName = attackNameAndDesc.nextToken();
+
+                        if (attackNameAndDesc.hasMoreTokens()) {
+                            attackDesc = attackNameAndDesc.nextToken();
+                        } else
+                            attackDesc = "";
+                        attackDamage = inFile.readLine();
+
+                        attacks.add(new Attack(attackName, attackDesc, attackDamage));
+                    }
+                    cards.add(new Card(cardName, HP, type, dateOfCard, attacks));
+                }
+                albums.add(new Album(albumNum, capacity, cards, date));
+                System.out.printf("YAY! Album #%d was added into the collection!\n\n", albumNum);
             }
 
             inFile.close();
         } catch (FileNotFoundException e) {
             System.out.println("This album doesn't exist :(\n");
         } catch (NumberFormatException e) {
+        }
+    }
+
+    public static void removeAlbum(ArrayList<Album> albums, Scanner in) {
+        int albumNum;
+        ArrayList<Card> emptyArrList = new ArrayList<>();
+
+        try {
+            System.out.print("Would you like to remove by album # or by date (MM/DD/YYYY)?: ");
+
+            System.out.print("Enter the album #: ");
+            albumNum = Integer.parseInt(in.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid album #.\n");
         }
     }
 
@@ -124,7 +207,6 @@ public class Driver {
 
         int choice = 0;
         int subChoice;
-        String fileName;
 
         // TESTING ONLY
         ArrayList<Card> emptyArrList = new ArrayList<>();
@@ -186,19 +268,8 @@ public class Driver {
                     displayInfo(in, albums);
                 } else if (subChoice == 3) { // Menu #1 Submenu #3
                     addAlbum(albums, in);
-
-                    // // WORKING ON THIS - DONT ALLOW FOR DUPLICATE ALBUMS
-                    // albumNum = Integer.parseInt(inFile.readLine());
-                    // Collections.sort(albums);
-                    // int index = Collections.binarySearch(albums,
-                    // new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
-
-                    // if (index >= 0) // already has a duplicate
-                    // System.out.println("This album already exists!");
-                    // else // not in albums yet
-
                 } else if (subChoice == 4) {
-                    // Menu #1 Submenu #4
+                    removeAlbum(albums, in);
                 } else if (subChoice == 5) {
                     // Menu #1 Submenu #5
                 } else if (subChoice == 6) {

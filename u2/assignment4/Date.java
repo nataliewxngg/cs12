@@ -6,28 +6,39 @@ import java.util.StringTokenizer;
 
 public class Date {
     // Variables
-    private int month;
-    private int date;
-    private int year;
+    private String month;
+    private String date;
+    private String year;
 
     // Constructor
     public Date(String date) { // MM/DD/YYYY
         StringTokenizer st = new StringTokenizer(date, "/");
 
-        this.month = Integer.parseInt(st.nextToken());
-        this.date = Integer.parseInt(st.nextToken());
-        this.year = Integer.parseInt(st.nextToken());
+        this.month = st.nextToken();
+        this.date = st.nextToken();
+        this.year = st.nextToken();
     }
 
     // Getters + Setters
     public String toString() {
-        return Integer.toString(this.month) + "/" + Integer.toString(this.date) + "/" + Integer.toString(this.year);
+        return this.month + "/" + this.date + "/" + this.year;
     }
 
     // valid() - to check if a date is a valid date
     public boolean valid() {
-        // check year
-        // check month
-        // check date
+        int[] days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+        int year = Integer.parseInt(this.year);
+        int month = Integer.parseInt(this.month);
+        int date = Integer.parseInt(this.date);
+
+        if (year >= 1000 && year <= 2023) { // year: 1000-2023
+            if (month >= 1 && month <= 12) { // month: 1-12
+                if (date >= 1 && date <= days[month - 1]) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
