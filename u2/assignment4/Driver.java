@@ -38,7 +38,7 @@ public class Driver {
             System.out.print("Enter the album #: ");
             albumNum = Integer.parseInt(in.nextLine());
 
-            if (albumNum < 0) { // don't allow for negative album #s
+            if (albumNum <= 0) { // don't allow for negative/0 album #s
                 throw new NumberFormatException();
             }
 
@@ -61,15 +61,19 @@ public class Driver {
         String fileName = in.nextLine();
 
         ArrayList<Card> emptyArrList = new ArrayList<>();
+
         int albumNum;
         Date date;
+        int capacity;
 
         try {
             BufferedReader inFile = new BufferedReader(new FileReader(fileName + ".txt"));
 
             albumNum = Integer.parseInt(inFile.readLine());
-            if (albumNum < 0) { // don't allow for negative album #s
+            if (albumNum <= 0) { // don't allow for negative/0 album #s
                 inFile.close();
+                System.out.println(
+                        "The album number of this album is invalid... Album not added into collection. :(");
                 throw new NumberFormatException();
             }
             // check for duplicates
@@ -82,11 +86,26 @@ public class Driver {
 
                 // Date of album
                 date = new Date(inFile.readLine());
+
                 if (date.valid()) {
                     // IF DATE IS VALID
+
+                    // Maximum capacity of the album
+                    capacity = Integer.parseInt(inFile.readLine());
+                    if (capacity < 1) {
+                        System.out.println(
+                                "The maximum capacity of this album is invalid... Album not added into collection. :(");
+                        inFile.close();
+                        throw new NumberFormatException();
+                    }
+
+                    // Number of cards in album
+
                 } else {
                     // IF DATE IS INVALID
                     System.out.println("The date of album creation is invalid... Album not added into collection. :(");
+                    inFile.close();
+                    throw new NumberFormatException();
                 }
 
             }
@@ -95,7 +114,6 @@ public class Driver {
         } catch (FileNotFoundException e) {
             System.out.println("This album doesn't exist :(\n");
         } catch (NumberFormatException e) {
-            System.out.println("The album number is invalid... Album not added into collection. :(");
         }
     }
 
