@@ -24,7 +24,7 @@ public class Driver {
         try {
             // Prompt for album
             System.out.print("Enter the album #: ");
-            albumNum = Integer.parseInt(in.nextLine());
+            albumNum = Integer.parseInt(in.nextLine().strip());
 
             if (albumNum <= 0) { // don't allow for negative/0 album #s
                 throw new NumberFormatException();
@@ -46,7 +46,7 @@ public class Driver {
 
     public static void addAlbum(ArrayList<Album> albums, Scanner in) throws IOException { // #1-#3
         System.out.print("Enter the file name (exclude .txt): ");
-        String fileName = in.nextLine();
+        String fileName = in.nextLine().strip();
 
         ArrayList<Card> emptyArrList = new ArrayList<>();
 
@@ -113,6 +113,11 @@ public class Driver {
                             "The number of cards in this album is invalid... Album not added into collection. :(");
                     inFile.close();
                     throw new NumberFormatException();
+                } else if (numCards > capacity) {
+                    System.out.println(
+                            "The number of cards in this album exceeds maximum capacity... Album not added into collection. :(");
+                    inFile.close();
+                    throw new NumberFormatException();
                 }
 
                 // Loops for ALL cards in the album
@@ -171,6 +176,7 @@ public class Driver {
         } catch (FileNotFoundException e) {
             System.out.println("This album doesn't exist :(\n");
         } catch (NumberFormatException e) {
+            System.out.println();
         }
     }
 
@@ -186,7 +192,7 @@ public class Driver {
         do {
             try {
                 System.out.print("\n1. Album Number \n2. Date (MM/DD/YYYY)\nRemove by: ");
-                option = Integer.parseInt(in.nextLine());
+                option = Integer.parseInt(in.nextLine().strip());
 
                 if (option != 1 && option != 2)
                     throw new NumberFormatException();
@@ -204,7 +210,7 @@ public class Driver {
             System.out.print("Enter the album #: ");
 
             try {
-                albumNum = Integer.parseInt(in.nextLine());
+                albumNum = Integer.parseInt(in.nextLine().strip());
 
                 Collections.sort(albums);
                 int index = Collections.binarySearch(albums,
@@ -222,10 +228,20 @@ public class Driver {
         } else { // remove by album date
             System.out.print("Enter the date (MM/DD/YYYY): ");
 
-            inDate = in.nextLine();
+            inDate = in.nextLine().strip();
             st = new StringTokenizer(inDate, "/");
 
             if (st.countTokens() == 3) {
+                // make sure all the tokens are integers
+                try {
+                    Integer.parseInt(st.nextToken());
+                    Integer.parseInt(st.nextToken());
+                    Integer.parseInt(st.nextToken());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid date inputted\n");
+                    return;
+                }
+
                 date = new Date(inDate);
 
                 if (date.valid()) {
@@ -277,11 +293,15 @@ public class Driver {
             do {
                 try {
                     System.out.print("Enter your choice: ");
-                    choice = Integer.parseInt(in.nextLine());
+                    choice = Integer.parseInt(in.nextLine().strip());
 
                     if (choice < 1 || choice > 3)
                         throw new NumberFormatException();
-                    else {
+                    else if (choice == 2 && albums.size() == 0) {
+                        System.out.println("You don't own any albums.");
+                        choice = 0;
+                        break;
+                    } else {
                         if (choice == 1)
                             System.out.println("");
                         break;
@@ -301,7 +321,7 @@ public class Driver {
                 do {
                     try {
                         System.out.print("Enter your choice: ");
-                        subChoice = Integer.parseInt(in.nextLine());
+                        subChoice = Integer.parseInt(in.nextLine().strip());
 
                         if (subChoice < 1 || subChoice > 6)
                             throw new NumberFormatException();
@@ -315,11 +335,17 @@ public class Driver {
                 if (subChoice == 1) { // Menu #1 Submenu #1
                     displayAlbums(albums);
                 } else if (subChoice == 2) { // Menu #1 Submenu #2
-                    displayInfo(in, albums);
+                    if (albums.size() > 0)
+                        displayInfo(in, albums);
+                    else
+                        System.out.println("You own 0 albums... :(\n");
                 } else if (subChoice == 3) { // Menu #1 Submenu #3
                     addAlbum(albums, in);
                 } else if (subChoice == 4) { // Menu #1 Submenu #4
-                    removeAlbum(albums, in);
+                    if (albums.size() > 0)
+                        removeAlbum(albums, in);
+                    else
+                        System.out.println("You own 0 albums... :(\n");
                 } else if (subChoice == 5) {
                     // Menu #1 Submenu #5
                 } else if (subChoice == 6) {
@@ -333,7 +359,7 @@ public class Driver {
                 System.out.print("Enter the album #: ");
 
                 try {
-                    albumNum = Integer.parseInt(in.nextLine());
+                    albumNum = Integer.parseInt(in.nextLine().strip());
 
                     if (albumNum <= 0) {
                         throw new NumberFormatException();
@@ -358,7 +384,7 @@ public class Driver {
                             do {
                                 try {
                                     System.out.print("Enter your choice: ");
-                                    subChoice = Integer.parseInt(in.nextLine());
+                                    subChoice = Integer.parseInt(in.nextLine().strip());
 
                                     if (subChoice < 1 || subChoice > 7)
                                         throw new NumberFormatException();
@@ -373,7 +399,7 @@ public class Driver {
                                 chosenAlbum.displayAllCards();
                             } else if (subChoice == 2) { // Menu #2 Submenu #2
                                 System.out.print("Enter the card name: ");
-                                chosenAlbum.displayCard(in.nextLine());
+                                chosenAlbum.displayCard(in.nextLine().strip());
                             } else if (subChoice == 3) {
                                 // Menu #2 Submenu #3
                             } else if (subChoice == 4) {
