@@ -20,10 +20,6 @@ public class Date {
     }
 
     // Getters + Setters
-    public String toString() {
-        return this.month + "/" + this.date + "/" + this.year;
-    }
-
     public int getMonth() {
         return Integer.parseInt(this.month);
     }
@@ -52,5 +48,10 @@ public class Date {
             }
         }
         return false;
+    }
+
+    // toString() - for display
+    public String toString() {
+        return this.month + "/" + this.date + "/" + this.year;
     }
 }

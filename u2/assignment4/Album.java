@@ -124,4 +124,9 @@ public class Album implements Comparable<Album> {
     public Date getDate() {
         return this.date;
     }
+
+    // toString() - for display
+    public String toString() {
+        return this.num + "";
+    }
 }

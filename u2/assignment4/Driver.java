@@ -189,6 +189,11 @@ public class Driver {
         Date date;
         ArrayList<Card> emptyArrList = new ArrayList<>();
 
+        ArrayList<Album> albumsCopy = new ArrayList<>(albums);
+        ArrayList<Album> albumsWithDate = new ArrayList<>();
+        int index;
+        int removeChoice;
+
         do {
             try {
                 System.out.print("\n1. Album Number \n2. Date (MM/DD/YYYY)\nRemove by: ");
@@ -213,7 +218,7 @@ public class Driver {
                 albumNum = Integer.parseInt(in.nextLine().strip());
 
                 Collections.sort(albums);
-                int index = Collections.binarySearch(albums,
+                index = Collections.binarySearch(albums,
                         new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
 
                 if (index >= 0) { // already exists
@@ -234,9 +239,9 @@ public class Driver {
             if (st.countTokens() == 3) {
                 // make sure all the tokens are integers
                 try {
-                    Integer.parseInt(st.nextToken());
-                    Integer.parseInt(st.nextToken());
-                    Integer.parseInt(st.nextToken());
+                    for (int i = 0; i < 3; i++) {
+                        Integer.parseInt(st.nextToken());
+                    }
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid date inputted\n");
                     return;
@@ -245,15 +250,54 @@ public class Driver {
                 date = new Date(inDate);
 
                 if (date.valid()) {
+                    // sort and find album with date
                     Collections.sort(albums, new SortAlbumsByDate());
-                    int index = Collections.binarySearch(albums, new Album(0, 0, emptyArrList, date),
-                            new SortAlbumsByDate());
 
-                    if (index >= 0) {
-                        albums.remove(index);
-                        System.out.println("Album removed!\n");
-                    } else {
+                    do {
+                        index = Collections.binarySearch(albumsCopy, new Album(0, 0, emptyArrList, date),
+                                new SortAlbumsByDate());
+                        if (index >= 0) {
+                            albumsWithDate.add(albumsCopy.get(index));
+                            albumsCopy.set(index,
+                                    new Album(0, 0, emptyArrList, new Date("00/00/0000")));
+                        } else
+                            break;
+                    } while (true);
+
+                    if (albumsWithDate.size() == 0) { // 0 albums with date of creation found
                         System.out.println("You don't own an album with this album creation date...\n");
+                    } else if (albumsWithDate.size() == 1) { // 1 album w same date of creation found
+                        albums.remove(Collections.binarySearch(albums, new Album(0, 0, emptyArrList, date),
+                                new SortAlbumsByDate()));
+                        System.out.println("Album removed!\n");
+                    } else { // more than 1 album w same date of creation found
+
+                        System.out.printf("There are %d albums with the same date of creation:\n",
+                                albumsWithDate.size());
+                        for (int albumWithDate = 0; albumWithDate < albumsWithDate.size(); albumWithDate++) {
+                            System.out.printf("%d. Album #%d\n", albumWithDate + 1,
+                                    albumsWithDate.get(albumWithDate).getNum());
+                        }
+
+                        do {
+                            try {
+                                System.out.print("Which album would you like to remove? (Select a #): ");
+                                removeChoice = Integer.parseInt(in.nextLine());
+
+                                if (removeChoice < 1 || removeChoice > albumsWithDate.size())
+                                    throw new NumberFormatException();
+                                else {
+                                    // remove the album
+                                    albums.remove(albums.indexOf(albumsWithDate.get(removeChoice - 1)));
+                                    System.out.println("Album removed!\n");
+                                    break;
+                                }
+
+                            } catch (NumberFormatException e) {
+                                System.out.print("\nInvalid input. ");
+                            }
+                        } while (true);
+
                     }
                 } else {
                     System.out.println("Invalid date inputted...\n");
