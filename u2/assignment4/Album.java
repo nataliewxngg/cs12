@@ -54,40 +54,50 @@ public class Album implements Comparable<Album> {
     }
 
     // displayCard method - for #2-#2
-    public void displayCard(String cardName) {
+    public void displayCard(Scanner in) {
         int index;
         Card chosenCard;
 
-        // sort cards by name alphabetically, case insensitively
-        Collections.sort(this.getCards());
-        // searches for the card alphabetically
-        index = Collections.binarySearch(this.getCards(),
-                new Card(cardName, 0, "", new Date("00/00/0000"), emptyArrList));
-
-        if (index < 0) {
-            System.out.println("This card does not exist in your album...");
-        } else {
-            chosenCard = this.getCards().get(index);
-            System.out.printf("\nCard name: %s\nHP: %d\nType: %s\n", chosenCard.getName(), chosenCard.getHP(),
-                    chosenCard.getType());
-            for (int attack = 0; attack < chosenCard.getAttacks().size(); attack++) {
-                if (chosenCard.getAttacks().get(attack).getDesc() == "") {
-                    System.out.printf("Attack %d name: %s\nAttack %d damage: %s\n",
-                            attack + 1,
-                            chosenCard.getAttacks().get(attack).getName(), attack + 1,
-                            chosenCard.getAttacks().get(attack).getDamage());
-                } else {
-                    System.out.printf(
-                            "Attack %d name: %s\nAttack %d description: %s\nAttack %d damage: %s\n",
-                            attack + 1,
-                            chosenCard.getAttacks().get(attack).getName(), attack + 1,
-                            chosenCard.getAttacks().get(attack).getDesc(), attack + 1,
-                            chosenCard.getAttacks().get(attack).getDamage());
-                }
-            }
-            System.out.printf("Date of purchase/trade: %s\n\n", chosenCard.getDateDisplay());
+        System.out.println();
+        for (int card = 0; card < this.cards.size(); card++) {
+            System.out.printf("%d) %s (%s)\n", card + 1, this.cards.get(card).getName(),
+                    this.cards.get(card).getDateDisplay());
         }
 
+        do {
+            try {
+                System.out.print("Select a card (by #): ");
+                index = Integer.parseInt(in.nextLine().strip()) - 1;
+
+                if (index < 0 || index >= this.cards.size())
+                    throw new NumberFormatException();
+                else {
+                    chosenCard = this.cards.get(index);
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. ");
+            }
+        } while (true);
+
+        System.out.printf("\nCard name: %s\nHP: %d\nType: %s\n", chosenCard.getName(), chosenCard.getHP(),
+                chosenCard.getType());
+        for (int attack = 0; attack < chosenCard.getAttacks().size(); attack++) {
+            if (chosenCard.getAttacks().get(attack).getDesc() == "") {
+                System.out.printf("Attack %d name: %s\nAttack %d damage: %s\n",
+                        attack + 1,
+                        chosenCard.getAttacks().get(attack).getName(), attack + 1,
+                        chosenCard.getAttacks().get(attack).getDamage());
+            } else {
+                System.out.printf(
+                        "Attack %d name: %s\nAttack %d description: %s\nAttack %d damage: %s\n",
+                        attack + 1,
+                        chosenCard.getAttacks().get(attack).getName(), attack + 1,
+                        chosenCard.getAttacks().get(attack).getDesc(), attack + 1,
+                        chosenCard.getAttacks().get(attack).getDamage());
+            }
+        }
+        System.out.printf("Date of purchase/trade: %s\n\n", chosenCard.getDateDisplay());
     }
 
     // Getters + Setters

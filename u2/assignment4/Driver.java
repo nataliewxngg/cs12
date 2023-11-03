@@ -71,7 +71,7 @@ public class Driver {
         try {
             BufferedReader inFile = new BufferedReader(new FileReader(fileName + ".txt"));
 
-            albumNum = Integer.parseInt(inFile.readLine());
+            albumNum = Integer.parseInt(inFile.readLine().strip());
             if (albumNum <= 0) { // don't allow for negative/0 album #s
                 inFile.close();
                 System.out.println(
@@ -87,7 +87,7 @@ public class Driver {
                 System.out.println("This album already exists!\n");
             else {
                 // Date of album
-                date = new Date(inFile.readLine());
+                date = new Date(inFile.readLine().strip());
 
                 if (!date.valid()) { // Stop if date entered is invalid
                     System.out.println("The date of album creation is invalid... Album not added into collection. :(");
@@ -96,7 +96,7 @@ public class Driver {
                 }
 
                 // Maximum capacity of the album
-                capacity = Integer.parseInt(inFile.readLine());
+                capacity = Integer.parseInt(inFile.readLine().strip());
 
                 if (capacity < 1) { // Invalid capacity - less than 1
                     System.out.println(
@@ -106,7 +106,7 @@ public class Driver {
                 }
 
                 // Number of cards in album
-                numCards = Integer.parseInt(inFile.readLine());
+                numCards = Integer.parseInt(inFile.readLine().strip());
 
                 if (numCards < 0) { // have negative # of cards
                     System.out.println(
@@ -123,10 +123,10 @@ public class Driver {
                 // Loops for ALL cards in the album
                 for (int card = 0; card < numCards; card++) {
                     // Name of card
-                    cardName = inFile.readLine();
+                    cardName = inFile.readLine().strip();
 
                     // HP of card
-                    HP = Integer.parseInt(inFile.readLine());
+                    HP = Integer.parseInt(inFile.readLine().strip());
                     if (HP < 1) { // HP of pokemon cards must ATLEAST be 1
                         System.out.println("A card in this album is invalid... Album not added into collection :(");
                         inFile.close();
@@ -136,7 +136,7 @@ public class Driver {
                     type = inFile.readLine();
 
                     // Date of purchase/trade
-                    dateOfCard = new Date(inFile.readLine());
+                    dateOfCard = new Date(inFile.readLine().strip());
 
                     if (!dateOfCard.valid()) {
                         System.out.println("A card in this album is invalid... Album not added into collection :(");
@@ -145,7 +145,7 @@ public class Driver {
                     }
 
                     // Number of attacks
-                    numAttacks = Integer.parseInt(inFile.readLine());
+                    numAttacks = Integer.parseInt(inFile.readLine().strip());
                     if (numAttacks < 0) { // Don't allow for negative # of attacks
                         System.out.println("A card in this album is invalid... Album not added into collection :(");
                         inFile.close();
@@ -162,7 +162,7 @@ public class Driver {
                             attackDesc = attackNameAndDesc.nextToken().strip();
                         } else
                             attackDesc = "";
-                        attackDamage = inFile.readLine();
+                        attackDamage = inFile.readLine().strip();
 
                         attacks.add(new Attack(attackName, attackDesc, attackDamage));
                     }
@@ -398,8 +398,9 @@ public class Driver {
                             if (subChoice == 1) { // Menu #2 Submenu #1
                                 chosenAlbum.displayAllCards();
                             } else if (subChoice == 2) { // Menu #2 Submenu #2
-                                System.out.print("Enter the card name: ");
-                                chosenAlbum.displayCard(in.nextLine().strip());
+                                chosenAlbum.displayCard(in);
+                                // System.out.print("Enter the card name: ");
+                                // chosenAlbum.displayCard(in.nextLine().strip());
                             } else if (subChoice == 3) {
                                 // Menu #2 Submenu #3
                             } else if (subChoice == 4) {
