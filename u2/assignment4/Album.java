@@ -18,6 +18,7 @@ public class Album implements Comparable<Album> {
     private Date date;
     private int totalHP;
 
+    private static ArrayList<Attack> emptyArrList = new ArrayList<>();
     private static int totalNumOfCards = 0;
 
     // Constructor
@@ -37,9 +38,55 @@ public class Album implements Comparable<Album> {
     public void displayInfo() {
         System.out.printf(
                 "\nAlbum #: %d\nDate: %s\nMaxCapacity: %d\nNumber of Cards: %d\nTotal HP: %d\n\n",
-                this.num, this.getDate(),
+                this.num, this.getDateDisplay(),
                 this.capacity,
                 this.cards.size(), this.totalHP);
+    }
+
+    // displayAllCards method - for #2-#1
+    public void displayAllCards() {
+        for (int card = 0; card < cards.size(); card++) {
+            System.out.printf("\nCard Name: %s\nDate of purchase/trade: %s\n", this.getCards().get(card).getName(),
+                    this.getCards().get(card).getDateDisplay());
+        }
+        System.out.println("");
+    }
+
+    // displayCard method - for #2-#2
+    public void displayCard(String cardName) {
+        int index;
+        Card chosenCard;
+
+        // sort cards by name alphabetically, case insensitively
+        Collections.sort(this.getCards());
+        // searches for the card alphabetically
+        index = Collections.binarySearch(this.getCards(),
+                new Card(cardName, 0, "", new Date("00/00/0000"), emptyArrList));
+
+        if (index < 0) {
+            System.out.println("This card does not exist in your album...");
+        } else {
+            chosenCard = this.getCards().get(index);
+            System.out.printf("\nCard name: %s\nHP: %d\nType: %s\n", chosenCard.getName(), chosenCard.getHP(),
+                    chosenCard.getType());
+            for (int attack = 0; attack < chosenCard.getAttacks().size(); attack++) {
+                if (chosenCard.getAttacks().get(attack).getDesc() == "") {
+                    System.out.printf("Attack %d name: %s\nAttack %d damage: %s\n",
+                            attack + 1,
+                            chosenCard.getAttacks().get(attack).getName(), attack + 1,
+                            chosenCard.getAttacks().get(attack).getDamage());
+                } else {
+                    System.out.printf(
+                            "Attack %d name: %s\nAttack %d description: %s\nAttack %d damage: %s\n",
+                            attack + 1,
+                            chosenCard.getAttacks().get(attack).getName(), attack + 1,
+                            chosenCard.getAttacks().get(attack).getDesc(), attack + 1,
+                            chosenCard.getAttacks().get(attack).getDamage());
+                }
+            }
+            System.out.printf("Date of purchase/trade: %s\n\n", chosenCard.getDateDisplay());
+        }
+
     }
 
     // Getters + Setters
@@ -59,7 +106,11 @@ public class Album implements Comparable<Album> {
         return this.totalHP;
     }
 
-    public String getDate() {
+    public String getDateDisplay() {
         return this.date.toString();
+    }
+
+    public Date getDate() {
+        return this.date;
     }
 }

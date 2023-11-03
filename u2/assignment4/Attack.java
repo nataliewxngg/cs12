@@ -15,4 +15,17 @@ public class Attack {
         this.desc = desc;
         this.damage = damage;
     }
+
+    // Getters + Setters
+    public String getName() {
+        return this.name;
+    }
+
+    public String getDesc() {
+        return this.desc;
+    }
+
+    public String getDamage() {
+        return this.damage;
+    }
 }

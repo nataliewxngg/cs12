@@ -5,7 +5,11 @@ import java.util.*;
 // Necessary instance and static variables declared (can ADD more variables later)
 // Constructor (can be cahnged later)
 
-public class Card {
+public class Card implements Comparable<Card> {
+    public int compareTo(Card c) {
+        return this.getName().toLowerCase().compareTo(c.getName().toLowerCase());
+    }
+
     // Variables
     private String name;
     private int HP;
@@ -23,7 +27,23 @@ public class Card {
     }
 
     // Getters + Setters
+    public String getName() {
+        return this.name;
+    }
+
     public int getHP() {
         return this.HP;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public ArrayList<Attack> getAttacks() {
+        return this.attacks;
+    }
+
+    public String getDateDisplay() {
+        return this.date.toString();
     }
 }

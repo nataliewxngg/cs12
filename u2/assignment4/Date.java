@@ -24,6 +24,18 @@ public class Date {
         return this.month + "/" + this.date + "/" + this.year;
     }
 
+    public int getMonth() {
+        return Integer.parseInt(this.month);
+    }
+
+    public int getDate() {
+        return Integer.parseInt(this.date);
+    }
+
+    public int getYear() {
+        return Integer.parseInt(this.year);
+    }
+
     // valid() - to check if a date is a valid date
     public boolean valid() {
         int[] days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
