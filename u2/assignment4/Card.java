@@ -3,7 +3,7 @@ package u2.assignment4;
 import java.util.*;
 
 // Necessary instance and static variables declared (can ADD more variables later)
-// Constructor (can be cahnged later)
+// Constructor (can be changed later)
 
 public class Card implements Comparable<Card> {
     public int compareTo(Card c) {

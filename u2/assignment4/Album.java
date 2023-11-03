@@ -32,6 +32,7 @@ public class Album implements Comparable<Album> {
         for (int card = 0; card < cards.size(); card++) {
             this.totalHP += cards.get(card).getHP();
         }
+        totalNumOfCards += cards.size();
     }
 
     // displayInfo method - for #1-#2
