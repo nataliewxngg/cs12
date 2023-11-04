@@ -251,9 +251,11 @@ public class Driver {
 
                 if (date.valid()) {
                     // sort and find album with date
-                    Collections.sort(albums, new SortAlbumsByDate());
+                    System.out.println(albums);
 
                     do {
+                        Collections.sort(albumsCopy, new SortAlbumsByDate());
+
                         index = Collections.binarySearch(albumsCopy, new Album(0, 0, emptyArrList, date),
                                 new SortAlbumsByDate());
                         if (index >= 0) {
@@ -274,6 +276,8 @@ public class Driver {
 
                         System.out.printf("There are %d albums with the same date of creation:\n",
                                 albumsWithDate.size());
+
+                        Collections.sort(albumsWithDate);
                         for (int albumWithDate = 0; albumWithDate < albumsWithDate.size(); albumWithDate++) {
                             System.out.printf("%d. Album #%d\n", albumWithDate + 1,
                                     albumsWithDate.get(albumWithDate).getNum());
