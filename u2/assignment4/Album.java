@@ -20,11 +20,14 @@ public class Album implements Comparable<Album> {
 
     private static ArrayList<Attack> emptyArrList = new ArrayList<>();
     private static int totalNumOfCards = 0;
+    private static int totalCapacity = 0;
+    private static int totalHPOfAllAlbums = 0;
 
     // Constructor
     public Album(int num, int capacity, ArrayList<Card> cards, Date date) {
         this.num = num;
         this.capacity = capacity;
+        totalCapacity += capacity;
         this.cards = cards;
         this.date = date;
 
@@ -32,6 +35,7 @@ public class Album implements Comparable<Album> {
         for (int card = 0; card < cards.size(); card++) {
             this.totalHP += cards.get(card).getHP();
         }
+        totalHPOfAllAlbums += this.totalHP;
         totalNumOfCards += cards.size();
     }
 
@@ -123,6 +127,18 @@ public class Album implements Comparable<Album> {
 
     public Date getDate() {
         return this.date;
+    }
+
+    public static int getTotalNumOfCards() {
+        return totalNumOfCards;
+    }
+
+    public static int getTotalCapacity() {
+        return totalCapacity;
+    }
+
+    public static int getTotalHPOfAllAlbums() {
+        return totalHPOfAllAlbums;
     }
 
     // toString() - for display

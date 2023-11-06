@@ -313,6 +313,22 @@ public class Driver {
 
     }
 
+    public static void stats(ArrayList<Album> albums) { // #1-#5
+        Collections.sort(albums); // sort by album # (ascending order)
+        System.out.println();
+
+        for (int album = 0; album < albums.size(); album++) {
+            System.out.printf("%-10s: %d out of %d%n", "Album " + albums.get(album).getNum(),
+                    albums.get(album).getCards().size(), albums.get(album).getCapacity());
+            System.out.printf("%-10s: %.1f%n", "",
+                    albums.get(album).getTotalHP() * 1.0 / albums.get(album).getCards().size());
+        }
+
+        System.out.printf("%s: %d out of %d\n", "ALL albums", Album.getTotalNumOfCards(), Album.getTotalCapacity());
+        System.out.printf("%-10s: %.1f\n\n", "", 1.0 * Album.getTotalHPOfAllAlbums() / Album.getTotalNumOfCards());
+
+    }
+
     public static void main(String[] args) throws IOException {
         // Variables
         ArrayList<Album> albums = new ArrayList<>();
@@ -394,8 +410,11 @@ public class Driver {
                         removeAlbum(albums, in);
                     else
                         System.out.println("You own 0 albums... :(\n");
-                } else if (subChoice == 5) {
-                    // Menu #1 Submenu #5
+                } else if (subChoice == 5) { // Menu #1 Submenu #5
+                    if (albums.size() > 0)
+                        stats(albums);
+                    else
+                        System.out.println("You own 0 albums... :(\n");
                 } else if (subChoice == 6) {
                     // Exit
                     break;
