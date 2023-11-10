@@ -3,6 +3,10 @@ package u2.assignment4;
 import java.util.*;
 import java.io.*;
 
+// prompt with options
+// #1-#5
+// #2
+
 public class Driver {
     public static void displayAlbums(ArrayList<Album> albums) { // #1-#1
         if (albums.size() == 0) // own 0 albums
@@ -18,30 +22,33 @@ public class Driver {
     }
 
     public static void displayInfo(Scanner in, ArrayList<Album> albums) { // #1-#2
-        int albumNum;
-        ArrayList<Card> emptyArrList = new ArrayList<>();
+        int index;
 
-        try {
-            // Prompt for album
-            System.out.print("Enter the album #: ");
-            albumNum = Integer.parseInt(in.nextLine().strip());
-
-            if (albumNum <= 0) { // don't allow for negative/0 album #s
-                throw new NumberFormatException();
-            }
-
-            Collections.sort(albums); // sort by album # and see if album already exists
-            int index = Collections.binarySearch(albums,
-                    new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
-
-            if (index >= 0) { // album found
-                albums.get(index).displayInfo();
-            } else { // album not found
-                System.out.println("You don't own this album... :(\n");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid album #.\n");
+        // display list
+        Collections.sort(albums);
+        for (int album = 0; album < albums.size(); album++) {
+            System.out.printf("%d. Album #%d\n", album + 1, albums.get(album).getNum());
         }
+
+        do {
+            try {
+                System.out.print("\nSelect an album (enter album's list #): ");
+                index = Integer.parseInt(in.nextLine().strip()) - 1;
+
+                if (index < 0 || index >= albums.size())
+                    throw new NumberFormatException();
+                else {
+                    System.out.println("");
+                    break;
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.print("\nInvalid input.");
+            }
+        } while (true);
+
+        // display the info
+        albums.get(index).displayInfo();
     }
 
     public static void addAlbum(ArrayList<Album> albums, Scanner in) throws IOException { // #1-#3
@@ -207,7 +214,7 @@ public class Driver {
                 }
 
             } catch (NumberFormatException e) {
-                System.out.print("\nInvalid input. ");
+                System.out.print("\nInvalid input.\n");
             }
         } while (true);
 
@@ -228,7 +235,7 @@ public class Driver {
                     System.out.println("Enter an album you actually own next time...\n");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid album #.");
+                System.out.println("Invalid album #.\n");
             }
         } else { // remove by album date
             System.out.print("Enter the date (MM/DD/YYYY): ");
