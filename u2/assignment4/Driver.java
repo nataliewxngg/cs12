@@ -29,10 +29,10 @@ public class Driver {
         for (int album = 0; album < albums.size(); album++) {
             System.out.printf("%d. Album #%d\n", album + 1, albums.get(album).getNum());
         }
-
+        // prompt user for album
         do {
             try {
-                System.out.print("\nSelect an album (enter album's list #): ");
+                System.out.print("\nSelect an album (enter album's LIST #): ");
                 index = Integer.parseInt(in.nextLine().strip()) - 1;
 
                 if (index < 0 || index >= albums.size())
@@ -46,7 +46,6 @@ public class Driver {
                 System.out.print("\nInvalid input.");
             }
         } while (true);
-
         // display the info
         albums.get(index).displayInfo();
     }
@@ -82,8 +81,8 @@ public class Driver {
             if (albumNum <= 0) { // don't allow for negative/0 album #s
                 inFile.close();
                 System.out.println(
-                        "The album number of this album is invalid... Album not added into collection. :(");
-                throw new NumberFormatException();
+                        "The album number of this album is invalid... Album not added into collection. :(\n");
+                return;
             }
 
             // check for duplicates
@@ -97,9 +96,10 @@ public class Driver {
                 date = new Date(inFile.readLine().strip());
 
                 if (!date.valid()) { // Stop if date entered is invalid
-                    System.out.println("The date of album creation is invalid... Album not added into collection. :(");
+                    System.out
+                            .println("The date of album creation is invalid... Album not added into collection. :(\n");
                     inFile.close();
-                    throw new NumberFormatException();
+                    return;
                 }
 
                 // Maximum capacity of the album
@@ -107,9 +107,9 @@ public class Driver {
 
                 if (capacity < 1) { // Invalid capacity - less than 1
                     System.out.println(
-                            "The maximum capacity of this album is invalid... Album not added into collection. :(");
+                            "The maximum capacity of this album is invalid... Album not added into collection. :(\n");
                     inFile.close();
-                    throw new NumberFormatException();
+                    return;
                 }
 
                 // Number of cards in album
@@ -117,14 +117,14 @@ public class Driver {
 
                 if (numCards < 0) { // have negative # of cards
                     System.out.println(
-                            "The number of cards in this album is invalid... Album not added into collection. :(");
+                            "The number of cards in this album is invalid... Album not added into collection. :(\n");
                     inFile.close();
-                    throw new NumberFormatException();
+                    return;
                 } else if (numCards > capacity) {
                     System.out.println(
-                            "The number of cards in this album exceeds maximum capacity... Album not added into collection. :(");
+                            "The number of cards in this album exceeds maximum capacity... Album not added into collection. :(\n");
                     inFile.close();
-                    throw new NumberFormatException();
+                    return;
                 }
 
                 // Loops for ALL cards in the album
@@ -135,9 +135,9 @@ public class Driver {
                     // HP of card
                     HP = Integer.parseInt(inFile.readLine().strip());
                     if (HP < 1) { // HP of pokemon cards must ATLEAST be 1
-                        System.out.println("A card in this album is invalid... Album not added into collection :(");
+                        System.out.println("A card in this album is invalid... Album not added into collection :(\n");
                         inFile.close();
-                        throw new NumberFormatException();
+                        return;
                     }
 
                     type = inFile.readLine();
@@ -146,17 +146,17 @@ public class Driver {
                     dateOfCard = new Date(inFile.readLine().strip());
 
                     if (!dateOfCard.valid()) {
-                        System.out.println("A card in this album is invalid... Album not added into collection :(");
+                        System.out.println("A card in this album is invalid... Album not added into collection :(\n");
                         inFile.close();
-                        throw new NumberFormatException();
+                        return;
                     }
 
                     // Number of attacks
                     numAttacks = Integer.parseInt(inFile.readLine().strip());
                     if (numAttacks < 0) { // Don't allow for negative # of attacks
-                        System.out.println("A card in this album is invalid... Album not added into collection :(");
+                        System.out.println("A card in this album is invalid... Album not added into collection :(\n");
                         inFile.close();
-                        throw new NumberFormatException();
+                        return;
                     }
 
                     // Attacks
@@ -183,11 +183,12 @@ public class Driver {
         } catch (FileNotFoundException e) {
             System.out.println("This album doesn't exist :(\n");
         } catch (NumberFormatException e) {
-            System.out.println();
+            System.out.println("This file consists an invalid integer input... Album not added into collection:(\n");
         }
     }
 
     public static void removeAlbum(ArrayList<Album> albums, Scanner in) { // #1-#4
+        int index;
         int option = 0;
         int albumNum;
 
@@ -198,7 +199,8 @@ public class Driver {
 
         ArrayList<Album> albumsCopy = new ArrayList<>(albums);
         ArrayList<Album> albumsWithDate = new ArrayList<>();
-        int index;
+
+        ArrayList<Date> displayedDates = new ArrayList<>();
         int removeChoice;
 
         do {
@@ -219,25 +221,61 @@ public class Driver {
         } while (true);
 
         if (option == 1) { // remove by album #
-            System.out.print("Enter the album #: ");
-
-            try {
-                albumNum = Integer.parseInt(in.nextLine().strip());
-
-                Collections.sort(albums);
-                index = Collections.binarySearch(albums,
-                        new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
-
-                if (index >= 0) { // already exists
-                    albums.remove(index);
-                    System.out.printf("Album %d has been successfully removed!\n\n", albumNum);
-                } else {
-                    System.out.println("Enter an album you actually own next time...\n");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid album #.\n");
+            // display list
+            Collections.sort(albums);
+            for (int album = 0; album < albums.size(); album++) {
+                System.out.printf("%d. Album #%d\n", album + 1, albums.get(album).getNum());
             }
+            // prompt user for album
+            do {
+                try {
+                    System.out.print("\nSelect an album (enter album's LIST #): ");
+                    index = Integer.parseInt(in.nextLine().strip()) - 1;
+
+                    if (index < 0 || index >= albums.size())
+                        throw new NumberFormatException();
+                    else {
+                        System.out.println("");
+                        break;
+                    }
+
+                } catch (NumberFormatException e) {
+                    System.out.print("\nInvalid input.");
+                }
+            } while (true);
+
+            albums.remove(index);
+            System.out.printf("Album %d has been successfully removed!\n\n", albums.get(index).getNum());
+
         } else { // remove by album date
+
+            Collections.sort(albums, new SortAlbumsByDate());
+            for (int album = 0; album < albums.size(); album++) {
+                if (!displayedDates.contains(albums.get(album).getDate())) { // only if date is not yet displayed
+                    System.out.printf("%d. %s\n", album + 1, albums.get(album).getDateDisplay());
+                    displayedDates.add(albums.get(album).getDate());
+                }
+            }
+
+            do {
+                try {
+                    System.out.print("\nSelect an album (enter album's LIST #): ");
+                    index = Integer.parseInt(in.nextLine().strip()) - 1;
+
+                    if (index < 0 || index >= albums.size())
+                        throw new NumberFormatException();
+                    else {
+                        System.out.println("");
+                        break;
+                    }
+
+                } catch (NumberFormatException e) {
+                    System.out.print("\nInvalid input.");
+                }
+            } while (true);
+
+            // ------------------------------------------
+
             System.out.print("Enter the date (MM/DD/YYYY): ");
 
             inDate = in.nextLine().strip();
