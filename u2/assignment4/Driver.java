@@ -3,10 +3,6 @@ package u2.assignment4;
 import java.util.*;
 import java.io.*;
 
-// prompt with options
-// #1-#5
-// #2
-
 public class Driver {
     public static void displayAlbums(ArrayList<Album> albums) { // #1-#1
         if (albums.size() == 0) // own 0 albums
@@ -190,19 +186,17 @@ public class Driver {
     public static void removeAlbum(ArrayList<Album> albums, Scanner in) { // #1-#4
         int index;
         int option = 0;
-        int albumNum;
 
-        String inDate;
-        StringTokenizer st;
         Date date;
         ArrayList<Card> emptyArrList = new ArrayList<>();
 
         ArrayList<Album> albumsCopy = new ArrayList<>(albums);
         ArrayList<Album> albumsWithDate = new ArrayList<>();
 
-        ArrayList<Date> displayedDates = new ArrayList<>();
+        ArrayList<String> displayedDates = new ArrayList<>();
         int removeChoice;
 
+        // prompts for remove by option
         do {
             try {
                 System.out.print("\n1. Album Number \n2. Date (MM/DD/YYYY)\nRemove by: ");
@@ -244,27 +238,35 @@ public class Driver {
                 }
             } while (true);
 
-            albums.remove(index);
             System.out.printf("Album %d has been successfully removed!\n\n", albums.get(index).getNum());
+            albums.remove(index);
 
         } else { // remove by album date
 
+            // puts dates into a displayedDates, has no duplicates
             Collections.sort(albums, new SortAlbumsByDate());
             for (int album = 0; album < albums.size(); album++) {
-                if (!displayedDates.contains(albums.get(album).getDate())) { // only if date is not yet displayed
-                    System.out.printf("%d. %s\n", album + 1, albums.get(album).getDateDisplay());
-                    displayedDates.add(albums.get(album).getDate());
+                if (!displayedDates.contains(albums.get(album).getDateDisplay())) { // only if date is not already in
+                                                                                    // the list
+                    displayedDates.add(albums.get(album).getDateDisplay());
                 }
             }
 
+            // display the list of dates
+            for (int displayedDate = 0; displayedDate < displayedDates.size(); displayedDate++) {
+                System.out.printf("%d. %s\n", displayedDate + 1, displayedDates.get(displayedDate));
+            }
+
+            // prompts user to select a date to remove
             do {
                 try {
-                    System.out.print("\nSelect an album (enter album's LIST #): ");
+                    System.out.print("\nSelect a date (enter #): ");
                     index = Integer.parseInt(in.nextLine().strip()) - 1;
 
                     if (index < 0 || index >= albums.size())
                         throw new NumberFormatException();
                     else {
+                        date = new Date(displayedDates.get(index));
                         System.out.println("");
                         break;
                     }
@@ -274,88 +276,58 @@ public class Driver {
                 }
             } while (true);
 
-            // ------------------------------------------
+            // finds all albums with same date and puts them into albumsWithDate
+            do {
+                Collections.sort(albumsCopy, new SortAlbumsByDate());
 
-            System.out.print("Enter the date (MM/DD/YYYY): ");
+                index = Collections.binarySearch(albumsCopy, new Album(0, 0, emptyArrList,
+                        date),
+                        new SortAlbumsByDate());
+                if (index >= 0) {
+                    albumsWithDate.add(albumsCopy.get(index));
+                    albumsCopy.set(index,
+                            new Album(0, 0, emptyArrList, new Date("00/00/0000")));
+                } else
+                    break;
+            } while (true);
 
-            inDate = in.nextLine().strip();
-            st = new StringTokenizer(inDate, "/");
+            if (albumsWithDate.size() == 1) { // 1 album w same date of creation found
+                albums.remove(Collections.binarySearch(albums, new Album(0, 0, emptyArrList,
+                        date),
+                        new SortAlbumsByDate()));
+                System.out.println("Album removed!\n");
+            } else { // more than 1 album w same date of creation found
 
-            if (st.countTokens() == 3) {
-                // make sure all the tokens are integers
-                try {
-                    for (int i = 0; i < 3; i++) {
-                        Integer.parseInt(st.nextToken());
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid date inputted\n");
-                    return;
+                System.out.printf("There are %d albums with the same date of creation:\n",
+                        albumsWithDate.size());
+
+                Collections.sort(albumsWithDate);
+                for (int albumWithDate = 0; albumWithDate < albumsWithDate.size(); albumWithDate++) {
+                    System.out.printf("%d. Album #%d\n", albumWithDate + 1,
+                            albumsWithDate.get(albumWithDate).getNum());
                 }
 
-                date = new Date(inDate);
+                do {
+                    try {
+                        System.out.print("Which album would you like to remove? (Select the album's LIST #): ");
+                        removeChoice = Integer.parseInt(in.nextLine());
 
-                if (date.valid()) {
-                    // sort and find album with date
-                    System.out.println(albums);
-
-                    do {
-                        Collections.sort(albumsCopy, new SortAlbumsByDate());
-
-                        index = Collections.binarySearch(albumsCopy, new Album(0, 0, emptyArrList, date),
-                                new SortAlbumsByDate());
-                        if (index >= 0) {
-                            albumsWithDate.add(albumsCopy.get(index));
-                            albumsCopy.set(index,
-                                    new Album(0, 0, emptyArrList, new Date("00/00/0000")));
-                        } else
+                        if (removeChoice < 1 || removeChoice > albumsWithDate.size())
+                            throw new NumberFormatException();
+                        else {
+                            // remove the album
+                            albums.remove(albums.indexOf(albumsWithDate.get(removeChoice - 1)));
+                            System.out.println("Album removed!\n");
                             break;
-                    } while (true);
-
-                    if (albumsWithDate.size() == 0) { // 0 albums with date of creation found
-                        System.out.println("You don't own an album with this album creation date...\n");
-                    } else if (albumsWithDate.size() == 1) { // 1 album w same date of creation found
-                        albums.remove(Collections.binarySearch(albums, new Album(0, 0, emptyArrList, date),
-                                new SortAlbumsByDate()));
-                        System.out.println("Album removed!\n");
-                    } else { // more than 1 album w same date of creation found
-
-                        System.out.printf("There are %d albums with the same date of creation:\n",
-                                albumsWithDate.size());
-
-                        Collections.sort(albumsWithDate);
-                        for (int albumWithDate = 0; albumWithDate < albumsWithDate.size(); albumWithDate++) {
-                            System.out.printf("%d. Album #%d\n", albumWithDate + 1,
-                                    albumsWithDate.get(albumWithDate).getNum());
                         }
 
-                        do {
-                            try {
-                                System.out.print("Which album would you like to remove? (Select a #): ");
-                                removeChoice = Integer.parseInt(in.nextLine());
-
-                                if (removeChoice < 1 || removeChoice > albumsWithDate.size())
-                                    throw new NumberFormatException();
-                                else {
-                                    // remove the album
-                                    albums.remove(albums.indexOf(albumsWithDate.get(removeChoice - 1)));
-                                    System.out.println("Album removed!\n");
-                                    break;
-                                }
-
-                            } catch (NumberFormatException e) {
-                                System.out.print("\nInvalid input. ");
-                            }
-                        } while (true);
-
+                    } catch (NumberFormatException e) {
+                        System.out.print("\nInvalid input. ");
                     }
-                } else {
-                    System.out.println("Invalid date inputted...\n");
-                }
-            } else {
-                System.out.println("Invalid date inputted...\n");
+                } while (true);
+
             }
         }
-
     }
 
     public static void stats(ArrayList<Album> albums) { // #1-#5
@@ -371,7 +343,6 @@ public class Driver {
 
         System.out.printf("%s: %d out of %d\n", "ALL albums", Album.getTotalNumOfCards(), Album.getTotalCapacity());
         System.out.printf("%-10s: %.1f\n\n", "", 1.0 * Album.getTotalHPOfAllAlbums() / Album.getTotalNumOfCards());
-
     }
 
     public static void main(String[] args) throws IOException {
@@ -384,7 +355,7 @@ public class Driver {
 
         ArrayList<Card> emptyArrList = new ArrayList<>();
 
-        int albumNum;
+        Album albumSM2; // chosen album for submenu #2
         int index;
 
         // Main Code
@@ -460,75 +431,77 @@ public class Driver {
                         stats(albums);
                     else
                         System.out.println("You own 0 albums... :(\n");
-                } else if (subChoice == 6) {
+                } else if (subChoice == 6) { // Menu #1 Submenu #6
                     // Exit
                     break;
                 }
             }
 
             if (choice == 2) {
-                // Obtain the album number
-                System.out.print("Enter the album #: ");
 
-                try {
-                    albumNum = Integer.parseInt(in.nextLine().strip());
+                // display list
+                Collections.sort(albums);
+                for (int album = 0; album < albums.size(); album++) {
+                    System.out.printf("%d. Album #%d\n", album + 1, albums.get(album).getNum());
+                }
 
-                    if (albumNum <= 0) {
-                        throw new NumberFormatException();
-                    }
+                // prompt user for album
+                do {
+                    try {
+                        System.out.print("\nSelect an album (enter LIST #): ");
+                        index = Integer.parseInt(in.nextLine().strip()) - 1;
 
-                    // Check if album exists
-                    Collections.sort(albums);
-                    index = Collections.binarySearch(albums,
-                            new Album(albumNum, 0, emptyArrList, new Date("00/00/0000")));
-                    System.out.println();
-
-                    if (index < 0) {
-                        System.out.println("You don't own this album... Returning back to main menu");
-                    } else {
-                        while (true) {
-                            // Submenu 2
-                            Album chosenAlbum = albums.get(index);
-                            System.out.println(
-                                    "---------  SUB-MENU #2  ----------\n1) Display all cards (in the last sorted order)\n2) Display information on a particular card\n3) Add a card\n4) Remove a card (4 options)\n5) Edit attack\n6) Sort cards (3 options)\n7) Return back to main menu\n----------------------------------\n");
-
-                            // Prompt for submenu option
-                            do {
-                                try {
-                                    System.out.print("Enter your choice: ");
-                                    subChoice = Integer.parseInt(in.nextLine().strip());
-
-                                    if (subChoice < 1 || subChoice > 7)
-                                        throw new NumberFormatException();
-                                    else
-                                        break;
-                                } catch (NumberFormatException e) {
-                                    System.out.print("Invalid input. ");
-                                }
-                            } while (true);
-
-                            if (subChoice == 1) { // Menu #2 Submenu #1
-                                chosenAlbum.displayAllCards();
-                            } else if (subChoice == 2) { // Menu #2 Submenu #2
-                                chosenAlbum.displayCard(in);
-                                // System.out.print("Enter the card name: ");
-                                // chosenAlbum.displayCard(in.nextLine().strip());
-                            } else if (subChoice == 3) {
-                                // Menu #2 Submenu #3
-                            } else if (subChoice == 4) {
-                                // Menu #2 Submenu #4
-                            } else if (subChoice == 5) {
-                                // Menu #2 Submenu #5
-                            } else if (subChoice == 6) {
-                                // Menu #2 Submenu #6
-                            } else if (subChoice == 7) {
-                                // Exit
-                                break;
-                            }
+                        if (index < 0 || index >= albums.size())
+                            throw new NumberFormatException();
+                        else {
+                            albumSM2 = albums.get(index);
+                            System.out.printf("You selected album #%d!\n\n", albumSM2.getNum());
+                            break;
                         }
+
+                    } catch (NumberFormatException e) {
+                        System.out.print("\nInvalid input.");
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid album #.");
+                } while (true);
+
+                // album chosen, in submenu 2 now
+                while (true) {
+                    // Submenu 2
+                    Album chosenAlbum = albums.get(index);
+                    System.out.println(
+                            "---------  SUB-MENU #2  ----------\n1) Display all cards (in the last sorted order)\n2) Display information on a particular card\n3) Add a card\n4) Remove a card (4 options)\n5) Edit attack\n6) Sort cards (3 options)\n7) Return back to main menu\n----------------------------------\n");
+
+                    // Prompt for submenu option
+                    do {
+                        try {
+                            System.out.print("Enter your choice: ");
+                            subChoice = Integer.parseInt(in.nextLine().strip());
+
+                            if (subChoice < 1 || subChoice > 7)
+                                throw new NumberFormatException();
+                            else
+                                break;
+                        } catch (NumberFormatException e) {
+                            System.out.print("Invalid input. ");
+                        }
+                    } while (true);
+
+                    if (subChoice == 1) { // Menu #2 Submenu #1
+                        chosenAlbum.displayAllCards();
+                    } else if (subChoice == 2) { // Menu #2 Submenu #2
+                        chosenAlbum.displayCard(in);
+                    } else if (subChoice == 3) { // Menu #2 Submenu #3
+                        chosenAlbum.addCard(in);
+                    } else if (subChoice == 4) {
+                        // Menu #2 Submenu #4
+                    } else if (subChoice == 5) {
+                        // Menu #2 Submenu #5
+                    } else if (subChoice == 6) {
+                        // Menu #2 Submenu #6
+                    } else if (subChoice == 7) {
+                        // Exit
+                        break;
+                    }
                 }
 
             }
