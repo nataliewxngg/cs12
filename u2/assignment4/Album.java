@@ -245,6 +245,67 @@ public class Album implements Comparable<Album> {
         }
     }
 
+    // removeCard method - for #2-#4 - NOT DONE
+    public void removeCard(Scanner in) {
+
+        int choice; // choice from list of sort by options
+
+        do { // get number of attacks
+            try {
+                System.out.print("1. Name\n2. HP\n3. First Listed Card\n4. Last Listed Card\nRemove card by/the: ");
+                choice = Integer.parseInt(in.nextLine().strip());
+
+                if (choice < 1 || choice > 4) // don't allow for -# of attacks
+                    throw new NumberFormatException();
+                else
+                    break;
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. ");
+            }
+        } while (true);
+
+        if (choice == 1) { // Remove by NAME - case insensitively!
+
+            Collections.sort(this.cards);
+            ArrayList<Card> cardsCopy = new ArrayList<>(this.cards);
+            ArrayList<String> cardNamesNoDuplicates = new ArrayList<>();
+
+            // Store non-duplicate card names in another array
+            for (int card = 0; card < this.cards.size(); card++) {
+                if (!cardNamesNoDuplicates.contains(cards.get(card).getName())) {
+                    cardNamesNoDuplicates.add(this.cards.get(card).getName());
+                }
+            }
+            System.out.println(cardNamesNoDuplicates); // NOT DONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE and not
+                                                       // working lol
+
+            // Display a list of all the non-duplicated cards by NAME
+
+            // Prompt for which name
+
+            // Remove ALL instances of cards with the same name in cards
+            // Update variables too!
+
+        } else if (choice == 2) { // Remove by HP
+
+            // Store non-duplicate card HPs in another array
+
+            // Display a list of all the non-duplicated cards by HP
+
+            // Prompt for which HP
+
+            // Remove all instances of cards with the same HP in cards
+            // Update variables too!
+
+        } else if (choice == 3) { // Remove the First Listed Card (in last sorted order)
+            System.out.printf("%s was removed!\n\n", this.cards.get(0).getName());
+            this.cards.remove(0);
+        } else { // Remove Last Listed Card (in Last sorted order)
+            System.out.printf("%s was removed!\n\n", this.cards.get(this.cards.size() - 1).getName());
+            this.cards.remove(this.cards.size() - 1);
+        }
+    }
+
     // Getters + Setters
     public int getNum() {
         return this.num;

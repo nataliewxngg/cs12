@@ -492,8 +492,8 @@ public class Driver {
                         chosenAlbum.displayCard(in);
                     } else if (subChoice == 3) { // Menu #2 Submenu #3
                         chosenAlbum.addCard(in);
-                    } else if (subChoice == 4) {
-                        // Menu #2 Submenu #4
+                    } else if (subChoice == 4) { // Menu #2 Submenu #4
+                        chosenAlbum.removeCard(in);
                     } else if (subChoice == 5) {
                         // Menu #2 Submenu #5
                     } else if (subChoice == 6) {
