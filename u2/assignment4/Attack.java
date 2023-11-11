@@ -28,4 +28,16 @@ public class Attack {
     public String getDamage() {
         return this.damage;
     }
+
+    public void changeName(String newName) {
+        this.name = newName;
+    }
+
+    public void changeDesc(String newDesc) {
+        this.desc = newDesc;
+    }
+
+    public void changeDamage(String newDamage) {
+        this.damage = newDamage;
+    }
 }

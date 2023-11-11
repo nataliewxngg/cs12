@@ -50,11 +50,15 @@ public class Album implements Comparable<Album> {
 
     // displayAllCards method - for #2-#1
     public void displayAllCards() {
-        for (int card = 0; card < cards.size(); card++) {
-            System.out.printf("\nCard Name: %s\nDate of purchase/trade: %s\n", this.getCards().get(card).getName(),
-                    this.getCards().get(card).getDateDisplay());
+        if (this.cards.size() == 0) {
+            System.out.println("This album contains 0 cards.\n");
+        } else {
+            for (int card = 0; card < cards.size(); card++) {
+                System.out.printf("\nCard Name: %s\nDate of purchase/trade: %s\n", this.getCards().get(card).getName(),
+                        this.getCards().get(card).getDateDisplay());
+            }
+            System.out.println("");
         }
-        System.out.println("");
     }
 
     // displayCard method - for #2-#2
@@ -63,45 +67,50 @@ public class Album implements Comparable<Album> {
         Card chosenCard;
 
         System.out.println();
-        for (int card = 0; card < this.cards.size(); card++) {
-            System.out.printf("%d) %s (%s)\n", card + 1, this.cards.get(card).getName(),
-                    this.cards.get(card).getDateDisplay());
-        }
 
-        do {
-            try {
-                System.out.print("Select a card (by #): ");
-                index = Integer.parseInt(in.nextLine().strip()) - 1;
+        if (this.cards.size() == 0) {
+            System.out.println("This album contains 0 cards.\n");
+        } else {
+            for (int card = 0; card < this.cards.size(); card++) {
+                System.out.printf("%d) %s (%s)\n", card + 1, this.cards.get(card).getName(),
+                        this.cards.get(card).getDateDisplay());
+            }
 
-                if (index < 0 || index >= this.cards.size())
-                    throw new NumberFormatException();
-                else {
-                    chosenCard = this.cards.get(index);
-                    break;
+            do {
+                try {
+                    System.out.print("Select a card (by #): ");
+                    index = Integer.parseInt(in.nextLine().strip()) - 1;
+
+                    if (index < 0 || index >= this.cards.size())
+                        throw new NumberFormatException();
+                    else {
+                        chosenCard = this.cards.get(index);
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.print("Invalid input. ");
                 }
-            } catch (NumberFormatException e) {
-                System.out.print("Invalid input. ");
-            }
-        } while (true);
+            } while (true);
 
-        System.out.printf("\nCard name: %s\nHP: %d\nType: %s\n", chosenCard.getName(), chosenCard.getHP(),
-                chosenCard.getType());
-        for (int attack = 0; attack < chosenCard.getAttacks().size(); attack++) {
-            if (chosenCard.getAttacks().get(attack).getDesc() == "") {
-                System.out.printf("Attack %d name: %s\nAttack %d damage: %s\n",
-                        attack + 1,
-                        chosenCard.getAttacks().get(attack).getName(), attack + 1,
-                        chosenCard.getAttacks().get(attack).getDamage());
-            } else {
-                System.out.printf(
-                        "Attack %d name: %s\nAttack %d description: %s\nAttack %d damage: %s\n",
-                        attack + 1,
-                        chosenCard.getAttacks().get(attack).getName(), attack + 1,
-                        chosenCard.getAttacks().get(attack).getDesc(), attack + 1,
-                        chosenCard.getAttacks().get(attack).getDamage());
+            System.out.printf("\nCard name: %s\nHP: %d\nType: %s\n", chosenCard.getName(), chosenCard.getHP(),
+                    chosenCard.getType());
+            for (int attack = 0; attack < chosenCard.getAttacks().size(); attack++) {
+                if (chosenCard.getAttacks().get(attack).getDesc() == "") {
+                    System.out.printf("Attack %d name: %s\nAttack %d damage: %s\n",
+                            attack + 1,
+                            chosenCard.getAttacks().get(attack).getName(), attack + 1,
+                            chosenCard.getAttacks().get(attack).getDamage());
+                } else {
+                    System.out.printf(
+                            "Attack %d name: %s\nAttack %d description: %s\nAttack %d damage: %s\n",
+                            attack + 1,
+                            chosenCard.getAttacks().get(attack).getName(), attack + 1,
+                            chosenCard.getAttacks().get(attack).getDesc(), attack + 1,
+                            chosenCard.getAttacks().get(attack).getDamage());
+                }
             }
+            System.out.printf("Date of purchase/trade: %s\n\n", chosenCard.getDateDisplay());
         }
-        System.out.printf("Date of purchase/trade: %s\n\n", chosenCard.getDateDisplay());
     }
 
     // addCard method - for #2-#3
@@ -245,17 +254,208 @@ public class Album implements Comparable<Album> {
         }
     }
 
-    // removeCard method - for #2-#4 - NOT DONE
+    // removeCard method - for #2-#4
     public void removeCard(Scanner in) {
-
         int choice; // choice from list of sort by options
+        int index;
 
-        do { // get number of attacks
+        if (this.cards.size() == 0) // if album doesn't have ANY cards
+            System.out.println("This album contains 0 cards. (No cards removed)\n");
+        else {
+            // prompt for removeby option
+            do {
+                try {
+                    System.out.print("1. Name\n2. HP\n3. First Listed Card\n4. Last Listed Card\nRemove card by/the: ");
+                    choice = Integer.parseInt(in.nextLine().strip());
+
+                    if (choice < 1 || choice > 4)
+                        throw new NumberFormatException();
+                    else
+                        break;
+                } catch (NumberFormatException e) {
+                    System.out.print("Invalid input. ");
+                }
+            } while (true);
+
+            ArrayList<Card> cardsCopy = new ArrayList<>(this.cards);
+
+            if (choice == 1) { // Remove by NAME
+
+                ArrayList<Card> noDuplicateNames = new ArrayList<>();
+                int removeNameChoice;
+                String removeName;
+
+                // Store non-duplicate card names in another array
+                Collections.sort(cardsCopy);
+                for (int i = 0; i < this.cards.size(); i++) {
+                    if (Collections.binarySearch(noDuplicateNames,
+                            new Card(cardsCopy.get(i).getName(), 0, "", new Date("00/00/0000"), emptyArrList)) < 0) {
+                        noDuplicateNames.add(cardsCopy.get(i));
+                    }
+                }
+                System.out.println();
+
+                // Display a list of all the non-duplicated cards by NAME
+                for (int i = 0; i < noDuplicateNames.size(); i++) {
+                    System.out.printf("%d. %s\n", i + 1, noDuplicateNames.get(i).getName());
+                }
+
+                // Prompt for which name
+                do {
+                    try {
+                        System.out.print("Remove Card with Name (Enter LIST #): ");
+                        removeNameChoice = Integer.parseInt(in.nextLine().strip());
+
+                        if (removeNameChoice < 1 || removeNameChoice > noDuplicateNames.size())
+                            throw new NumberFormatException();
+                        else {
+                            removeName = noDuplicateNames.get(removeNameChoice - 1).getName();
+                            System.out.println();
+                            break;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.print("Invalid input. ");
+                    }
+                } while (true);
+
+                // Remove ALL instances of cards with the same name in cards
+                // Update variables too!
+                Collections.sort(cardsCopy);
+
+                while ((index = Collections.binarySearch(cardsCopy,
+                        new Card(removeName, 0, "", new Date("00/00/0000"), emptyArrList))) >= 0) {
+
+                    System.out.printf("%s was removed!\n", cardsCopy.get(index).getName());
+
+                    this.totalHP -= cardsCopy.get(index).getHP();
+                    totalNumOfCards--;
+                    totalHPOfAllAlbums -= cardsCopy.get(index).getHP();
+
+                    this.cards.remove(cardsCopy.get(index));
+                    cardsCopy.remove(index);
+                }
+                System.out.println();
+
+            } else if (choice == 2) { // Remove by HP
+
+                ArrayList<Integer> noDuplicateHPs = new ArrayList<>();
+                int removeHPChoice;
+                int removeHP;
+
+                // Store non-duplicate card HPs in another array
+                for (int i = 0; i < this.cards.size(); i++) {
+                    if (!noDuplicateHPs.contains(this.cards.get(i).getHP())) {
+                        noDuplicateHPs.add(this.cards.get(i).getHP());
+                    }
+                }
+                System.out.println();
+
+                // Display a list of all the non-duplicated cards by HP
+                for (int i = 0; i < noDuplicateHPs.size(); i++) {
+                    System.out.printf("%d. %d\n", i + 1, noDuplicateHPs.get(i));
+                }
+
+                // Prompt for which HP
+                do {
+                    try {
+                        System.out.print("Remove Card with HP (Enter LIST #): ");
+                        removeHPChoice = Integer.parseInt(in.nextLine().strip());
+
+                        if (removeHPChoice < 1 || removeHPChoice > noDuplicateHPs.size())
+                            throw new NumberFormatException();
+                        else {
+                            removeHP = noDuplicateHPs.get(removeHPChoice - 1);
+                            System.out.println();
+                            break;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.print("Invalid input. ");
+                    }
+                } while (true);
+
+                // Remove all instances of cards with the same HP in cards
+                Collections.sort(cardsCopy, new SortCardsByHP());
+
+                while ((index = Collections.binarySearch(cardsCopy,
+                        new Card("", removeHP, "", new Date("00/00/0000"), emptyArrList), new SortCardsByHP())) >= 0) {
+
+                    System.out.printf("%s was removed!\n", cardsCopy.get(index).getName());
+
+                    this.totalHP -= cardsCopy.get(index).getHP();
+                    totalNumOfCards--;
+                    totalHPOfAllAlbums -= cardsCopy.get(index).getHP();
+
+                    this.cards.remove(cardsCopy.get(index));
+                    cardsCopy.remove(index);
+                }
+                System.out.println();
+
+            } else if (choice == 3) { // Remove the First Listed Card (in last sorted order)
+                System.out.printf("%s was removed!\n\n", this.cards.get(0).getName());
+
+                this.totalHP -= this.cards.get(0).getHP();
+                totalNumOfCards--;
+                totalHPOfAllAlbums -= this.cards.get(0).getHP();
+
+                this.cards.remove(0);
+            } else { // Remove Last Listed Card (in Last sorted order)
+                System.out.printf("%s was removed!\n\n", this.cards.get(this.cards.size() - 1).getName());
+
+                this.totalHP -= this.cards.get(this.cards.size() - 1).getHP();
+                totalNumOfCards--;
+                totalHPOfAllAlbums -= this.cards.get(this.cards.size() - 1).getHP();
+
+                this.cards.remove(this.cards.size() - 1);
+            }
+        }
+    }
+
+    // editAttack method - for #2-#5
+    public void editAttack(Scanner in) {
+        int index;
+
+        if (this.cards.size() == 0) {
+            System.out.println("This album contains 0 cards.\n");
+        } else {
+            // display all cards available to choose from
+            for (int card = 0; card < this.cards.size(); card++) {
+                System.out.printf("%d) %s (%s)\n", card + 1, this.cards.get(card).getName(),
+                        this.cards.get(card).getDateDisplay());
+            }
+
+            // prompt for card to edit from
+            do {
+                try {
+                    System.out.print("Select a card (by #): ");
+                    index = Integer.parseInt(in.nextLine().strip()) - 1;
+
+                    if (index < 0 || index >= this.cards.size())
+                        throw new NumberFormatException();
+                    else {
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.print("Invalid input. ");
+                }
+            } while (true);
+
+            // edit attack
+            this.cards.get(index).editAttack(in);
+        }
+    }
+
+    // sortCards method - #2-#6
+    public void sortCards(Scanner in) {
+        int choice;
+
+        System.out.println("1. Sort by NAME\n2. Sort by HP\n3. Sort by DATE");
+
+        do {
             try {
-                System.out.print("1. Name\n2. HP\n3. First Listed Card\n4. Last Listed Card\nRemove card by/the: ");
-                choice = Integer.parseInt(in.nextLine().strip());
+                System.out.print("Sort by (Enter #): ");
+                choice = Integer.parseInt(in.nextLine());
 
-                if (choice < 1 || choice > 4) // don't allow for -# of attacks
+                if (choice < 1 || choice > 3)
                     throw new NumberFormatException();
                 else
                     break;
@@ -264,45 +464,23 @@ public class Album implements Comparable<Album> {
             }
         } while (true);
 
-        if (choice == 1) { // Remove by NAME - case insensitively!
-
+        if (choice == 1) { // sort by NAME
             Collections.sort(this.cards);
-            ArrayList<Card> cardsCopy = new ArrayList<>(this.cards);
-            ArrayList<String> cardNamesNoDuplicates = new ArrayList<>();
 
-            // Store non-duplicate card names in another array
-            for (int card = 0; card < this.cards.size(); card++) {
-                if (!cardNamesNoDuplicates.contains(cards.get(card).getName())) {
-                    cardNamesNoDuplicates.add(this.cards.get(card).getName());
-                }
-            }
-            System.out.println(cardNamesNoDuplicates); // NOT DONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE and not
-                                                       // working lol
+            System.out.println("Cards sorted by NAME (in alphabetical order)!");
+            this.displayAllCards();
 
-            // Display a list of all the non-duplicated cards by NAME
+        } else if (choice == 2) { // sort by HP
+            Collections.sort(this.cards, new SortCardsByHP());
 
-            // Prompt for which name
+            System.out.println("Cards sorted by HP (in ascending order)!");
+            this.displayAllCards();
 
-            // Remove ALL instances of cards with the same name in cards
-            // Update variables too!
+        } else {// sort by DATE
+            Collections.sort(this.cards, new SortCardsByDate());
 
-        } else if (choice == 2) { // Remove by HP
-
-            // Store non-duplicate card HPs in another array
-
-            // Display a list of all the non-duplicated cards by HP
-
-            // Prompt for which HP
-
-            // Remove all instances of cards with the same HP in cards
-            // Update variables too!
-
-        } else if (choice == 3) { // Remove the First Listed Card (in last sorted order)
-            System.out.printf("%s was removed!\n\n", this.cards.get(0).getName());
-            this.cards.remove(0);
-        } else { // Remove Last Listed Card (in Last sorted order)
-            System.out.printf("%s was removed!\n\n", this.cards.get(this.cards.size() - 1).getName());
-            this.cards.remove(this.cards.size() - 1);
+            System.out.println("Cards sorted by Date (from OLDEST to NEWEST)!");
+            this.displayAllCards();
         }
     }
 

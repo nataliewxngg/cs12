@@ -353,8 +353,6 @@ public class Driver {
         int choice = 0;
         int subChoice;
 
-        ArrayList<Card> emptyArrList = new ArrayList<>();
-
         Album albumSM2; // chosen album for submenu #2
         int index;
 
@@ -496,9 +494,10 @@ public class Driver {
                         chosenAlbum.removeCard(in);
                     } else if (subChoice == 5) {
                         // Menu #2 Submenu #5
-                    } else if (subChoice == 6) {
-                        // Menu #2 Submenu #6
-                    } else if (subChoice == 7) {
+                        chosenAlbum.editAttack(in);
+                    } else if (subChoice == 6) { // Menu #2 Submenu #6
+                        chosenAlbum.sortCards(in);
+                    } else if (subChoice == 7) { // Menu #2 Submenu #7
                         // Exit
                         break;
                     }
