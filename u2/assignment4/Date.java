@@ -14,12 +14,18 @@ public class Date {
     public Date(String date) { // PARAMETERS: A date, in string format, in the form of MM/DD/YYYY
         StringTokenizer st = new StringTokenizer(date, "/");
 
+        // Initializes the instance variables of the new Date object!
         this.month = st.nextToken();
         this.date = st.nextToken();
         this.year = st.nextToken();
+
+        // RETURNS: none (constructors do not return any value)
     }
 
-    // Getters + Setters
+    // DESCRIPTION: Getter methods - allows the files utilizing Date objects to
+    // access its private attributes
+    // PARAMETERS: none
+    // RETURNS: dependent on each attribute's data type - all int in this case
     public int getMonth() {
         return Integer.parseInt(this.month);
     }
@@ -32,16 +38,22 @@ public class Date {
         return Integer.parseInt(this.year);
     }
 
-    // valid() - to check if a date is a valid date
-    public boolean valid() {
+    // DESCRIPTION: Utilized to check if a date is valid/realistic
+    public boolean valid() { // PARAMETERS: none
         int[] days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
         int year = Integer.parseInt(this.year);
         int month = Integer.parseInt(this.month);
         int date = Integer.parseInt(this.date);
 
-        if (year >= 1000 && year <= 2023) { // year: 1000-2023
-            if (month >= 1 && month <= 12) { // month: 1-12
+        // RETURNS:
+        // If the year of the date is valid (1000-2023 inclusively),
+        // if the month of the date is valid (1-12 inclusively),
+        // and if the date of the date is valid (dependent on the days int[] array),
+        // return true
+        // Otherwise, return false
+        if (year >= 1000 && year <= 2023) {
+            if (month >= 1 && month <= 12) {
                 if (date >= 1 && date <= days[month - 1]) {
                     return true;
                 }
@@ -50,7 +62,14 @@ public class Date {
         return false;
     }
 
-    // toString() - for display
+    // DESCRIPTION: .toString() is called whenever a Date object is to be printed
+    // By default, it will print the address location of the Date object in the
+    // computer.
+    // However, by overriding (writing) the .toString() method like so ourselves,
+    // it allows us to change what is to be displayed instead.
+
+    // Likewise, this method will allow us to display the Date object in a string
+    // format instead.
     public String toString() {
         return this.month + "/" + this.date + "/" + this.year;
     }

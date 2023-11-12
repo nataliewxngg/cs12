@@ -41,7 +41,7 @@ public class Card implements Comparable<Card> {
                                                                                           // purchase/trade
                                                                                           // 5. Card's list of attacks
 
-        // Initializes the instance variables of the new Album object!
+        // Initializes the instance variables of the new Card object!
         this.name = name;
         this.HP = HP;
         this.type = type;
