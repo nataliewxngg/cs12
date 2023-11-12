@@ -10,7 +10,7 @@ public class SortAlbumsByDate implements Comparator<Album> {
 
     public int compare(Album a1, Album a2) { // PARAMETERS: 2 Album objects to compare
 
-        // RETURN:
+        // RETURNS:
 
         // SCENARIO 1:
         // If a1.year == a2.year and a1.month == a2.month:
