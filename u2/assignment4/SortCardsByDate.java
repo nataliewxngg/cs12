@@ -9,7 +9,7 @@ import java.util.*;
 public class SortCardsByDate implements Comparator<Card> { // PARAMETERS: 2 Card objects to compare
     public int compare(Card c1, Card c2) {
 
-        // RETURN:
+        // RETURNS:
 
         // SCENARIO 1:
         // If c1.year == c2.year and c1.month == c2.month:
