@@ -663,6 +663,8 @@ public class Album implements Comparable<Album> {
     // DESCRIPTION: Getter methods - allows the files utilizing Album objects to
     // access its private attributes (including data encapsulated static/class
     // variables too)
+    // PARAMETERS: none
+    // RETURNS: dependent on each attribute's data type
     public int getNum() {
         return this.num;
     }
@@ -708,6 +710,6 @@ public class Album implements Comparable<Album> {
     // Likewise, this method will allow us to display the album # of an Album
     // object instead of its address location
     public String toString() { // PARAMETER: none
-        return this.num + "";
+        return this.num + ""; // RETURNS: the album #
     }
 }
