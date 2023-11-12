@@ -8,7 +8,7 @@ public class Album implements Comparable<Album> {
     // Used to compare the album # of two Album objects
     // (ALBUM1.compareTo(ALBUM2))
 
-    // It is moreover a method utilized for the Comparalbe Interface - NATURAL
+    // It is moreover a method utilized for the Comparable Interface - NATURAL
     // SORTING ORDER
     // When called (Collections.sort(ARRAYLIST)), it allows the comparable interface
     // to sort an ArrayList of Album objects in ascending order of their album #s
