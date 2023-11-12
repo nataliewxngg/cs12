@@ -48,6 +48,13 @@ public class Album implements Comparable<Album> {
                 this.cards.size(), this.totalHP);
     }
 
+    // updateVars() method - for #2-#4
+    public static void updateVars(Album a) {
+        totalNumOfCards -= a.cards.size();
+        totalCapacity -= a.capacity;
+        totalHPOfAllAlbums -= a.totalHP;
+    }
+
     // displayAllCards method - for #2-#1
     public void displayAllCards() {
         if (this.cards.size() == 0) {
@@ -116,7 +123,7 @@ public class Album implements Comparable<Album> {
     // addCard method - for #2-#3
     public void addCard(Scanner in) {
         if (this.capacity == this.cards.size()) // if album is already at maximum capacity - cannot add new card
-            System.out.printf("Album #d has already reached maximum capacity - Card not added\n", this.num);
+            System.out.printf("Album #%d has already reached maximum capacity - Card not added\n\n", this.num);
         else {
             String cardName;
             int cardHP;
