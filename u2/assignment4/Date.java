@@ -1,17 +1,17 @@
 package u2.assignment4;
 
-import java.util.StringTokenizer;
-// Necessary instance and static variables declared (can ADD more variables later)
-// Constructor (can be cahnged later)
+import java.util.*;
 
 public class Date {
-    // Variables
+
+    // Instance Variables + Data Encapsulation
     private String month;
     private String date;
     private String year;
 
-    // Constructor
-    public Date(String date) { // MM/DD/YYYY
+    // DESCRIPTION: The CONSTRUCTOR method - utilized to create new Date objects
+    // and to initialize each object's instance variables
+    public Date(String date) { // PARAMETERS: A date, in string format, in the form of MM/DD/YYYY
         StringTokenizer st = new StringTokenizer(date, "/");
 
         this.month = st.nextToken();
