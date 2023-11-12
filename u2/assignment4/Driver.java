@@ -374,7 +374,7 @@ public class Driver {
             }
 
             // Continuously prompts the user for which date to "remove" ("" because it
-            // removes the album with THAT date of creation, not the date itself) until a
+            // removes the ALBUM with THAT date of creation, not the date itself) until a
             // valid input is inputted
             do {
                 try {
@@ -753,5 +753,6 @@ public class Driver {
                 break;
             }
         }
+        // RETURNS: none (void method)
     }
 }
