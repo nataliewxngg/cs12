@@ -20,7 +20,7 @@ public class Driver {
         // If there are 0 albums in the collection,
         // inform the user of it and exit the method
         if (albums.size() == 0)
-            System.out.println("You own 0 albums... :(\n");
+            System.out.println("You own 0 albums.\n");
 
         // If there is/are 1+ albums in the collection,
         // display each's album # and date of album creation
@@ -642,6 +642,7 @@ public class Driver {
                 // Display a list of all the albums in the collection, listed in ascending order
                 // of their album #s
                 Collections.sort(albums);
+                System.out.println();
                 for (int album = 0; album < albums.size(); album++) {
                     System.out.printf("%d. Album #%d\n", album + 1, albums.get(album).getNum());
                 }
@@ -650,7 +651,7 @@ public class Driver {
                 // valid input is inputted
                 do {
                     try {
-                        System.out.print("\nSelect an album (enter LIST #): ");
+                        System.out.print("Select an album (enter LIST #): ");
                         index = Integer.parseInt(in.nextLine().strip()) - 1;
 
                         if (index < 0 || index >= albums.size())
@@ -664,7 +665,7 @@ public class Driver {
                             break;
                         }
                     } catch (NumberFormatException e) {
-                        System.out.print("\nInvalid input.");
+                        System.out.print("Invalid input. ");
                     }
                 } while (true);
 

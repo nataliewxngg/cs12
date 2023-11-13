@@ -156,7 +156,7 @@ public class Album implements Comparable<Album> {
 
                 // If the attack does NOT have a description, only display its name and damage
                 if (chosenCard.getAttacks().get(attack).getDesc() == "") {
-                    System.out.printf("Attack %d name: %s\nAttack %d damage: %s\n",
+                    System.out.printf("\nAttack %d name: %s\nAttack %d damage: %s\n",
                             attack + 1,
                             chosenCard.getAttacks().get(attack).getName(), attack + 1,
                             chosenCard.getAttacks().get(attack).getDamage());
@@ -165,7 +165,7 @@ public class Album implements Comparable<Album> {
                 // including its description
                 else {
                     System.out.printf(
-                            "Attack %d name: %s\nAttack %d description: %s\nAttack %d damage: %s\n",
+                            "\nAttack %d name: %s\nAttack %d description: %s\nAttack %d damage: %s\n",
                             attack + 1,
                             chosenCard.getAttacks().get(attack).getName(), attack + 1,
                             chosenCard.getAttacks().get(attack).getDesc(), attack + 1,
@@ -174,7 +174,7 @@ public class Album implements Comparable<Album> {
             }
 
             // Display the card's date of purchase/trade
-            System.out.printf("Date of purchase/trade: %s\n\n", chosenCard.getDateDisplay());
+            System.out.printf("\nDate of purchase/trade: %s\n\n", chosenCard.getDateDisplay());
         }
 
         // RETURNS: none (void method)
@@ -375,9 +375,10 @@ public class Album implements Comparable<Album> {
 
             // Continuously prompt for the remove by criteria until a valid input is
             // inputted
+            System.out.print("1. Name\n2. HP\n3. First Listed Card\n4. Last Listed Card\n");
             do {
                 try {
-                    System.out.print("1. Name\n2. HP\n3. First Listed Card\n4. Last Listed Card\nRemove card by/the: ");
+                    System.out.print("Remove card by/the: ");
                     choice = Integer.parseInt(in.nextLine().strip());
 
                     if (choice < 1 || choice > 4)
@@ -533,7 +534,7 @@ public class Album implements Comparable<Album> {
             // If the user chooses to remove the first listed card (in the last sorted
             // order), remove it and update the static/class variables
             else if (choice == 3) {
-                System.out.printf("%s was removed!\n\n", this.cards.get(0).getName());
+                System.out.printf("\n%s was removed!\n\n", this.cards.get(0).getName());
 
                 // Update the static/class variables
                 this.totalHP -= this.cards.get(0).getHP();
@@ -546,7 +547,7 @@ public class Album implements Comparable<Album> {
             // If the user chooses to remove the last listed card (in the last sorted
             // order), remove it and update the static/class variables
             else {
-                System.out.printf("%s was removed!\n\n", this.cards.get(this.cards.size() - 1).getName());
+                System.out.printf("\n%s was removed!\n\n", this.cards.get(this.cards.size() - 1).getName());
 
                 // Update the static/class variables
                 this.totalHP -= this.cards.get(this.cards.size() - 1).getHP();
@@ -576,6 +577,7 @@ public class Album implements Comparable<Album> {
         // to edit the attack from, and prompt for a new atack name, description, or
         // attack
         else {
+            System.out.println();
             // Display a numbered list of all the cards in the album
             for (int card = 0; card < this.cards.size(); card++) {
                 System.out.printf("%d) %s (%s)\n", card + 1, this.cards.get(card).getName(),
@@ -701,7 +703,7 @@ public class Album implements Comparable<Album> {
         return totalHPOfAllAlbums;
     }
 
-    // DESCRIPTION: .toString() is called whenever a Album object is to be printed
+    // DESCRIPTION: .toString() is called whenever an Album object is to be printed
     // By default, it will print the address location of the Album object in the
     // computer.
     // However, by overriding (writing) the .toString() method like so ourselves,

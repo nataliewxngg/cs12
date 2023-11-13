@@ -67,6 +67,7 @@ public class Card implements Comparable<Card> {
             int editOption;
 
             // Displays a numbered list of all the attacks the card contains
+            System.out.println();
             for (int attack = 0; attack < this.attacks.size(); attack++) {
                 System.out.printf("%d) %s (%s Damage)\n", attack + 1, this.attacks.get(attack).getName(),
                         this.attacks.get(attack).getDamage());
@@ -82,7 +83,7 @@ public class Card implements Comparable<Card> {
                     if (index < 0 || index >= this.attacks.size())
                         throw new NumberFormatException();
                     else { // Once an attack is selected to edit from, stop prompting for one
-                        System.out.printf("You selected the Attack %s.\n", this.attacks.get(index).getName());
+                        System.out.printf("You selected the Attack %s.\n\n", this.attacks.get(index).getName());
                         break;
                     }
                 } catch (NumberFormatException e) {
@@ -101,6 +102,7 @@ public class Card implements Comparable<Card> {
                     if (editOption < 1 || editOption > 3)
                         throw new NumberFormatException();
                     else { // Once a field is chosen to edit from, stop prompting the user for it
+                        System.out.println();
                         break;
                     }
                 } catch (NumberFormatException e) {
@@ -152,7 +154,7 @@ public class Card implements Comparable<Card> {
                 // Continuously prompt the user for the new attack damage until a non-empty
                 // input is inputted
                 do {
-                    System.out.print("Enter the new attack name (CANNOT BE EMPTY!): ");
+                    System.out.print("Enter the new attack damage (CANNOT BE EMPTY!): ");
                     newDamage = in.nextLine().strip();
 
                     if (newDamage != "")
