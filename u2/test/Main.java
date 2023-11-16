@@ -36,5 +36,10 @@ public class Main {
         s1.noOfShapes++;
         Shape.noOfShapes++;
         System.out.println(Shape.noOfShapes);
+
+        // dog
+        Animal oohlala = new Poodle(1, 2, 3);
+        oohlala.yo(); // !!!!!!!!!!! USING OVERRIDEN METHODS FOR WEIRDLY DEFINED THINGS DO NOT WORK
+                      // UNLESS IT IS OVERRIDEN FRROOOOOM THE REAL DATATYPE
     }
 }

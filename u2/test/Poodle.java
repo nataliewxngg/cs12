@@ -13,4 +13,8 @@ public class Poodle extends Dog {
 		System.out.println("poodleID = " + poodleID);
 	}
 
+	public void yo() {
+		System.out.println("just testing smt weewoo");
+	}
+
 }

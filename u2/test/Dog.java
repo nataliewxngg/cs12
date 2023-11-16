@@ -17,4 +17,8 @@ public class Dog extends Animal {
 		System.out.println("dogID = " + dogID);
 	}
 
+	public void yo() {
+		System.out.println("just testing smt");
+	}
+
 }
