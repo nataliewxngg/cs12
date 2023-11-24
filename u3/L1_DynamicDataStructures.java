@@ -59,5 +59,36 @@ public class L1_DynamicDataStructures {
         // - add(Obj)
         // - remove()
         // - set(Obj)
+
+        // -----------------------------
+
+        // Other ways to traverse through an ArrayList
+        // 1.
+        System.out.println(1);
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println(names.get(i));
+        }
+
+        // 2.
+        System.out.println(2);
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        // 3.
+        System.out.println(3);
+        ListIterator iter1 = names.listIterator();
+
+        while (iter1.hasNext()) {
+            System.out.println(iter1.next());
+        }
+
+        // -----------------------------
+
+        // Sublist (returns a list)
+        List<String> sublist = names.subList(1, 2);
+        names.set(1, "poop");
+        System.out.println(names);
+        System.out.println(sublist);
     }
 }

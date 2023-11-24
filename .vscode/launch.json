@@ -1,0 +1,399 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "L1_ArrayListDemo",
+      "request": "launch",
+      "mainClass": "u3.L1_ArrayListDemo",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "L1_VariablesAndMath",
+      "request": "launch",
+      "mainClass": "u0.L1_VariablesAndMath",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L2_Arithmetics",
+      "request": "launch",
+      "mainClass": "u0.L2_Arithmetics",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L3_Loops",
+      "request": "launch",
+      "mainClass": "u0.L3_Loops",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L4_printF",
+      "request": "launch",
+      "mainClass": "u0.L4_printF",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L5_strings",
+      "request": "launch",
+      "mainClass": "u0.L5_strings",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L6_arrays",
+      "request": "launch",
+      "mainClass": "u0.L6_arrays",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L7_2DArrays",
+      "request": "launch",
+      "mainClass": "u0.L7_2DArrays",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "Review",
+      "request": "launch",
+      "mainClass": "u0.Review",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "ReviewExcersises",
+      "request": "launch",
+      "mainClass": "u0.assignments.ReviewExcersises",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "StringsPractice",
+      "request": "launch",
+      "mainClass": "u0.assignments.StringsPractice",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "test",
+      "request": "launch",
+      "mainClass": "u0.test",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "ControlMyRectangles",
+      "request": "launch",
+      "mainClass": "u1.ControlMyRectangles",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L1_ReadingAndWritingToFiles",
+      "request": "launch",
+      "mainClass": "u1.L1_ReadingAndWritingToFiles",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L3_MultipleExceptions",
+      "request": "launch",
+      "mainClass": "u1.L3_MultipleExceptions",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L4_StringBuilder",
+      "request": "launch",
+      "mainClass": "u1.L4_StringBuilder",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L4_StringBuilderExercises",
+      "request": "launch",
+      "mainClass": "u1.L4_StringBuilderExercises",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L4_StringBuilderExercises2",
+      "request": "launch",
+      "mainClass": "u1.L4_StringBuilderExercises2",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L5_StringTokenizer",
+      "request": "launch",
+      "mainClass": "u1.L5_StringTokenizer",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L5_StringTokenizerExercises",
+      "request": "launch",
+      "mainClass": "u1.L5_StringTokenizerExercises",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L6_Recursion",
+      "request": "launch",
+      "mainClass": "u1.L6_Recursion",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L6_RecursionPractice",
+      "request": "launch",
+      "mainClass": "u1.L6_RecursionPractice",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L7_BigInteger",
+      "request": "launch",
+      "mainClass": "u1.L7_BigInteger",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "U1_Review_1",
+      "request": "launch",
+      "mainClass": "u1.U1_Review_1",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "U1_Review_2",
+      "request": "launch",
+      "mainClass": "u1.U1_Review_2",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "U1_Review_3",
+      "request": "launch",
+      "mainClass": "u1.U1_Review_3",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "U1_Review_8",
+      "request": "launch",
+      "mainClass": "u1.U1_Review_8",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "U1_Review_9",
+      "request": "launch",
+      "mainClass": "u1.U1_Review_9",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "NatalieWong_A",
+      "request": "launch",
+      "mainClass": "u1.assignment1.NatalieWong_A",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "NatalieWong_B",
+      "request": "launch",
+      "mainClass": "u1.assignment1.NatalieWong_B",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "NatalieWong_C",
+      "request": "launch",
+      "mainClass": "u1.assignment1.NatalieWong_C",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "NatalieWong_bruh",
+      "request": "launch",
+      "mainClass": "u1.assignment1.NatalieWong_bruh",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "NatalieWong_Assignment2",
+      "request": "launch",
+      "mainClass": "u1.assignment2.NatalieWong_Assignment2",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "NatalieWong_SaveCat",
+      "request": "launch",
+      "mainClass": "u1.assignment2.NatalieWong_SaveCat",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "NatalieWong_SaveCatBONUS",
+      "request": "launch",
+      "mainClass": "u1.assignment2.NatalieWong_SaveCatBONUS",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "asdlfjasdkl",
+      "request": "launch",
+      "mainClass": "u1.assignment2.asdlfjasdkl",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "NatalieWong_RecursionExercises",
+      "request": "launch",
+      "mainClass": "u1.recursionExercises.NatalieWong_RecursionExercises",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "test(1)",
+      "request": "launch",
+      "mainClass": "u1.recursionExercises.test",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L1_MsWong",
+      "request": "launch",
+      "mainClass": "u2.L1_MsWong",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L2_ArrayList",
+      "request": "launch",
+      "mainClass": "u2.L2_ArrayList",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L3_ComparableInterface",
+      "request": "launch",
+      "mainClass": "u2.L3_ComparableInterface",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L4_ComparatorInterface",
+      "request": "launch",
+      "mainClass": "u2.L4_ComparatorInterface",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L5_LinearVsBinarySearch",
+      "request": "launch",
+      "mainClass": "u2.L5_LinearVsBinarySearch",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L6_BinarySearchAlgorithm",
+      "request": "launch",
+      "mainClass": "u2.L6_BinarySearchAlgorithm",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L7_AddingJComponents",
+      "request": "launch",
+      "mainClass": "u2.L7_AddingJComponents",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L8_Inheritance",
+      "request": "launch",
+      "mainClass": "u2.L8_Inheritance",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "u2.assignment3.Main",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "Main_NOCOMMENTS",
+      "request": "launch",
+      "mainClass": "u2.assignment3.Main_NOCOMMENTS",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "Driver",
+      "request": "launch",
+      "mainClass": "u2.assignment4.Driver",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L1_OOPIntro",
+      "request": "launch",
+      "mainClass": "u2.review.L1_OOPIntro",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L2_ArrayList(1)",
+      "request": "launch",
+      "mainClass": "u2.review.L2_ArrayList",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L3_Comparables",
+      "request": "launch",
+      "mainClass": "u2.review.L3_Comparables",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L4_Comparator",
+      "request": "launch",
+      "mainClass": "u2.review.L4_Comparator",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "Main(1)",
+      "request": "launch",
+      "mainClass": "u2.test.Main",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L1_DynamicDataStructures",
+      "request": "launch",
+      "mainClass": "u3.L1_DynamicDataStructures",
+      "projectName": "cs12_30b59500"
+    }
+  ]
+}
