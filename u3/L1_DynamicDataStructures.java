@@ -86,9 +86,16 @@ public class L1_DynamicDataStructures {
         // -----------------------------
 
         // Sublist (returns a list)
-        List<String> sublist = names.subList(1, 2);
-        names.set(1, "poop");
-        System.out.println(names);
-        System.out.println(sublist);
+        ArrayList<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.add("D");
+        list.add("E");
+
+        List<String> subList = list.subList(2, 5); // {C,D,E}
+        subList.remove(0);
+        System.out.println(list);
+        System.out.println(subList);
     }
 }
