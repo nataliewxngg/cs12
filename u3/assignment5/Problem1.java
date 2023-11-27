@@ -41,7 +41,6 @@ public class Problem1 {
                 for (int i = 0; i < numOfCases; i++) {
                     s = inFile.readLine();
                     // cOCNOITNINEUEUEUUEUEUEUE
-
                 }
             }
             inFile.close();
