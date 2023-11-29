@@ -7,7 +7,7 @@
 
 package u3.assignment5;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Problem2 {
     public static void main(String[] args) {
@@ -15,6 +15,8 @@ public class Problem2 {
         int denominator;
         Fraction lowerLimit;
         Fraction upperLimit;
+        Set<Double> fractions = new TreeSet<Double>();
+        Set<Double> subList;
 
         System.out.println("\nPROGRAM #2\n");
 
@@ -40,8 +42,6 @@ public class Problem2 {
 
             if (lowerLimit.valid(false, new Fraction("1/1")))
                 break;
-            else
-                System.out.print("Invalid input. ");
         } while (true);
 
         // Upper limit
@@ -53,6 +53,37 @@ public class Problem2 {
                 break;
         } while (true);
 
-        in.close();
+        // Display results
+        // Determine TOTAL number of fractions
+        fractions.add(0.0);
+        for (int d = denominator; d >= 1; d--) {
+            for (int n = 1; n < d; n++) {
+                fractions.add(n * 1.0 / d);
+            }
+        }
+        fractions.add(1.0);
+
+        System.out.printf("Total number of fractions: %d%n", fractions.size());
+
+        // Determine number of fractions between the lower and upper limit (inclusive)
+
+        if (!fractions.contains(lowerLimit.toDecimal())) {
+            if (!fractions.contains(upperLimit.toDecimal())) {
+                // doesn't contain both lower and upper limits
+                fractions.add(lowerLimit.toDecimal());
+                fractions.add(upperLimit.toDecimal());
+            }
+        }
+        fractions.add(lowerLimit.toDecimal());
+
+        fractions.add(upperLimit.toDecimal());
+
+        subList =
+                // System.out.println(
+                // "Number of fractions between " + lowerLimit + " and " + upperLimit + "
+                // inclusive: "
+                // + fractionsSUBLISTOFLIMITS.size());
+
+                in.close();
     }
 }
