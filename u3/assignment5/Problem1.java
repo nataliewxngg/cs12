@@ -47,8 +47,7 @@ public class Problem1 {
 
                     for (int start = 0; start < s.length(); start++) {
                         for (int end = start + 1; end <= s.length(); end++) {
-                            substrings.add(s.substring(start, end));
-                            // System.out.println(s.substring(start, end));
+                            substrings.add(s.substring(start, end).toLowerCase());
                         }
                     }
 

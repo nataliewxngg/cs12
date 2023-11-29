@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Problem2",
+      "request": "launch",
+      "mainClass": "u3.assignment5.Problem2",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
       "name": "Problem1",
       "request": "launch",
       "mainClass": "u3.assignment5.Problem1",
