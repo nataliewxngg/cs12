@@ -67,6 +67,10 @@ public class Problem2 {
 
         // Determine number of fractions between the lower and upper limit (inclusive)
 
+        if (fractions.contains(lowerLimit.toDecimal()) && fractions.contains(upperLimit.toDecimal())) {
+            subList = fractions.subList()
+        }
+
         if (!fractions.contains(lowerLimit.toDecimal())) {
             if (!fractions.contains(upperLimit.toDecimal())) {
                 // doesn't contain both lower and upper limits
@@ -74,8 +78,8 @@ public class Problem2 {
                 fractions.add(upperLimit.toDecimal());
             }
         }
-        fractions.add(lowerLimit.toDecimal());
 
+        fractions.add(lowerLimit.toDecimal());
         fractions.add(upperLimit.toDecimal());
 
         subList =
