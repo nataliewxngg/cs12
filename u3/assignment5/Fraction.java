@@ -42,7 +42,7 @@ public class Fraction {
                 if (numerator / denominator > lowerNumerator / lowerDenominator)
                     return true;
                 else {
-                    System.out.print("Upper limit entered is greater than lower input! ");
+                    System.out.print("Upper limit entered is greater or equal to the lower input! ");
                     return false;
                 }
             }

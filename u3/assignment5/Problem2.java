@@ -16,7 +16,7 @@ public class Problem2 {
         Fraction lowerLimit;
         Fraction upperLimit;
         Set<Double> fractions = new TreeSet<Double>();
-        Set<Double> subList;
+        List<Double> subList;
 
         System.out.println("\nPROGRAM #2\n");
 
@@ -38,19 +38,33 @@ public class Problem2 {
         // Lower limit
         do {
             System.out.print("Enter the lower limit: ");
-            lowerLimit = new Fraction(in.nextLine());
+            String s;
 
-            if (lowerLimit.valid(false, new Fraction("1/1")))
-                break;
+            if (!((s = in.nextLine()).indexOf('/') != -1))
+                System.out.print("Invalid input. ");
+
+            else {
+                lowerLimit = new Fraction(s);
+
+                if (lowerLimit.valid(false, new Fraction("1/1")))
+                    break;
+            }
+
         } while (true);
 
         // Upper limit
         do {
             System.out.print("Enter the upper limit: ");
-            upperLimit = new Fraction(in.nextLine());
+            String s;
 
-            if (upperLimit.valid(true, lowerLimit))
-                break;
+            if (!((s = in.nextLine()).indexOf('/') != -1))
+                System.out.print("Invalid input. ");
+            else {
+                upperLimit = new Fraction(s);
+
+                if (upperLimit.valid(true, lowerLimit))
+                    break;
+            }
         } while (true);
 
         // Display results
@@ -66,28 +80,45 @@ public class Problem2 {
         System.out.printf("Total number of fractions: %d%n", fractions.size());
 
         // Determine number of fractions between the lower and upper limit (inclusive)
-
+        // contains both upper AND lower limits
         if (fractions.contains(lowerLimit.toDecimal()) && fractions.contains(upperLimit.toDecimal())) {
-            subList = fractions.subList()
+            subList = new ArrayList<Double>(fractions);
+
+            subList = subList.subList(subList.indexOf(lowerLimit.toDecimal()),
+                    subList.indexOf(upperLimit.toDecimal()) + 1);
         }
 
-        if (!fractions.contains(lowerLimit.toDecimal())) {
-            if (!fractions.contains(upperLimit.toDecimal())) {
-                // doesn't contain both lower and upper limits
-                fractions.add(lowerLimit.toDecimal());
-                fractions.add(upperLimit.toDecimal());
-            }
+        // doesn't contain upper AND lower limits
+        else if (!fractions.contains(lowerLimit.toDecimal()) && !fractions.contains(upperLimit.toDecimal())) {
+            fractions.add(lowerLimit.toDecimal());
+            fractions.add(upperLimit.toDecimal());
+            subList = new ArrayList<Double>(fractions);
+
+            subList = subList.subList(subList.indexOf(lowerLimit.toDecimal()) + 1,
+                    subList.indexOf(upperLimit.toDecimal()));
         }
 
-        fractions.add(lowerLimit.toDecimal());
-        fractions.add(upperLimit.toDecimal());
+        // Only contains upper limit
+        else if (!fractions.contains(lowerLimit.toDecimal())) {
+            fractions.add(lowerLimit.toDecimal());
+            subList = new ArrayList<Double>(fractions);
 
-        subList =
-                // System.out.println(
-                // "Number of fractions between " + lowerLimit + " and " + upperLimit + "
-                // inclusive: "
-                // + fractionsSUBLISTOFLIMITS.size());
+            subList = subList.subList(subList.indexOf(lowerLimit.toDecimal()) + 1,
+                    subList.indexOf(upperLimit.toDecimal()) + 1);
+        }
 
-                in.close();
+        // Only contains lower limit
+        else {
+            fractions.add(upperLimit.toDecimal());
+            subList = new ArrayList<Double>(fractions);
+
+            subList = subList.subList(subList.indexOf(lowerLimit.toDecimal()), subList.indexOf(upperLimit.toDecimal()));
+        }
+
+        System.out.println(
+                "Number of fractions between " + lowerLimit + " and " + upperLimit + " inclusive: "
+                        + subList.size());
+
+        in.close();
     }
 }
