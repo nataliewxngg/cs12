@@ -16,6 +16,12 @@ public class Problem3 extends JPanel {
         // JPanel Default Settings
         setPreferredSize(new Dimension(700, 400));
         setBackground(new Color(50, 50, 50));
+
+        Problem3 navBarPanel = new JPanel();
+        Problem3 cardsPanel = new JPanel();
+
+        panel.add(navBarPanel);
+        panel.add(cardsPanel);
     }
 
     public void paintComponent(Graphics g) {
@@ -27,12 +33,7 @@ public class Problem3 extends JPanel {
         JFrame frame = new JFrame("Problem #3");
 
         // create and add panels
-        Problem3 navBarPanel = new Problem3();
-        Problem3 cardsPanel = new Problem3();
-        // frame.add(navBarPanel);
-        // frame.add(cardsPanel);
-        frame.setVisible(true);
-        frame.pack();
+        Problem3 panel = new Problem3();
 
         // NAV BAR
         JButton jb1 = new JButton("Button 1");
@@ -45,12 +46,14 @@ public class Problem3 extends JPanel {
         navBarPanel.add(jb3);
 
         // CARDS
-        // JTextField t1 = new JTextField("jalodkfjoaiwejfoiawjef");
-        // cardsPanel.add(t1);
+        JTextField t1 = new JTextField("jalodkfjoaiwejfoiawjef");
+        JButton jb4 = new JButton("poop");
+
+        cardsPanel.add(jb4);
+        cardsPanel.add(t1);
 
         // Set the window to be visible as the default to be false
-        frame.add(navBarPanel);
-        // frame.add(cardsPanel);
+        frame.add(panel);
         frame.pack();
         frame.setVisible(true);
     }
