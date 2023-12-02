@@ -42,7 +42,7 @@ public class Problem3 {
                     else
                         numCards = 0;
 
-                    if (numCards < 0) {
+                    if (numCards < 0 || numCards > 25) {
                         throw new NumberFormatException();
                     } else if (numCards == 0) {
                         draw(frame);
@@ -92,6 +92,7 @@ public class Problem3 {
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         if (numCards == -1) {
+            panel3.setLayout(new FlowLayout());
             JLabel text1 = new JLabel("Invalid input!");
             panel3.add(text1);
 
