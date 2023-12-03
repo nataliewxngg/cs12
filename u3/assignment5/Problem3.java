@@ -20,7 +20,7 @@ public class Problem3 {
     // Global variables
     public static int numCards = 0;
     public static Stack<Integer> stack = new Stack<>(); // For the FINAL ORDER (cards in ascending order)
-    public static Deque<Integer> original = new ArrayDeque<>(); // For the ORIGINAL ORDER
+    public static Deque<Integer> original = new LinkedList<>(); // For the ORIGINAL ORDER
 
     // DESCRIPTION: Utilized to draw the 3 panels - 1 for the # of cards selection
     // (textfield and Go button),
