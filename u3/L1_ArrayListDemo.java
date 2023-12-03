@@ -62,7 +62,8 @@ public class L1_ArrayListDemo {
         newList2.removeAll(newList);
         System.out.println(newList2); // []
         System.out.println(newList); // [1,2,3,4,5,6,7,8,9,10]
-        System.out.println(subList); // ERROR --> subList is only a view (error when original is empty)
+        // System.out.println(subList); // ERROR --> subList is only a view (error when
+        // original is empty)
 
         Collections.sort(myList);
         System.out.println(myList); // [1,2,3,4,5,6,7,8,9,10]
@@ -81,6 +82,7 @@ public class L1_ArrayListDemo {
         // Traversing method #2
         ListIterator<String> scan = myList.listIterator();
         while (scan.hasNext()) {
+            System.out.println(scan.nextIndex());
             System.out.println(scan.next());
         }
 
@@ -97,5 +99,31 @@ public class L1_ArrayListDemo {
         for (int i = 0; i < strArray.length; i++) {
             System.out.println(strArray[i]);
         }
+
+        // Study:
+        ArrayList<String> names = new ArrayList<>();
+        names.add("rilakkuma");
+        names.add("stitch");
+        names.add("totoro");
+
+        ListIterator<String> iter = names.listIterator();
+        System.out.println(iter.next());
+        iter.add("alsdajflkasdjklasd"); // {"rilakkuma", "alsdajflkasdjklasd", "stitch", "totoro"}
+        // iter.set("i like poop"); // {"i like poop", "stitch", "totoro"}
+        System.out.println(names); // skips the newly added ones
+        System.out.println(iter.next());
+
+        names = new ArrayList<>();
+        names.add("rilakkuma");
+        names.add("stitch");
+        names.add("totoro");
+
+        List<String> subL = names.subList(1, 2);
+        System.out.println(subL);
+
+        Queue<String> q1 = new LinkedList<>();
+        Queue<String> q2 = new ArrayList<>();
+        Stack<String> s1 = new LinkedList<>();
+        Stack<String> s2 = new ArrayList<>();
     }
 }
