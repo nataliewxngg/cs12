@@ -147,5 +147,18 @@ public class study {
         System.out.println(names); // {rilakkuma, hellooo, stitch, totoro, what}
         names1.addAll(2, names1);
         System.out.println(names1); // {rilakkuma, stitch, rilakkuma, hellooo, stitch, totoro, what, totoro}
+
+        // ----------------------------------------------------------------------------------------
+
+        names.removeAll(names);
+        names.add("rilakkuma");
+        names.add("stitch");
+        names.add("totoro");
+
+        List<String> sub = names.subList(1, 3);
+        sub.set(1, "oiajweoifjaosdijf");
+
+        System.out.println(names);
+        System.out.println(sub);
     }
 }
