@@ -53,7 +53,7 @@ public class Problem1 {
                 System.out.println("Finding the number of Substrings");
                 for (int i = 0; i < numOfCases; i++) {
                     substrings = new HashSet<>();
-                    s = inFile.readLine().strip();
+                    s = inFile.readLine();
 
                     // Create a double for loop, one index for the start index, and one for the end.
                     // Substring the case by these indexes each time and add them into the hashset
