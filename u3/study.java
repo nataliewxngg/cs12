@@ -137,5 +137,15 @@ public class study {
 
         // 1128 Iterator, HashCode, and equals
 
+        // ----------------------------------------------------------------------------------------
+
+        ArrayList<String> names1 = new ArrayList<>();
+        names1.add("rilakkuma");
+        names1.add("stitch");
+        names1.add("totoro");
+
+        System.out.println(names); // {rilakkuma, hellooo, stitch, totoro, what}
+        names1.addAll(2, names1);
+        System.out.println(names1); // {rilakkuma, stitch, rilakkuma, hellooo, stitch, totoro, what, totoro}
     }
 }
