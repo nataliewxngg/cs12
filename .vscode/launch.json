@@ -6,6 +6,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "test",
+      "request": "launch",
+      "mainClass": "ACSL.test",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "C1",
+      "request": "launch",
+      "mainClass": "ACSL.C1",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
       "name": "study",
       "request": "launch",
       "mainClass": "u3.study",
