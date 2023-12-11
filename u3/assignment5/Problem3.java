@@ -190,7 +190,8 @@ public class Problem3 {
         }
     }
 
-    // DESCRPTION: The CONSTRUCTOR method - utilized to create the jframe and adjust
+    // DESCRIPTION: The CONSTRUCTOR method - utilized to create the jframe and
+    // adjust
     // its settings - Also calls draw() to draw the panels on to the jframe
     public Problem3() { // PARAMETERS: none
         JFrame frame = new JFrame("Assignment 5 - Problem #3");

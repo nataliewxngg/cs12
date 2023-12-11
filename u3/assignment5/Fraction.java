@@ -86,7 +86,7 @@ public class Fraction {
                                                         // object
     }
 
-    // // DESCRIPTION: Getter methods - allows the files utilizing Fraction objects
+    // DESCRIPTION: Getter methods - allows the files utilizing Fraction objects
     // to access its private attributes
     // PARAMETERS: none
     // RETURNS: dependent on each attribute's data type (all integers in this case)
