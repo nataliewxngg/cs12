@@ -9,61 +9,109 @@ package u3.assignment6;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.*;
 
 // must use maps or other collection methods
 
 public class Main {
 
-    public Main() {
-        String[] files = { "ALICE", "MOBY" };
+    public static JFrame frame;
+    public static JPanel mainPanel, inputPanel, input1Panel, input2Panel, viewPanel, filePanel, statsPanel;
+    public static JComboBox<String> recentFiles;
+    public static JLabel space = new JLabel(" | ");
+    public static JButton addFile, selectFile, exit;
+    public static JTextArea viewFile, stats;
+    public static JScrollPane fileScroller, statsScroller;
 
-        JFrame frame = new JFrame("Word Frequency Assignment");
+    public static String[] files = { "ALICE", "MOBY" };
+
+    public static String[] addFile(String fileName) {
+        String out[] = new String[files.length + 1];
+        for (int i = 0; i < files.length; i++) {
+            out[i] = files[i];
+        }
+        out[out.length - 1] = fileName;
+        return out;
+    }
+
+    public Main() {
+        frame = new JFrame("Word Frequency Assignment");
         frame.setPreferredSize(new Dimension(600, 400));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // for all panels
-        JPanel mainPanel = new JPanel();
+        mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
         // Add file button, drop-down menu for recent files, exit button
-        JPanel inputPanel = new JPanel();
-        inputPanel.setBackground(Color.GRAY);
+        inputPanel = new JPanel();
+        inputPanel.setBackground(new Color(2, 17, 27));
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
         // inputPanel.setPreferredSize(new Dimension(500, 20));
 
         // Add file button, drop-down menu for recent files
-        JPanel input1Panel = new JPanel();
+        input1Panel = new JPanel();
         input1Panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        input1Panel.setBackground(Color.GRAY);
+        input1Panel.setBackground(new Color(2, 17, 27));
 
-        JButton addFile = new JButton("Add File");
+        addFile = new JButton("Add File");
         addFile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("developing...");
+                String fileName = JOptionPane.showInputDialog(frame, "Enter the file name (Exclude .txt):", null);
+                try {
+                    BufferedReader inFile = new BufferedReader(new FileReader(fileName.strip() + ".txt"));
+
+                    viewFile.setText("");
+                    viewFile.read(inFile, null);
+
+                    // add to array
+                    files = addFile(fileName);
+
+                    DefaultComboBoxModel<String> recentFilesModel = new DefaultComboBoxModel<>(files);
+                    recentFiles.setModel(recentFilesModel);
+
+                    JOptionPane.showMessageDialog(frame, fileName + ".txt has been added!");
+
+                    // close the bufferedreader
+                    inFile.close();
+                } catch (IOException x) {
+                    JOptionPane.showMessageDialog(frame, fileName + ".txt does not exist!");
+                }
             }
         });
 
         input1Panel.add(addFile);
-        JLabel space = new JLabel(" | ");
         input1Panel.add(space);
 
-        JComboBox<String> recentFiles = new JComboBox<String>(files);
+        recentFiles = new JComboBox<String>(files);
         input1Panel.add(recentFiles);
 
-        JButton selectFile = new JButton("Select");
+        selectFile = new JButton("Select");
         selectFile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("developing..."); // *********************
+                try {
+                    BufferedReader inFile = new BufferedReader(new FileReader(recentFiles.getSelectedItem() + ".txt"));
+
+                    viewFile.setText("");
+                    viewFile.read(inFile, null);
+
+                    // redraw file panel to update the file content
+                    filePanel.repaint();
+
+                    inFile.close();
+                } catch (IOException x) {
+                    JOptionPane.showMessageDialog(frame, "Reading error!");
+                }
             }
         });
         input1Panel.add(selectFile);
 
         // Exit button
-        JPanel input2Panel = new JPanel();
+        input2Panel = new JPanel();
         input2Panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        input2Panel.setBackground(Color.GRAY);
+        input2Panel.setBackground(new Color(2, 17, 27));
 
-        JButton exit = new JButton("Exit");
+        exit = new JButton("Exit");
         exit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -75,23 +123,23 @@ public class Main {
         inputPanel.add(input2Panel);
 
         // File Viewer and Frequency Stats
-        JPanel viewPanel = new JPanel();
+        viewPanel = new JPanel();
         viewPanel.setLayout(new GridLayout(1, 2));
 
-        JPanel filePanel = new JPanel();
-        JScrollPane fileScroller = new JScrollPane(filePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+        filePanel = new JPanel();
+        fileScroller = new JScrollPane(filePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         filePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JTextArea viewFile = new JTextArea(
-                "VIEW PANEL");
+        filePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        viewFile = new JTextArea("");
         viewFile.setEditable(false);
         filePanel.add(viewFile);
 
-        JPanel statsPanel = new JPanel();
-        JScrollPane statsScroller = new JScrollPane(statsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+        statsPanel = new JPanel();
+        statsScroller = new JScrollPane(statsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         statsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JTextArea stats = new JTextArea("STATS PANEL");
+        stats = new JTextArea("");
         viewFile.setEditable(false);
         statsPanel.add(stats);
 
