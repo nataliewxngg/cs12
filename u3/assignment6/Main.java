@@ -36,7 +36,7 @@ public class Main {
 
     public Main() {
         frame = new JFrame("Word Frequency Assignment");
-        frame.setPreferredSize(new Dimension(600, 400));
+        frame.setPreferredSize(new Dimension(800, 550));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // for all panels
