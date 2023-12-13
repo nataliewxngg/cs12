@@ -1,12 +1,12 @@
 package u3.assignment6;
 
-public class Word {
+public class Word implements Comparable<Word> {
     // Instance Variables + Data Encapsulation
     private String word;
     private int frequency;
 
     // DESCRPTION: The CONSTRUCTOR method - utilized to create new Word objects
-    public Word(String word) { // PARAMETERS: A word
+    public Word(String word, int frequency) { // PARAMETERS: A word
 
         // Initializes the instance variables of the new Wordobject!
         this.word = word;
@@ -26,4 +26,22 @@ public class Word {
     public int getFrequency() {
         return this.frequency;
     }
+
+    // DESCRIPTION: Setter methods - allows the files utilizing Word objects
+    // to access/edit its private attributes
+    // PARAMETERS: none
+    // RETURNS: none (void methods)
+    public void addFreq() {
+        this.frequency++;
+    }
+
+    // uncommented
+    public String toString() {
+        return this.word;
+    }
+
+    public int compareTo(Word o) {
+        return this.word.toLowerCase().compareTo(o.word.toLowerCase());
+    }
+
 }

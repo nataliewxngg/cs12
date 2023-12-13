@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import java.util.*;
 
 // must use maps or other collection methods
 
@@ -97,6 +98,39 @@ public class Main {
 
                     // redraw file panel to update the file content
                     filePanel.repaint();
+
+                    // stats panel
+                    long startTimer = System.currentTimeMillis();
+
+                    // key - FREQUENCY; value - WORD
+                    Map<Word, Integer> words = new TreeMap<>();
+
+                    inFile = new BufferedReader(new FileReader(recentFiles.getSelectedItem() + ".txt"));
+                    String s;
+                    StringTokenizer st;
+                    Word w;
+
+                    // // collect frequencies of all the words
+                    // while ((s = inFile.readLine()) != null) {
+                    // st = new StringTokenizer(s, " -");
+
+                    // while (st.hasMoreTokens()) {
+                    // w = new Word(st.nextToken().toLowerCase(), 1);
+                    // // System.out.println(w.getWord());
+
+                    // if (words.containsKey(w)) {
+                    // words.remove(w);
+                    // w.addFreq();
+                    // }
+
+                    // words.put(w, w.getFrequency());
+                    // }
+                    // }
+
+                    long timer = System.currentTimeMillis() - startTimer;
+                    System.out.println(timer + "ms");
+
+                    System.out.println(words);
 
                     inFile.close();
                 } catch (IOException x) {

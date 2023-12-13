@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Core",
+      "request": "launch",
+      "mainClass": "u3.assignment6.Core",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
       "name": "HeapsExercise",
       "request": "launch",
       "mainClass": "u3.HeapsExercise",
