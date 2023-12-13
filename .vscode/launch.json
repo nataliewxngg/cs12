@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "HeapsExercise",
+      "request": "launch",
+      "mainClass": "u3.HeapsExercise",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
       "name": "ArrayMethodsWorking",
       "request": "launch",
       "mainClass": "ArrayMethodsWorking",
