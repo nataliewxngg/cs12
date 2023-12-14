@@ -8,6 +8,7 @@ public class Core {
         Map<Word, Integer> words = new TreeMap<>(); // uses .compareTo()
 
         try {
+            Long startTime = System.currentTimeMillis();
             BufferedReader in = new BufferedReader(new FileReader("ALICE.TXT"));
 
             String s;
@@ -26,9 +27,10 @@ public class Core {
 
                     words.put(w, w.getFrequency());
                 }
-                System.out.println(words);
             }
-
+            System.out.println(words);
+            System.out.println(System.currentTimeMillis() - startTime + "ms");
+            in.close();
         } catch (IOException e) {
             System.out.println("File not Found!");
         }
