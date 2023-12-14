@@ -8,7 +8,7 @@ public class Word implements Comparable<Word> {
     // DESCRPTION: The CONSTRUCTOR method - utilized to create new Word objects
     public Word(String word, int frequency) { // PARAMETERS: A word
 
-        // Initializes the instance variables of the new Wordobject!
+        // Initializes the instance variables of the new Word object!
         this.word = word;
         this.frequency++;
 
@@ -40,8 +40,13 @@ public class Word implements Comparable<Word> {
         return this.word;
     }
 
-    public int compareTo(Word o) {
-        return this.word.toLowerCase().compareTo(o.word.toLowerCase());
+    public int compareTo(Word w) {
+        if (this.word.toLowerCase().equals(w.word.toLowerCase())) {
+            return 0;
+        } else if (this.frequency == w.frequency) {
+            return this.word.toLowerCase().compareTo(w.word.toLowerCase());
+        }
+        return w.frequency - this.frequency;
     }
 
 }

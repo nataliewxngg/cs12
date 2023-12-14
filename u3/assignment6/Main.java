@@ -27,11 +27,16 @@ public class Main {
     public static String[] files = { "ALICE", "MOBY" };
 
     public static String[] addFile(String fileName) {
-        String out[] = new String[files.length + 1];
+        String[] out = new String[files.length + 1];
         for (int i = 0; i < files.length; i++) {
             out[i] = files[i];
+
+            if (files[i].toLowerCase() == fileName.toLowerCase()) {
+                out = new String[0];
+                return files;
+            }
         }
-        out[out.length - 1] = fileName;
+        out[out.length - 1] = fileName.strip();
         return out;
     }
 
@@ -59,19 +64,22 @@ public class Main {
         addFile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String fileName = JOptionPane.showInputDialog(frame, "Enter the file name (Exclude .txt):", null);
+
                 try {
                     BufferedReader inFile = new BufferedReader(new FileReader(fileName.strip() + ".txt"));
 
-                    viewFile.setText("");
-                    viewFile.read(inFile, null);
-
                     // add to array
+                    int orrLength = files.length;
                     files = addFile(fileName);
 
-                    DefaultComboBoxModel<String> recentFilesModel = new DefaultComboBoxModel<>(files);
-                    recentFiles.setModel(recentFilesModel);
+                    if (files.length == orrLength) {
+                        JOptionPane.showMessageDialog(frame, fileName + ".txt has already been added!");
+                    } else {
+                        DefaultComboBoxModel<String> recentFilesModel = new DefaultComboBoxModel<>(files);
+                        recentFiles.setModel(recentFilesModel);
 
-                    JOptionPane.showMessageDialog(frame, fileName + ".txt has been added!");
+                        JOptionPane.showMessageDialog(frame, fileName + ".txt has been added!");
+                    }
 
                     // close the bufferedreader
                     inFile.close();
@@ -91,7 +99,8 @@ public class Main {
         selectFile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    BufferedReader inFile = new BufferedReader(new FileReader(recentFiles.getSelectedItem() + ".txt"));
+                    BufferedReader inFile = new BufferedReader(
+                            new FileReader(recentFiles.getSelectedItem() + ".txt"));
 
                     viewFile.setText("");
                     viewFile.read(inFile, null);
