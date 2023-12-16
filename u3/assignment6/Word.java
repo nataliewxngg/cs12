@@ -1,5 +1,7 @@
 package u3.assignment6;
 
+import java.util.*;
+
 public class Word implements Comparable<Word> {
     // Instance Variables + Data Encapsulation
     private String word;
@@ -10,9 +12,13 @@ public class Word implements Comparable<Word> {
 
         // Initializes the instance variables of the new Word object!
         this.word = word;
-        this.frequency++;
+        this.frequency = frequency;
 
         // RETURNS: none (constructors do not return any value)
+    }
+
+    public Word(String word) {
+        this.word = word;
     }
 
     // DESCRIPTION: Getter methods - allows the files utilizing Word objects
@@ -40,13 +46,20 @@ public class Word implements Comparable<Word> {
         return this.word;
     }
 
-    public int compareTo(Word w) {
-        if (this.word.toLowerCase().equals(w.word.toLowerCase())) {
-            return 0;
-        } else if (this.frequency == w.frequency) {
-            return this.word.toLowerCase().compareTo(w.word.toLowerCase());
-        }
-        return w.frequency - this.frequency;
+    // FOR HASHMAP
+    public int hashCode() {
+        return word.hashCode();
     }
 
+    public boolean equals(Object o) {
+        Word w = (Word) o;
+        return (this.word.equals(w.word));
+    }
+
+    // FOR TREEMAP
+    public int compareTo(Word w) {
+        if (w.frequency == this.frequency)
+            return this.word.compareTo(w.word);
+        return w.frequency - this.frequency;
+    }
 }
