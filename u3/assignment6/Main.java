@@ -4,6 +4,11 @@
 // Assignment #6 - Word Frequency Assignment
 // This program determines the frequency of all words in a textfile.
 
+// Assumptions:
+// Contractions (eg. don't, isn't) are separated into TWO words
+// Words connected by dashes are separated (eg. "ice-cream" --> "ice", "cream")
+// Numbers are IGNORED
+
 package u3.assignment6;
 
 import java.awt.*;
@@ -15,6 +20,8 @@ import java.util.*;
 // must use maps or other collection methods
 
 public class Main {
+    public static Color NAVIGATOR_COLOR = new Color(29, 45, 68);
+    public static Color BODY_COLOR = new Color(244, 243, 238);
 
     public static JFrame frame;
     public static JPanel mainPanel, inputPanel, input1Panel, input2Panel, viewPanel, filePanel, statsPanel;
@@ -123,7 +130,7 @@ public class Main {
 
     public Main() {
         frame = new JFrame("Word Frequency Assignment");
-        frame.setPreferredSize(new Dimension(800, 550));
+        frame.setPreferredSize(new Dimension(820, 570));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // for all panels
@@ -132,14 +139,14 @@ public class Main {
 
         // Add file button, drop-down menu for recent files, exit button
         inputPanel = new JPanel();
-        inputPanel.setBackground(new Color(2, 17, 27));
+        inputPanel.setBackground(NAVIGATOR_COLOR);
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
         // inputPanel.setPreferredSize(new Dimension(500, 20));
 
         // Add file button, drop-down menu for recent files
         input1Panel = new JPanel();
         input1Panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        input1Panel.setBackground(new Color(2, 17, 27));
+        input1Panel.setBackground(NAVIGATOR_COLOR);
 
         addFile = new JButton("Add File");
         addFile.addActionListener(new ActionListener() {
@@ -182,7 +189,7 @@ public class Main {
 
                 // stats panel
                 Map<Word, Integer> words = new HashMap<>(); // uses .equals()
-                Map<Word, Integer> sortedWords = new TreeMap<>(); // uses .compareTo()
+                ArrayList<Word> sortedWords;
 
                 try {
                     Long startTime = System.currentTimeMillis();
@@ -200,7 +207,7 @@ public class Main {
                     String w;
                     Word word;
                     StringTokenizer st;
-                    StringTokenizer st1;
+                    StringTokenizer wordSt;
                     int freq;
 
                     while ((s = inFile.readLine()) != null) {
@@ -208,14 +215,12 @@ public class Main {
 
                         while (st.hasMoreTokens()) {
                             w = correct(st.nextToken().toLowerCase());
-                            st1 = new StringTokenizer(w);
+                            wordSt = new StringTokenizer(w);
 
-                            while (st1.hasMoreTokens()) {
-                                w = st1.nextToken();
-                                // System.out.println(w + ".");
+                            while (wordSt.hasMoreTokens()) {
+                                w = wordSt.nextToken();
 
                                 if (words.containsKey(new Word(w))) {
-                                    // System.out.println(true);
                                     freq = words.get(new Word(w));
 
                                     word = new Word(w, freq);
@@ -229,25 +234,25 @@ public class Main {
                         }
                     }
 
-                    sortedWords = new TreeMap<>(words);
+                    sortedWords = new ArrayList<>(words.keySet());
+                    Collections.sort(sortedWords); // sorts by comparable (.compareTo)
+
                     System.out.println(System.currentTimeMillis() - startTime + "ms");
-
-                    Set<Word> setOfSortedWords = sortedWords.keySet();
-                    Iterator<Word> iter = setOfSortedWords.iterator();
-
                     String statsInfo = "Total Time: " + (System.currentTimeMillis() - startTime)
-                            + "milliseconds\n\n20 Most Frequent Words\n\n";
-                    statsInfo += String.format("%5s%10s\n", "Words", "Frequency");
+                            + " milliseconds\n\n20 Most Frequent Words\n\n";
+                    statsInfo += String.format("%-10s%-20s%-20s\n\n", "", "Words", "Frequency");
 
-                    for (int i = 0; i < 20; i++) {
-                        if (iter.hasNext()) {
-                            Word iterWord = iter.next();
-                            statsInfo += String.format("%d) %s - %d\n", i + 1, iterWord.getWord(),
-                                    iterWord.getFrequency());
-                        } else
-                            i = 20;
+                    if (sortedWords.size() > 0) {
+                        for (int i = 0; i < 20; i++) {
+                            statsInfo += String.format("%-10s%-20s%-20d\n",
+                                    i + 1 + ")", sortedWords.get(i),
+                                    sortedWords.get(i).getFrequency());
+                            if (i + 1 == sortedWords.size())
+                                i = 20;
+                        }
                     }
 
+                    System.out.println(statsInfo);
                     stats.setText(statsInfo);
                     statsPanel.repaint();
 
@@ -262,7 +267,7 @@ public class Main {
         // Exit button
         input2Panel = new JPanel();
         input2Panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        input2Panel.setBackground(new Color(2, 17, 27));
+        input2Panel.setBackground(NAVIGATOR_COLOR);
 
         exit = new JButton("Exit");
         exit.addActionListener(new ActionListener() {
@@ -280,19 +285,27 @@ public class Main {
         // File Viewer and Frequency Stats
         viewPanel = new JPanel();
         viewPanel.setLayout(new GridLayout(1, 2));
+        viewPanel.setBackground(BODY_COLOR);
 
         filePanel = new JPanel();
         fileScroller = new JScrollPane(filePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        filePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        filePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        filePanel.setBackground(BODY_COLOR);
         viewFile = new JTextArea("");
+        viewFile.setBackground(BODY_COLOR);
         viewFile.setEditable(false);
         filePanel.add(viewFile);
 
         statsPanel = new JPanel();
+        statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.PAGE_AXIS));
+        statsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        statsPanel.setBackground(BODY_COLOR);
         statsScroller = new JScrollPane(statsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         stats = new JTextArea("");
+        stats.setFont(new Font("monospaced", Font.PLAIN, 12));
+        stats.setBackground(BODY_COLOR);
         viewFile.setEditable(false);
         statsPanel.add(stats);
 
