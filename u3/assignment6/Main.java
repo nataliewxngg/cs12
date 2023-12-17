@@ -39,7 +39,6 @@ public class Main {
             out[i] = files[i];
 
             if (files[i].toLowerCase() == fileName.toLowerCase()) {
-                out = new String[0];
                 return files;
             }
         }
@@ -188,7 +187,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
 
                 // stats panel
-                Map<Word, Integer> words = new HashMap<>(); // uses .equals()
+                Map<Word, Integer> words = new HashMap<>(); // uses .hashcode() and .equals()
                 ArrayList<Word> sortedWords;
 
                 try {
