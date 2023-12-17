@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "ListIteratorExample",
+      "request": "launch",
+      "mainClass": "u3.ListIteratorExample",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
       "name": "sdlfkjsd",
       "request": "launch",
       "mainClass": "u3.assignment6.sdlfkjsd",

@@ -7,10 +7,7 @@ public class study {
         // 1120 Dynamic Data Structures, ArrayLists
 
         // ListIterator
-        ArrayList<String> names = new ArrayList<>();
-        names.add("rilakkuma");
-        names.add("stitch");
-        names.add("totoro");
+        ArrayList<String> names = new ArrayList<>(Arrays.asList("rilakkuma", "stitch", "totoro"));
 
         ListIterator<String> iter = names.listIterator();
         System.out.println(iter.next()); // "rilakkuma"
@@ -35,19 +32,16 @@ public class study {
         System.out.println(names); // {rilakkuma, hellooo, stitch, poopoo, totoro, what}
         // System.out.println(fav); // now invalid because names is different
 
+        // "u3/ListIteratorExample.java";
+
         // ----------------------------------------------------------------------------------------
 
         // 1121 LinkedLists
-        LinkedList<String> schools = new LinkedList<>();
-        schools.add("mss");
-        schools.add("ups");
-        schools.add("uhs");
-        schools.add("umps");
-        schools.add("peths");
+        LinkedList<String> schools = new LinkedList<>(Arrays.asList("mss", "ups", "uhs", "umps", "peths"));
         System.out.println(schools);
 
         List<String> ew = schools.subList(3, 4);
-        System.out.println(ew);
+        System.out.println("ew: " + ew);
 
         ListIterator<String> iter1 = schools.listIterator();
         System.out.println(iter1.next()); // mss
@@ -83,10 +77,10 @@ public class study {
         Stack<String> s1 = new Stack<>();
         s1.push("yo");
         s1.push("poo");
-        s1.push("ooh");
+        System.out.println(s1.push("ooh"));
         System.out.println(s1); // {yo, poo, ooh}
         System.out.println(s1.peek()); // ooh
-        s1.pop();
+        System.out.println(s1.pop()); // ooh
         System.out.println(s1); // {yo, poo}
         System.out.println(s1.empty()); // false
         System.out.println(s1.search("poo")); // 1
@@ -134,6 +128,8 @@ public class study {
         tree1.add("bro");
         System.out.println(tree1); // {bro, dad, mom, sis}
 
+        Iterator<String> treeSetIter = tree1.iterator();
+
         // ----------------------------------------------------------------------------------------
 
         // 1124 HashSet
@@ -145,6 +141,8 @@ public class study {
         hash1.add("s");
         System.out.println("ur bro".hashCode());
         System.out.println(s.hashCode());
+
+        Iterator<String> hashSetIter = hash1.iterator();
 
         // ----------------------------------------------------------------------------------------
 
@@ -193,6 +191,9 @@ public class study {
         aniMap.put("natalie", "skunk");
         Collection<String> vals = aniMap.values();
         System.out.println(vals);
+
+        Iterator<String> aniMapKeysIter = aniMap.keySet().iterator();
+        Iterator<String> aniMapValsIter = aniMap.values().iterator();
 
         // ----------------------------------------------------------------------------------------
 
@@ -287,6 +288,9 @@ public class study {
         // ----------------------------------------------------------------------------------------
 
         // 1208 Sorting - Stable vs. Unstable
+
+        // Stable sorting preserves the first sorting order even when the list is sorted
+        // repeatedly
 
         // ----------------------------------------------------------------------------------------
 
