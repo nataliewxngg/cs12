@@ -7,7 +7,7 @@
 // Assumptions:
 // Contractions (eg. don't, isn't) are separated into TWO words
 // Words connected by dashes are separated (eg. "ice-cream" --> "ice", "cream")
-// Numbers are IGNORED
+// Numbers are INCLUDED
 
 package u3.assignment6;
 
@@ -207,7 +207,7 @@ public class Main {
                     int freq;
 
                     while ((s = inFile.readLine()) != null) {
-                        st = new StringTokenizer(s, " !@#$%^&*()_-+=[]{}\\|\";:,./<>?~`0123456789");
+                        st = new StringTokenizer(s, " !@#$%^&*()_-+=[]{}\\|\";:,./<>?~`");
 
                         while (st.hasMoreTokens()) {
                             w = correct(st.nextToken().toLowerCase());
@@ -236,11 +236,11 @@ public class Main {
                     System.out.println(System.currentTimeMillis() - startTime + "ms");
                     String statsInfo = "Total Time: " + (System.currentTimeMillis() - startTime)
                             + " milliseconds\n\n20 Most Frequent Words\n\n";
-                    statsInfo += String.format("%-10s%-20s%-20s\n\n", "", "Words", "Frequency");
+                    statsInfo += String.format("%-10s%-25s%-10s\n\n", "", "Words", "Frequency");
 
                     if (sortedWords.size() > 0) {
                         for (int i = 0; i < 20; i++) {
-                            statsInfo += String.format("%-10s%-20s%-20d\n",
+                            statsInfo += String.format("%-10s%-25s%-10d\n",
                                     i + 1 + ")", sortedWords.get(i),
                                     sortedWords.get(i).getFrequency());
                             if (i + 1 == sortedWords.size())
