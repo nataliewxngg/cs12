@@ -35,13 +35,17 @@ public class Main {
 
     public static String[] addFile(String fileName) {
         String[] out = new String[files.length + 1];
+
         for (int i = 0; i < files.length; i++) {
             out[i] = files[i];
 
-            if (files[i].toLowerCase() == fileName.toLowerCase()) {
+            if (files[i].toLowerCase().equals(fileName.toLowerCase())) {
+                JOptionPane.showMessageDialog(frame, fileName + ".txt is already added!");
                 return files;
             }
         }
+
+        JOptionPane.showMessageDialog(frame, fileName + ".txt has been added!");
         out[out.length - 1] = fileName.strip();
         return out;
     }
@@ -156,17 +160,10 @@ public class Main {
                     BufferedReader inFile = new BufferedReader(new FileReader(fileName.strip() + ".txt"));
 
                     // add to array
-                    int orrLength = files.length;
                     files = addFile(fileName);
 
-                    if (files.length == orrLength) {
-                        JOptionPane.showMessageDialog(frame, fileName + ".txt has already been added!");
-                    } else {
-                        DefaultComboBoxModel<String> recentFilesModel = new DefaultComboBoxModel<>(files);
-                        recentFiles.setModel(recentFilesModel);
-
-                        JOptionPane.showMessageDialog(frame, fileName + ".txt has been added!");
-                    }
+                    DefaultComboBoxModel<String> recentFilesModel = new DefaultComboBoxModel<>(files);
+                    recentFiles.setModel(recentFilesModel);
 
                     // close the bufferedreader
                     inFile.close();
