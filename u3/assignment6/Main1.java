@@ -17,9 +17,9 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-// must use maps or other collection methods
-
 public class Main1 {
+
+    // Global Variables
     public static Color NAVIGATOR_COLOR = new Color(29, 45, 68);
     public static Color BODY_COLOR = new Color(244, 243, 238);
 
@@ -33,24 +33,42 @@ public class Main1 {
 
     public static String[] files = { "ALICE", "MOBY" };
 
-    public static String[] addFile(String fileName) {
+    // DESCRIPTION: The addFile method takes in a new file (by name) and adds it
+    // into the array of available files ONLY IF IT IS NOT ALREADY ADDED
+    public static String[] addFile(String fileName) { // PARAMETERS: name of new file (excluding .txt)
         String[] out = new String[files.length + 1];
 
+        // Copy each file from the array of available files into a new array (that is
+        // larger by 1 index)
+        //
+        // However, if the current available file has the same name (case insensitive)
+        // as the NEW file, indicating that the new file is already added, then inform
+        // the user of it and return the array of available files WITHOUT the new file
+        // added
         for (int i = 0; i < files.length; i++) {
             out[i] = files[i];
 
             if (files[i].toLowerCase().equals(fileName.toLowerCase())) {
                 JOptionPane.showMessageDialog(frame, fileName + ".txt is already added!");
-                return files;
+                return files; // RETURNS: the original list of available files (if new file is already
+                // added)
             }
         }
 
+        // If the new file does not already exist in the list of available files, then
+        // add it into the array, inform the user of it, and return it
         JOptionPane.showMessageDialog(frame, fileName + ".txt has been added!");
         out[out.length - 1] = fileName.strip();
-        return out;
+        return out; // RETURNS: the new list of available files (with new file added!)
     }
 
+    // DESCRIPTION: The correct method takes in a word and removes its
+    // leading/trailing apostrophes and contractions
     public static String correct(String s) {
+
+        // Create a new map containing all the contractions, where the key is the
+        // contraction itself, and the respective value contains the split-up
+        // contraction (eg. key = she's, value = she is)
         Map<String, String> contractions = new HashMap<>();
         contractions.put("should've", "should have");
         contractions.put("shouldn't", "should not");
@@ -95,33 +113,36 @@ public class Main1 {
         contractions.put("it's", "it is");
         contractions.put("i'm", "i am");
 
-        // starting or ending with an apostrophe
+        // Removes all leading apostrophes from the word
         while (s.charAt(0) == '\'') {
             s = s.substring(1);
             if (s.length() == 0)
-                return s;
+                return s; // RETURNS: If the word becomes empty (original was all apostrophes), then
+                          // return the empty string
         }
+
+        // Removes all trailing apostrophes from the word
         while (s.charAt(s.length() - 1) == '\'') {
             s = s.substring(0, s.length() - 1);
-            if (s.length() == 0)
-                return s;
         }
 
-        // contractions
+        // Splits the word (according to 'contractions''s key and value) and returns it
+        // if it's a contraction
         if (contractions.containsKey(s)) {
             s = contractions.get(s);
-            return (s);
+            return (s); // RETURNS: the contraction split up
         }
 
-        // 's
+        // Removes all 's from the end of the word
         while (s.length() >= 2) {
             if (s.substring(s.length() - 2, s.length()).equals("'s")) {
                 s = s.substring(0, s.length() - 2);
 
+                // If removing a 's leads to trailing apostrophes, remove them
                 while (s.charAt(s.length() - 1) == '\'') {
                     s = s.substring(0, s.length() - 1);
                     if (s.length() == 0)
-                        return s;
+                        return s; // RETURNS: the word if its length becomes 0 (indicating that its empty)
                 }
 
             } else {

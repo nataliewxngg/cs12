@@ -66,6 +66,8 @@ public class Main {
     // leading/trailing apostrophes and contractions
     public static String correct(String s) { // PARAMETERS: a WORD in String format
 
+        String symbols = "!@#$%^&*()_-+=[]{}\\|\"';:,./<>?~`";
+
         // Create a new map containing all the contractions, where the key is the
         // contraction itself, and the respective value contains the split-up
         // contraction (eg. key = she's, value = she is)
@@ -113,16 +115,16 @@ public class Main {
         contractions.put("it's", "it is");
         contractions.put("i'm", "i am");
 
-        // Removes all leading apostrophes from the word
-        while (s.charAt(0) == '\'') {
+        // Removes all leading symbols from the word
+        while (symbols.indexOf(s.charAt(0)) != -1) {
             s = s.substring(1);
             if (s.length() == 0)
-                return s; // RETURNS: If the word becomes empty (original was all apostrophes), then
+                return s; // RETURNS: If the word becomes empty (original was all symbols), then
                           // return the empty string
         }
 
-        // Removes all trailing apostrophes from the word
-        while (s.charAt(s.length() - 1) == '\'') {
+        // Removes all trailing symbols from the word
+        while (symbols.indexOf(s.charAt(s.length() - 1)) != -1) {
             s = s.substring(0, s.length() - 1);
         }
 
@@ -138,86 +140,129 @@ public class Main {
             if (s.substring(s.length() - 2, s.length()).equals("'s")) {
                 s = s.substring(0, s.length() - 2);
 
-                // If removing a 's leads to trailing apostrophes, remove them
-                while (s.charAt(s.length() - 1) == '\'') {
-                    s = s.substring(0, s.length() - 1);
-                    if (s.length() == 0)
-                        return s; // RETURNS: the word if its length becomes 0 (indicating that its empty)
+                while (s.length() > 0) {
+                    if (symbols.indexOf(s.charAt(s.length() - 1)) != -1) {
+                        s = s.substring(0, s.length() - 1);
+                        if (s.length() == 0)
+                            return s; // RETURNS: the word if its length becomes 0 (indicating that its empty)
+                    } else
+                        break;
                 }
 
             } else { // If the length of the word is incompatible for containing a 's (less than 2),
-                     // then stop looking for 's break;
+                break; // then stop looking for 's
             }
         }
-        return s;
+        return s; // RETURNS: the word with leading and trailing symbols removed, as well as
+                  // 's
     }
 
-    public Main() {
+    // DESCRPTION: The CONSTRUCTOR method - utilized to create and append all
+    // graphics components, as well as manage the full operation of the program
+    public Main() { // PARAMETERS: none
+
+        // Initialize the JFrame for the graphics window
         frame = new JFrame("Word Frequency Assignment");
         frame.setPreferredSize(new Dimension(820, 570));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // for all panels
+        // Initialize the JPanel utilized to group all other panels
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        // Add file button, drop-down menu for recent files, exit button
+        // Initialize the input JPanel - utilized for the navigation bar
         inputPanel = new JPanel();
         inputPanel.setBackground(NAVIGATOR_COLOR);
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
-        // inputPanel.setPreferredSize(new Dimension(500, 20));
 
-        // Add file button, drop-down menu for recent files
+        // Initialize the JPanel that contains
+        // 1. The add file button
+        // 2. The drop-down menu for available files
+        // in the navigation bar (inputPanel)
         input1Panel = new JPanel();
         input1Panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         input1Panel.setBackground(NAVIGATOR_COLOR);
 
+        // Initialize the add file button
         addFile = new JButton("Add File");
+
+        // If the add file button is selected, allow the user to input a new file (by
+        // name) through a pop-up window and append it into the array of available files
+        // if it's not already added
         addFile.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+
+            // DESCRIPTION: actionPerformed is a method in the interface ActionListener and
+            // is executed each time an action is performed
+
+            // IN this case, each time the add file button is pressed, a pop-up window will
+            // appear, input a new file (by name) from the user, and append it into the
+            // array of available files (if not already added)
+            public void actionPerformed(ActionEvent e) { // PARAMETERS: ActionEvent e not used
                 String fileName = JOptionPane.showInputDialog(frame, "Enter the file name (Exclude .txt):", null);
 
+                // Acquire the new file name from user and append it into the array of available
+                // files (if not already added)
                 try {
                     BufferedReader inFile = new BufferedReader(new FileReader(fileName.strip() + ".txt"));
 
-                    // add to array
+                    // Add the file into the array 'files'
                     files = addFile(fileName.strip());
 
+                    // Update the drop-down menu (recentFiles JComboBox)
                     DefaultComboBoxModel<String> recentFilesModel = new DefaultComboBoxModel<>(files);
                     recentFiles.setModel(recentFilesModel);
 
-                    // close the bufferedreader
                     inFile.close();
-                } catch (IOException x) {
+                } catch (IOException x) { // If the file name inputted does not exist in the directory, inform the user
+                                          // of it and do not modify the array of available files
                     JOptionPane.showMessageDialog(frame, fileName + ".txt does not exist!");
                 }
+
+                // RETURNS: none (void method)
             }
         });
 
         input1Panel.add(addFile);
         input1Panel.add(space);
 
+        // Initialize the drop-down menu for all available files
         recentFiles = new JComboBox<String>(files);
         input1Panel.add(recentFiles);
 
+        // Initialize the select button located on the navigation bar
         selectFile = new JButton("Select");
+
+        // If the select button is selected, determine and display the frequencies of
+        // every word in the current file selected (in the drop-down menu)
         selectFile.addActionListener(new ActionListener() {
+
+            // DESCRIPTION: actionPerformed is a method in the interface ActionListener and
+            // is executed each time an action is performed
+
+            // In this case, each time the select button is pressed, determine the display
+            // the frequencies of every word in the selected file (in the drop-down menu)
             public void actionPerformed(ActionEvent e) {
 
-                // stats panel
+                // Initalize the map utilized to keep track of each word and its frequency
+                // Moreover, initialize an arraylist later utilized to display the words and
+                // frequencies in order (greatest-least frequencies)
+
                 Map<Word, Integer> words = new HashMap<>(); // uses .hashcode() and .equals()
                 ArrayList<Word> sortedWords;
 
+                // Read through the selected file, display it on the file viewer, and determine
+                // and display the frequencies of each word in the stats panel
                 try {
-                    Long startTime = System.currentTimeMillis();
+                    // Update the new file content onto the file viewer
                     BufferedReader inFile = new BufferedReader(new FileReader(recentFiles.getSelectedItem() + ".txt"));
 
                     viewFile.setText("");
                     viewFile.read(inFile, null);
 
-                    // redraw file panel to update the file content
                     filePanel.repaint();
 
+                    // Start the timer and re-initialize the bufferedreader
+                    Long startTime = System.currentTimeMillis();
                     inFile = new BufferedReader(new FileReader(recentFiles.getSelectedItem() + ".txt"));
 
                     String s;
@@ -227,16 +272,28 @@ public class Main {
                     StringTokenizer wordSt;
                     int freq;
 
+                    // Tokenize the words in each line of the selected file and add each into the
+                    // map. If the word already exists in the map, accumulate its frequency!
                     while ((s = inFile.readLine()) != null) {
-                        st = new StringTokenizer(s, " !@#$%^&*()_-+=[]{}\\|\";:,./<>?~`");
+                        // StringTokenizer initialized to separate by space and by '-' (separates words
+                        // connected by dashes --> eg. ice-cream)
+                        st = new StringTokenizer(s, " -");
 
+                        // Correct each token (word) in the current line and add them into the map
+                        // (accumulate to frequency if already added)
                         while (st.hasMoreTokens()) {
                             w = correct(st.nextToken().toLowerCase());
-                            wordSt = new StringTokenizer(w);
+                            wordSt = new StringTokenizer(w); // Tokenize the corrected word - necessary for
+                                                             // split-up contractions
 
+                            // Add each of the tokenized word into the map. However, if the word is already
+                            // in the map, remove it, accumulate its frequency, and add it back into the map
+                            // instead
                             while (wordSt.hasMoreTokens()) {
                                 w = wordSt.nextToken();
 
+                                // If word is already in map, remove it, add to its frequency, and add it into
+                                // the map
                                 if (words.containsKey(new Word(w))) {
                                     freq = words.get(new Word(w));
 
@@ -244,13 +301,18 @@ public class Main {
                                     word.addFreq();
 
                                     words.remove(new Word(w));
-                                } else
+                                }
+                                // If the tokenized word is not already in the map, create a new word object
+                                // with it (with frequency at 1) and add it into the map
+                                else
                                     word = new Word(w, 1);
                                 words.put(word, word.getFrequency());
                             }
                         }
                     }
 
+                    // Initialize the arraylist containing the keys (Word objects) of the map
+                    // This arraylist will be utilized to display the stats in sorted order
                     sortedWords = new ArrayList<>(words.keySet());
                     Collections.sort(sortedWords); // sorts by comparable (.compareTo)
 
@@ -279,6 +341,7 @@ public class Main {
                 }
             }
         });
+
         input1Panel.add(selectFile);
 
         // Exit button
@@ -334,13 +397,14 @@ public class Main {
         frame.add(mainPanel);
         frame.pack();
         frame.setVisible(true);
+
+        // RETURNS: none (constructors do not return any value)
     }
 
     // DESCRIPTION: The main method operates the overall program by calling and
     // initializing the graphics
     public static void main(String[] args) { // PARAMETERS: args not used
         new Main();
-
         // RETURNS: none (void method)
     }
 }
