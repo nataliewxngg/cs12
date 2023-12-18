@@ -126,9 +126,32 @@ public class study {
         tree1.add("mom");
         tree1.add("sis");
         tree1.add("bro");
+        System.out.println(tree1.first()); // bro
+        System.out.println(tree1.last()); // sis
         System.out.println(tree1); // {bro, dad, mom, sis}
 
+        // Other methods
         Iterator<String> treeSetIter = tree1.iterator();
+
+        Set<String> w = tree1.subSet("dad", "sis");
+        w.add("granny");
+        System.out.println(w); // {dad, granny, mom}
+        System.out.println(tree1); // {bro, dad, granny, mom, sis}
+
+        // w.add("ape");
+        // error - ape is greater than bro, but bro is not in the
+        // subset so it cant be
+        // put properly
+
+        Set<String> bruh = tree1.headSet("mamacita"); // doesn't exist in set but still works accordingly
+        bruh.add("ape");
+        System.out.println(bruh); // {ape, bro, dad, granny}
+        System.out.println(tree1); // {ape, bro, dad, granny, mom, sis}
+
+        Set<String> evenMoreBruh = tree1.tailSet("mom");
+        System.out.println(evenMoreBruh.add("zaza")); // {zaza}
+        System.out.println(evenMoreBruh); // {mom, sis, zaza}
+        System.out.println(tree1); // {ape, bro, dad, granny, mom, sis, zaza}
 
         // ----------------------------------------------------------------------------------------
 
@@ -139,10 +162,13 @@ public class study {
         hash1.add("ur mom");
         hash1.add("ur sis");
         hash1.add("s");
-        System.out.println("ur bro".hashCode());
-        System.out.println(s.hashCode());
+
+        System.out.println("ur bro".hashCode()); // -839024100
+        System.out.println(s.hashCode()); // -839024100
 
         Iterator<String> hashSetIter = hash1.iterator();
+
+        // HASHSETS CANNOT USE SUBSETS, HEADSETS, NOR TAILSETS
 
         // ----------------------------------------------------------------------------------------
 
@@ -157,7 +183,8 @@ public class study {
         // - cannot get index
 
         // TreeSet - uses the compareTo() to determine sorting order
-        // HashSet - uses the equals() method to determine duplicates
+        // HashSet - uses the equals() method to determine duplicates (and .hashCode()
+        // to determine bucket index)
 
         // Rules of the .hashCode method
         // 1. two "equal" objects (according to equals() method) MUST produce the SAME
@@ -169,7 +196,7 @@ public class study {
 
         // 1205 Maps
 
-        Map<String, String> aniMap = new HashMap<>();
+        Map<String, String> aniMap = new TreeMap<>();
 
         aniMap.put("dog", "mammal");
         System.out.println(aniMap.put("cat", "mammal")); // null
@@ -289,8 +316,10 @@ public class study {
 
         // 1208 Sorting - Stable vs. Unstable
 
-        // Stable sorting preserves the first sorting order even when the list is sorted
-        // repeatedly
+        // First sorting order is preserved when list is sorted multiple times
+
+        // For objects --> STABLE MERGE SORT is utilized (memory intensive algorithm)
+        // For primitive types --> QUICK SORT is utilized - it's unstable
 
         // ----------------------------------------------------------------------------------------
 
