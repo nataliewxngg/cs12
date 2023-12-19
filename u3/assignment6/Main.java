@@ -380,15 +380,23 @@ public class Main {
     // DESCRIPTION: The main method operates the overall program by calling and
     // initializing the graphics
     public static void main(String[] args) { // PARAMETERS: args not used
+        // Ensure that the alice and moby textfiles are both in the directory already
+        // (as they are expected to be already "opened" when the program begins)
+
+        // If both textfiles are present, initialize the graphics components and begin
+        // executing the overall program
         try {
-            BufferedReader in = new BufferedReader(new FileReader("alice.txt"));
+            // Checks for alice.txt and moby.txt
+            BufferedReader in = new BufferedReader(new FileReader("ALICE.txt"));
             in.close();
             in = new BufferedReader(new FileReader("MOBY.txt"));
             in.close();
 
+            // Initialize graphics components and executes overall program
             new Main();
-        } catch (IOException e) {
-            System.out.println("ALICE.txt and/or MOBY.txt is missing");
+        } catch (IOException e) { // If alice.txt and/or moby.txt cannot be accessed by the BufferedReader, inform
+                                  // the user of it
+            System.out.println("ALICE.txt and/or MOBY.txt is missing!");
         }
         // RETURNS: none (void method)
     }
