@@ -235,21 +235,24 @@ public class Main {
                         while (st.hasMoreTokens()) {
                             w = correct(st.nextToken().toLowerCase());
 
-                            // If word is already in map, remove it, add to its frequency, and add it into
-                            // the map
-                            if (words.containsKey(new Word(w))) {
-                                freq = words.get(new Word(w));
+                            // Add the new Word object into the map if it is NOT an empty string
+                            if (w != "") {
+                                // If word is already in map, remove it, add to its frequency, and add it into
+                                // the map
+                                if (words.containsKey(new Word(w))) {
+                                    freq = words.get(new Word(w));
 
-                                word = new Word(w, freq);
-                                word.addFreq();
+                                    word = new Word(w, freq);
+                                    word.addFreq();
 
-                                words.remove(new Word(w));
+                                    words.remove(new Word(w));
+                                }
+                                // If the word is not already in the map, create a new word object
+                                // with it (with frequency at 1) and add it into the map
+                                else
+                                    word = new Word(w, 1);
+                                words.put(word, word.getFrequency());
                             }
-                            // If the word is not already in the map, create a new word object
-                            // with it (with frequency at 1) and add it into the map
-                            else
-                                word = new Word(w, 1);
-                            words.put(word, word.getFrequency());
                         }
                     }
 
