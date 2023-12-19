@@ -5,15 +5,15 @@ import java.io.*;
 
 public class sdlfkjsd {
     public static void main(String[] args) throws IOException {
-        ArrayList<String> arr = new ArrayList<>();
-        arr.add("Hello");
-        arr.add("autistic");
-        arr.add("weirdos");
-        arr.add("autism centre");
-        arr.add("markville");
+        HashSet<String> a = new HashSet(Arrays.asList("natalie", "lorraine", "amanda"));
+        HashSet<String> b = new HashSet(Arrays.asList("poopalie", "natalie", "what"));
+        HashSet<String> c = new HashSet(Arrays.asList("yoyo", "natalie", "poop"));
 
-        for (int i = 0; i < arr.size(); i++) {
-            System.out.printf("%-10s%-10s%-20d\n", i + 1 + ")", "hello", arr.get(i).length());
-        }
+        HashSet<String> allThree = new HashSet<>();
+        allThree.addAll(a);
+        allThree.retainAll(b);
+        allThree.retainAll(c);
+
+        System.out.println(allThree);
     }
 }
