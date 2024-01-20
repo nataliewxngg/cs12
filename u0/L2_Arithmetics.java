@@ -25,7 +25,7 @@ public class L2_Arithmetics {
 
         // Math methods
         System.out.println(Math.pow(3, 3)); // 27; RETURNS A DOUBLE
-        System.out.println(Math.sqrt(4)); // 2; RETURNS A DOUBL
+        System.out.println(Math.sqrt(4)); // 2; RETURNS A DOUBLE
 
         System.out.println(Math.max(3, 7)); // 7
         System.out.println(Math.max(1.2, 3.4)); // 3.4; RETURNS DOUBLE IF 1+ PARAMETERS DOUBLE

@@ -14,6 +14,9 @@ public class L5_strings {
         // --> 4
 
         // Variables
+        String hi = "            yo         ";
+        System.out.println(hi.strip());
+
         Scanner in = new Scanner(System.in);
         String word;
         String sentence;
