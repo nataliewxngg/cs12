@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "L1013",
+      "request": "launch",
+      "mainClass": "exam.u2.L1013",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
       "name": "L1006",
       "request": "launch",
       "mainClass": "exam.u2.L1006",
