@@ -6,6 +6,48 @@
   "configurations": [
     {
       "type": "java",
+      "name": "L1006",
+      "request": "launch",
+      "mainClass": "exam.u2.L1006",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L0921",
+      "request": "launch",
+      "mainClass": "exam.u1.L0921",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L0916",
+      "request": "launch",
+      "mainClass": "exam.u1.L0916",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L0915exercise",
+      "request": "launch",
+      "mainClass": "exam.u1.L0915exercise",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L0915",
+      "request": "launch",
+      "mainClass": "exam.u1.L0915",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
+      "name": "L0906",
+      "request": "launch",
+      "mainClass": "exam.u1.L0906",
+      "projectName": "cs12_30b59500"
+    },
+    {
+      "type": "java",
       "name": "Main1",
       "request": "launch",
       "mainClass": "u3.assignment6.Main1",
