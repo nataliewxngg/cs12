@@ -122,8 +122,5 @@ public class L1_ArrayListDemo {
         System.out.println(subL);
 
         Queue<String> q1 = new LinkedList<>();
-        Queue<String> q2 = new ArrayList<>();
-        Stack<String> s1 = new LinkedList<>();
-        Stack<String> s2 = new ArrayList<>();
     }
 }

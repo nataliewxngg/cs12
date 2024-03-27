@@ -128,6 +128,7 @@ public class study {
         tree1.add("bro");
         System.out.println(tree1.first()); // bro
         System.out.println(tree1.last()); // sis
+        Set<String> slkdjflsjkd = tree1.headSet("yo");
         System.out.println(tree1); // {bro, dad, mom, sis}
 
         // Other methods
